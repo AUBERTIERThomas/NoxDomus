@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://dq6hmfhh5r1oe"]
+
+[ext_resource type="Script" path="res://Scripts/GenerateLayout.gd" id="1_6afbm"]
+[ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="1_mv4t4"]
+[ext_resource type="Script" path="res://Scripts/MoveCamera.gd" id="2_36vc4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
+albedo_color = Color(1, 0, 1, 1)
+metallic = 1.0
+metallic_specular = 0.51
+normal_scale = -0.88
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh7d1"]
+albedo_color = Color(1, 1, 0, 1)
+metallic = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ib5b8"]
+material = SubResource("StandardMaterial3D_qh7d1")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xmpls"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lj7do"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q1xfd"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bbfoe"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_6afbm")
+
+[node name="LeTorus" type="CSGTorus3D" parent="."]
+transform = Transform3D(-8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0, 2, 5, 0, 0)
+sides = 15
+ring_sides = 9
+material = SubResource("StandardMaterial3D_8pi23")
+script = ExtResource("1_mv4t4")
+
+[node name="_Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+fov = 70.0
+near = 0.5
+script = ExtResource("2_36vc4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="_Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="_Camera3D"]
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.2
+
+[node name="Plafond" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 8.74228e-07, 0, -8.74228e-07, -10, 0, 0, 0, 10, 0, 4, 0)
+mesh = SubResource("PlaneMesh_ib5b8")
+
+[node name="Mur1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0, 0, 10, 10, 1, 0)
+mesh = SubResource("PlaneMesh_xmpls")
+skeleton = NodePath("../Sol")
+
+[node name="Mur2" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.73206e-15, 1.31134e-07, -10, 3, -1.31134e-07, 0, -1.31134e-07, -3, -4.37114e-07, 0, 1, 10)
+mesh = SubResource("PlaneMesh_lj7do")
+skeleton = NodePath("../Sol")
+
+[node name="Mur3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 10, -10, 1, 0)
+mesh = SubResource("PlaneMesh_q1xfd")
+skeleton = NodePath("../Sol")
+
+[node name="Mur4" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.73206e-15, 1.31134e-07, 10, 3, -1.31134e-07, 0, 1.31134e-07, 3, -4.37114e-07, 0, 1, -10)
+mesh = SubResource("PlaneMesh_bbfoe")
+skeleton = NodePath("../Sol")
+
+[node name="Sol" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -2, 0)
+mesh = SubResource("PlaneMesh_ib5b8")
+
+[node name="Lampe" type="OmniLight3D" parent="."]
+light_energy = 10.0
+omni_range = 20.0
+omni_attenuation = 2.0

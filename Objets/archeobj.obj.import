@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjdwf7mdljlas"
+path="res://.godot/imported/archeobj.obj-22e0abcf2de4a2f34cc1858f45f78b99.mesh"
+
+[deps]
+
+files=["res://.godot/imported/archeobj.obj-22e0abcf2de4a2f34cc1858f45f78b99.mesh"]
+
+source_file="res://Objets/archeobj.obj"
+dest_files=["res://.godot/imported/archeobj.obj-22e0abcf2de4a2f34cc1858f45f78b99.mesh", "res://.godot/imported/archeobj.obj-22e0abcf2de4a2f34cc1858f45f78b99.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
