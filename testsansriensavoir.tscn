@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=18 format=3 uid="uid://dq6hmfhh5r1oe"]
 
-[ext_resource type="Script" path="res://Scripts/GenerateLayout.gd" id="1_6afbm"]
+[ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_j5uer"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="1_mv4t4"]
 [ext_resource type="Script" path="res://Scripts/MoveCamera.gd" id="2_36vc4"]
 
@@ -25,8 +25,87 @@ material = SubResource("StandardMaterial3D_qh7d1")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bbfoe"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32g0a"]
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 10
+border_color = Color(0.588235, 0.588235, 0.588235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.392157, 0.392157, 0.392157, 0.6)
+shadow_size = 15
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1cn7"]
+bg_color = Color(0.542536, 0.495757, 0.197613, 1)
+border_width_bottom = 10
+border_color = Color(0.327451, 0.297541, 0.111216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.352867, 0.308167, 0.0382994, 0.6)
+shadow_size = 15
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smatl"]
+bg_color = Color(0.686275, 0.686275, 0.686275, 1)
+border_width_bottom = 10
+border_color = Color(0.490196, 0.490196, 0.490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.294118, 0.294118, 0.294118, 0.6)
+shadow_size = 15
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aklvf"]
+bg_color = Color(0.679041, 0.241128, 0.866578, 1)
+border_width_bottom = 10
+border_color = Color(0.424719, 0.0876797, 0.569584, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.442056, 0.0292621, 0.51323, 0.6)
+shadow_size = 15
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1mdd"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.686086, 0.569138, 0.550589, 1)
+border_width_bottom = 15
+border_color = Color(0.545122, 0.433172, 0.403027, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6wgqm"]
+
+[sub_resource type="Theme" id="Theme_ovgxn"]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 20
+Button/styles/disabled = SubResource("StyleBoxFlat_32g0a")
+Button/styles/focus = SubResource("StyleBoxFlat_32g0a")
+Button/styles/hover = SubResource("StyleBoxFlat_w1cn7")
+Button/styles/normal = SubResource("StyleBoxFlat_smatl")
+Button/styles/pressed = SubResource("StyleBoxFlat_aklvf")
+Panel/styles/panel = SubResource("StyleBoxFlat_a1mdd")
+TextEdit/colors/font_color = Color(0, 0, 0, 1)
+TextEdit/font_sizes/font_size = 30
+TextEdit/styles/normal = SubResource("StyleBoxEmpty_6wgqm")
+
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_6afbm")
+script = ExtResource("1_j5uer")
 
 [node name="LeTorus" type="CSGTorus3D" parent="."]
 transform = Transform3D(-8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0, 2, 5, 0, 0)
@@ -85,3 +164,68 @@ mesh = SubResource("PlaneMesh_ib5b8")
 light_energy = 10.0
 omni_range = 20.0
 omni_attenuation = 2.0
+
+[node name="QuestionMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="A" type="Button" parent="QuestionMenu"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 315.0
+offset_right = 536.0
+offset_bottom = 433.0
+text = "Réponse A"
+text_overrun_behavior = 2
+autowrap_mode = 2
+
+[node name="B" type="Button" parent="QuestionMenu"]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 316.0
+offset_right = 1090.0
+offset_bottom = 434.0
+text = "Réponse B"
+text_overrun_behavior = 2
+autowrap_mode = 2
+
+[node name="C" type="Button" parent="QuestionMenu"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 453.0
+offset_right = 536.0
+offset_bottom = 571.0
+text = "Réponse C"
+text_overrun_behavior = 2
+autowrap_mode = 2
+
+[node name="D" type="Button" parent="QuestionMenu"]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 454.0
+offset_right = 1090.0
+offset_bottom = 572.0
+text = "Réponse D"
+text_overrun_behavior = 2
+autowrap_mode = 2
+
+[node name="QuestionPanel" type="Panel" parent="QuestionMenu"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 17.0
+offset_right = 1128.0
+offset_bottom = 294.0
+
+[node name="TextEdit" type="TextEdit" parent="QuestionMenu/QuestionPanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 15.0
+offset_top = 12.0
+offset_right = 1085.0
+offset_bottom = 262.0
+text = "Ceci sera la question !"
+wrap_mode = 1
