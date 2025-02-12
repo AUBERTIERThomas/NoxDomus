@@ -9,7 +9,7 @@ class LlmException(Exception):
 class IsRightAnswer(BaseModel):
     is_right: bool = Field(default=False)
 
-def check_if_right_answer(model, question, correct_answer, answer):
+def check_if_right_answer(question, correct_answer, answer, model = "qwen2.5"):
     
     with open("Prompts/question_validator.txt", "r") as f:
         system_prompt = f.read()
@@ -39,7 +39,7 @@ def check_if_right_answer(model, question, correct_answer, answer):
 def check_answer(question, correct_answer, answer, model = "qwen2.5", nb_checks = 5):
     answers = []
     for _ in range(nb_checks):
-        response = check_if_right_answer(model, question, correct_answer, answer)
+        response = check_if_right_answer(question, correct_answer, answer, model)
         answers.append(response.is_right)
     # print(answers)
 
@@ -49,12 +49,14 @@ def check_answer(question, correct_answer, answer, model = "qwen2.5", nb_checks 
     # return False not in answers
 
 if __name__ == '__main__':
+    model = "qwen2.5"
     question = "He died for people's entertainment. "
     answer = "gladiator"
     user_answer = "soldier"
+    nb_checks = 5
 
     try:
-        response = check_answer(question, answer, user_answer)
+        response = check_answer(question, answer, user_answer, model, nb_checks)
         print(response)
     except LlmException as e:
         print(e)

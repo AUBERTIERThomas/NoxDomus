@@ -8,7 +8,7 @@ class LlmException(Exception):
 class Commentary(BaseModel):
     reponse_ia: str = Field(default="")
 
-def reponser_ia(model, is_user_right, question, correct_answer, student_answer):
+def comment(is_user_right, question, correct_answer, student_answer, model = "qwen2.5"):
 
     with open("Prompts/commentary.txt", "r") as f:
         system_prompt = f.read()
@@ -36,12 +36,14 @@ def reponser_ia(model, is_user_right, question, correct_answer, student_answer):
     return Commentary.model_validate_json(response.message.content)
 
 if __name__ == '__main__':
+    model = "qwen2.5"
     question = "He died for people's entertainment. "
     answer = "gladiator"
     user_answer = "soldier"
+    is_user_right = False
 
     try:
-        response = reponser_ia("qwen2.5", False, question, answer, user_answer)
+        response = comment(is_user_right, question, answer, user_answer, model)
         print(response)
     except LlmException as e:
         print(e)
