@@ -5,6 +5,7 @@ from typing import List
 class LlmException(Exception):
     pass
 
+# Output json schema for the model response
 class IsRightAnswer(BaseModel):
     is_right: bool = Field(default=False)
 
@@ -50,7 +51,7 @@ def check_answer(question, correct_answer, answer, model = "qwen2.5", nb_checks 
 if __name__ == '__main__':
     question = "He died for people's entertainment. "
     answer = "gladiator"
-    user_answer = "warrior in Rome"
+    user_answer = "soldier"
 
     try:
         response = check_answer(question, answer, user_answer)
