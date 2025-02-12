@@ -1,7 +1,7 @@
 extends Node3D
 
-var arch_obj = preload("res://archeobj.obj")
-var t1 = "res://map3.jpg"
+#var arch_obj = preload("res://archeobj.obj")
+var t1 = "res://Images//map3.jpg"
 var c = preload("res://Rouge.tres")
 var texture
 var child_list
@@ -49,14 +49,14 @@ func inst_plane(pos: Vector3, rot: Vector3, sc: Vector3) -> void:
 	print(plane.position)
 	pass
 
-func inst_arch(pos: Vector3, rot: Vector3, sc: Vector3) -> void:
-	var arch = MeshInstance3D.new()
+#func inst_arch(pos: Vector3, rot: Vector3, sc: Vector3) -> void:
+	#var arch = MeshInstance3D.new()
+	##arch.mesh = arch_obj
+	##var mat = PlaneMesh.new() 
+	##arch_obj.albedo_texture = t1
 	#arch.mesh = arch_obj
-	#var mat = PlaneMesh.new() 
-	#arch_obj.albedo_texture = t1
-	arch.mesh = arch_obj
-	arch.position = pos
-	arch.rotation = rot
-	arch.scale = sc
-	add_child(arch)
-	pass
+	#arch.position = pos
+	#arch.rotation = rot
+	#arch.scale = sc
+	#add_child(arch)
+	#pass
