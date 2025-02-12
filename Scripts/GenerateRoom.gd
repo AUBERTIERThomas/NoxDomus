@@ -1,17 +1,21 @@
 extends Node3D
 
 #var arch_obj = preload("res://archeobj.obj")
-var t1 = "res://Images//map3.jpg"
+var wall = "res://Images//map3.jpg"
+var ceiling = "res://Images//Photo_moi.JPG"
+var ground = "res://Images//CSR.png"
 var c = preload("res://Rouge.tres")
 var texture
 var child_list
+var text_list
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	child_list = [$Mur1, $Mur2, $Mur3, $Mur4, $Plafond, $Sol]
-	print(child_list.size())
+	text_list = [wall, wall, wall, wall, ceiling, ground]
+	#print(child_list.size())
 	for i in range(6):
-		print(child_list[i])
+		#print(child_list[i])
 		#var v = Vector3(cos(i*PI/2)*10,sin(i*PI/2)*10,0)
 		#var p = Vector3(0,0,90)
 		#if(randi() % 2):
@@ -20,7 +24,7 @@ func _ready() -> void:
 			#inst_plane(v,p,Vector3(3,3,10))
 			#inst_arch(v,p,Vector3(3,3,10))
 		apply_texture(i)
-	print(self.child_list)
+	#print(self.child_list)
 	pass # Replace with function body.
 
 
@@ -29,7 +33,7 @@ func _ready() -> void:
 #	pass
 func apply_texture(id: int) -> void:
 	var image = Image.new()
-	image.load(t1)
+	image.load(text_list[id])
 	var tex = ImageTexture.create_from_image(image)
 	var mat = StandardMaterial3D.new()
 	mat.albedo_texture = tex
