@@ -2,6 +2,8 @@ from ollama import chat
 from pydantic import BaseModel, Field
 from typing import List
 
+from creation.create_riddles import Riddles, read_from_csv
+
 class LlmException(Exception):
     pass
 
@@ -56,7 +58,16 @@ if __name__ == '__main__':
     nb_checks = 5
 
     try:
-        response = check_answer(question, answer, user_answer, model, nb_checks)
-        print(response)
+        for i in range(5):
+            riddle = read_from_csv('creation/riddles.csv').root[i]
+            question = riddle.question
+            answer = riddle.answer
+            user_answer = input(f"Question {i+1}: {question}\n")
+            check = check_answer(question, answer, user_answer, model, nb_checks)
+            print(check)
+            print("Correct answer: ", answer)
+
+        # response = check_answer(question, answer, user_answer, model, nb_checks)
+        # print(response)
     except LlmException as e:
         print(e)
