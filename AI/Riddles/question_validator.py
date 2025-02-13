@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     try:
         for i in range(5):
-            riddle = read_from_csv('creation/riddles.csv').root[i]
+            riddle = read_from_csv('creation/riddles.csv').root[i + 5]
             question = riddle.question
             answer = riddle.answer
             user_answer = input(f"Question {i+1}: {question}\n")
