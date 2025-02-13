@@ -52,9 +52,9 @@ def check_answer(question, correct_answer, answer, model = "qwen2.5", nb_checks 
 
 if __name__ == '__main__':
     model = "qwen2.5"
-    question = "He died for people's entertainment. "
-    answer = "gladiator"
-    user_answer = "soldier"
+    # question = "He died for people's entertainment. "
+    # answer = "gladiator"
+    # user_answer = "soldier"
     nb_checks = 5
 
     try:
