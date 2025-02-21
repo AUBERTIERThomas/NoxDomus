@@ -1,8 +1,7 @@
 from ollama import chat
 from pydantic import BaseModel, Field
-from typing import List
 
-from creation.create_riddles import Riddles, read_from_csv
+from .creation.create_riddles import Riddles, read_from_csv
 
 class LlmException(Exception):
     pass
@@ -11,7 +10,7 @@ class LlmException(Exception):
 class IsRightAnswer(BaseModel):
     is_right: bool = Field(default=False)
 
-def check_if_right_answer(question, correct_answer, answer, model = "qwen2.5"):
+def check_if_right_answer(question, correct_answer, answer, model):
     
     with open("Prompts/question_validator.txt", "r") as f:
         system_prompt = f.read()
@@ -38,36 +37,23 @@ def check_if_right_answer(question, correct_answer, answer, model = "qwen2.5"):
         raise LlmException("No response from the model")
     return IsRightAnswer.model_validate_json(response.message.content)
 
-def check_answer(question, correct_answer, answer, model = "qwen2.5", nb_checks = 5):
+def check_answer(question, correct_answer, answer, model, nb_checks = 5):
     answers = []
     for _ in range(nb_checks):
         response = check_if_right_answer(question, correct_answer, answer, model)
         answers.append(response.is_right)
-    # print(answers)
+    print(answers)
 
     # Return the majority vote
     return max(set(answers), key = answers.count)
-    # return False if one of the answers is False
-    # return False not in answers
 
 if __name__ == '__main__':
-    model = "qwen2.5"
-    # question = "He died for people's entertainment. "
-    # answer = "gladiator"
-    # user_answer = "soldier"
-    nb_checks = 5
+    # model = "qwen2.5"
+    model = "mistral"
+    question = "He died for people's entertainment. "
+    answer = "gladiator"
+    user_answer = "A woman with a sword and shield who fights"
+    nb_checks = 1
 
-    try:
-        for i in range(5):
-            riddle = read_from_csv('creation/riddles.csv').root[i + 5]
-            question = riddle.question
-            answer = riddle.answer
-            user_answer = input(f"Question {i+1}: {question}\n")
-            check = check_answer(question, answer, user_answer, model, nb_checks)
-            print(check)
-            print("Correct answer: ", answer)
-
-        # response = check_answer(question, answer, user_answer, model, nb_checks)
-        # print(response)
-    except LlmException as e:
-        print(e)
+    check = check_answer(question, answer, user_answer, model, nb_checks)
+    print(check)
