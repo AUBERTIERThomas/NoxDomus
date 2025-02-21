@@ -1,7 +1,10 @@
 extends Node3D
 
 #var arch_obj = preload("res://archeobj.obj")
-var wall = "res://Images//map3.jpg"
+var wall1 = "res://Images//map3.jpg"
+var wall2 = "res://Images//map3.jpg"
+var wall3 = "res://Images//map3.jpg"
+var wall4 = "res://Images//map3.jpg"
 var ceiling = "res://Images//Photo_moi.JPG"
 var ground = "res://Images//CSR.png"
 var c = preload("res://Rouge.tres")
@@ -12,7 +15,7 @@ var text_list
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	child_list = [$Mur1, $Mur2, $Mur3, $Mur4, $Plafond, $Sol]
-	text_list = [wall, wall, wall, wall, ceiling, ground]
+	text_list = [wall1, wall2, wall3, wall4, ceiling, ground]
 	#print(child_list.size())
 	for i in range(6):
 		#print(child_list[i])

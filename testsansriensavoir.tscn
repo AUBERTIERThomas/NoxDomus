@@ -1,21 +1,20 @@
-<<<<<<< HEAD
-[gd_scene load_steps=14 format=3 uid="uid://dq6hmfhh5r1oe"]
-=======
-[gd_scene load_steps=33 format=3 uid="uid://dq6hmfhh5r1oe"]
->>>>>>> 90ff1a64c22e753f30bf594c121dac5ba55321bf
+[gd_scene load_steps=44 format=3 uid="uid://dq6hmfhh5r1oe"]
 
-[ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_7kihc"]
+[ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_j5uer"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="1_mv4t4"]
 [ext_resource type="Script" path="res://Scripts/MoveCamera.gd" id="2_36vc4"]
-<<<<<<< HEAD
-[ext_resource type="Script" path="res://Scripts/torus_script.gd" id="4_swu2k"]
-[ext_resource type="PackedScene" uid="uid://k2wde6be2emq" path="res://Objets/porte.fbx" id="5_p75t4"]
-[ext_resource type="Script" path="res://Scripts/porte_script.gd" id="6_w6nxi"]
-=======
-[ext_resource type="Script" path="res://Main_UI.gd" id="4_a18jl"]
-[ext_resource type="Script" path="res://Enigme.gd" id="5_ex48v"]
-[ext_resource type="Script" path="res://Inventaire.gd" id="6_0sxs3"]
->>>>>>> 90ff1a64c22e753f30bf594c121dac5ba55321bf
+[ext_resource type="Script" path="res://Scripts/Main_UI.gd" id="4_a18jl"]
+[ext_resource type="Script" path="res://Scripts/Enigme.gd" id="5_ex48v"]
+[ext_resource type="Script" path="res://Minimap.gd" id="5_lflag"]
+[ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="6_0sxs3"]
+[ext_resource type="Texture2D" uid="uid://bk8hhsog7dkcc" path="res://Images/Minimap_-1.png" id="6_i67s0"]
+[ext_resource type="Script" path="res://Scripts/GenerateLayout.gd" id="7_3a4ee"]
+[ext_resource type="Texture2D" uid="uid://daye3cmnpjtk5" path="res://Images/Minimap_Link.png" id="7_81l0l"]
+[ext_resource type="Texture2D" uid="uid://8nunteq2qx5l" path="res://Images/Minimap_LocPin.png" id="8_ad2yc"]
+[ext_resource type="Texture2D" uid="uid://c4dfyqbwduxy2" path="res://Images/Arrow_Up.png" id="10_3hvi8"]
+[ext_resource type="Texture2D" uid="uid://nf2445wpq3sa" path="res://Images/Arrow_Down.png" id="11_1gund"]
+[ext_resource type="Texture2D" uid="uid://cmxjpxlmtsnww" path="res://Images/Arrow_Left.png" id="12_sfwst"]
+[ext_resource type="Texture2D" uid="uid://bgtcigo57xvxp" path="res://Images/Arrow_Right.png" id="13_bqpig"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -38,8 +37,6 @@ material = SubResource("StandardMaterial3D_qh7d1")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bbfoe"]
 
-<<<<<<< HEAD
-=======
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pknw"]
 bg_color = Color(0.287355, 0.30964, 0.572018, 1)
 border_width_left = 3
@@ -78,6 +75,12 @@ Button/styles/hover = SubResource("StyleBoxFlat_2pknw")
 Button/styles/normal = SubResource("StyleBoxFlat_047c6")
 Button/styles/pressed = SubResource("StyleBoxFlat_3ikts")
 Panel/styles/panel = SubResource("StyleBoxFlat_oeb6j")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7lgm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_foyba"]
+Button/styles/normal = SubResource("StyleBoxFlat_g7lgm")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32g0a"]
 bg_color = Color(1, 1, 1, 1)
@@ -225,9 +228,8 @@ Button/styles/normal = SubResource("StyleBoxFlat_s5efp")
 Button/styles/pressed = SubResource("StyleBoxFlat_ew74c")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_80ksb")
 
->>>>>>> 90ff1a64c22e753f30bf594c121dac5ba55321bf
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_7kihc")
+script = ExtResource("1_j5uer")
 
 [node name="LeTorus" type="CSGTorus3D" parent="."]
 transform = Transform3D(-8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0, 2, 5, 0, 0)
@@ -287,16 +289,7 @@ light_energy = 10.0
 omni_range = 20.0
 omni_attenuation = 2.0
 
-<<<<<<< HEAD
-[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
-script = ExtResource("4_swu2k")
-
-[node name="porte" parent="." instance=ExtResource("5_p75t4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78661, 0, 3.29767)
-script = ExtResource("6_w6nxi")
-=======
 [node name="MainUI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -305,6 +298,7 @@ theme = SubResource("Theme_f837t")
 script = ExtResource("4_a18jl")
 
 [node name="MapButton" type="Button" parent="MainUI"]
+layout_mode = 0
 offset_left = 944.0
 offset_top = 570.0
 offset_right = 1122.0
@@ -320,11 +314,20 @@ offset_bottom = 552.0
 
 [node name="Minimap" type="Control" parent="MainUI"]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1132.0
+offset_bottom = 624.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource("Theme_f837t")
+script = ExtResource("5_lflag")
 
 [node name="BG" type="Panel" parent="MainUI/Minimap"]
 layout_mode = 0
@@ -332,12 +335,93 @@ offset_right = 1154.0
 offset_bottom = 648.0
 
 [node name="Return" type="Button" parent="MainUI/Minimap"]
+layout_mode = 0
 offset_left = 944.0
 offset_top = 570.0
 offset_right = 1122.0
 offset_bottom = 618.0
 text = "Retour
 "
+
+[node name="RoomTile" type="Sprite2D" parent="MainUI/Minimap"]
+texture_filter = 1
+position = Vector2(575, 525)
+scale = Vector2(3, 3)
+texture = ExtResource("6_i67s0")
+
+[node name="LinkTile" type="Sprite2D" parent="MainUI/Minimap"]
+texture_filter = 1
+position = Vector2(575, 525)
+texture = ExtResource("7_81l0l")
+
+[node name="LocPin" type="Sprite2D" parent="MainUI/Minimap"]
+z_index = 1
+texture_filter = 1
+position = Vector2(575, 525)
+scale = Vector2(3, 3)
+texture = ExtResource("8_ad2yc")
+
+[node name="RoomList" type="Node" parent="MainUI/Minimap"]
+script = ExtResource("7_3a4ee")
+
+[node name="ChangeRoom" type="Control" parent="MainUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -14.0
+offset_right = 865.0
+offset_bottom = 630.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_foyba")
+
+[node name="UpArrow" type="Button" parent="MainUI/ChangeRoom"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 88.0
+offset_top = 404.0
+offset_right = 166.0
+offset_bottom = 480.0
+icon = ExtResource("10_3hvi8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="DownArrow" type="Button" parent="MainUI/ChangeRoom"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 87.0
+offset_top = 555.0
+offset_right = 165.0
+offset_bottom = 631.0
+icon = ExtResource("11_1gund")
+icon_alignment = 1
+expand_icon = true
+
+[node name="LeftArrow" type="Button" parent="MainUI/ChangeRoom"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 13.0
+offset_top = 480.0
+offset_right = 91.0
+offset_bottom = 556.0
+icon = ExtResource("12_sfwst")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RightArrow" type="Button" parent="MainUI/ChangeRoom"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.0
+offset_top = 479.0
+offset_right = 240.0
+offset_bottom = 555.0
+icon = ExtResource("13_bqpig")
+icon_alignment = 1
+expand_icon = true
 
 [node name="QCM_Menu" type="Control" parent="."]
 visible = false
@@ -402,6 +486,7 @@ offset_top = 12.0
 offset_right = 1085.0
 offset_bottom = 262.0
 text = "Ceci sera la question !"
+editable = false
 wrap_mode = 1
 
 [node name="Enigme_Menu" type="Control" parent="."]
@@ -440,6 +525,7 @@ offset_bottom = 553.0
 placeholder_text = "Réponse"
 
 [node name="Inventaire" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -610,4 +696,3 @@ alignment = 1
 editable = false
 
 [connection signal="text_submitted" from="Enigme_Menu/Reponse" to="Enigme_Menu" method="_on_reponse_text_submitted"]
->>>>>>> 90ff1a64c22e753f30bf594c121dac5ba55321bf
