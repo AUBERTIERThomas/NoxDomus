@@ -1,7 +1,7 @@
 from ollama import chat
 from pydantic import BaseModel, Field
 
-from .creation.create_riddles import Riddles, read_from_csv
+from .Creation.create_riddles import Riddles, read_from_csv
 
 class LlmException(Exception):
     pass
@@ -12,7 +12,7 @@ class IsRightAnswer(BaseModel):
 
 def check_if_right_answer(question, correct_answer, answer, model):
     
-    with open("Prompts/question_validator.txt", "r") as f:
+    with open("Riddles/Prompts/question_validator.txt", "r") as f:
         system_prompt = f.read()
     # print(system_prompt)
 

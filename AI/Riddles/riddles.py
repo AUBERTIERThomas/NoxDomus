@@ -1,9 +1,12 @@
-from .creation.create_riddles import Riddles, read_from_csv
+from .Creation.create_riddles import read_from_csv, read_from_json, read_from_csv2
 from random import choice
 
 class RiddlesHandler:
-    def __init__(self, filepath):
-        self.riddles = read_from_csv(filepath)
+    def __init__(self):
+        self.riddles = read_from_csv('Riddles/Creation/riddles.csv')
+        self.riddles += read_from_json('Riddles/Creation/riddles.json')
+        self.riddles += read_from_json('Riddles/Creation/riddles2.json')
+        self.riddles += read_from_csv2('Riddles/Creation/Riddles.csv')
         self.riddles_pool = self.riddles.root.copy()
 
     def reset_riddle_generator(self):
@@ -18,4 +21,7 @@ class RiddlesHandler:
             riddle = choice(self.riddles_pool)
             self.riddles_pool.remove(riddle)
             return riddle
+
+    def get_number_of_riddles(self):
+        return len(self.riddles.root)
 
