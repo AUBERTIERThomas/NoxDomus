@@ -4,8 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="1_mv4t4"]
 [ext_resource type="Script" path="res://Scripts/MoveCamera.gd" id="2_36vc4"]
 [ext_resource type="Script" path="res://Scripts/Main_UI.gd" id="4_a18jl"]
-[ext_resource type="Script" path="res://Scripts/Enigme.gd" id="5_ex48v"]
-[ext_resource type="Script" path="res://Minimap.gd" id="5_lflag"]
+[ext_resource type="Script" path="res://Scripts/Minimap.gd" id="5_lflag"]
 [ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="6_0sxs3"]
 [ext_resource type="Texture2D" uid="uid://bk8hhsog7dkcc" path="res://Images/Minimap_-1.png" id="6_i67s0"]
 [ext_resource type="Script" path="res://Scripts/GenerateLayout.gd" id="7_3a4ee"]
@@ -15,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://nf2445wpq3sa" path="res://Images/Arrow_Down.png" id="11_1gund"]
 [ext_resource type="Texture2D" uid="uid://cmxjpxlmtsnww" path="res://Images/Arrow_Left.png" id="12_sfwst"]
 [ext_resource type="Texture2D" uid="uid://bgtcigo57xvxp" path="res://Images/Arrow_Right.png" id="13_bqpig"]
+[ext_resource type="Script" path="res://Scripts/api_test.gd" id="14_e703i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -290,6 +290,7 @@ omni_range = 20.0
 omni_attenuation = 2.0
 
 [node name="MainUI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -490,13 +491,12 @@ editable = false
 wrap_mode = 1
 
 [node name="Enigme_Menu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = SubResource("Theme_ovgxn")
-script = ExtResource("5_ex48v")
+script = ExtResource("14_e703i")
 
 [node name="QuestionPanel" type="Panel" parent="Enigme_Menu"]
 layout_mode = 0
@@ -518,11 +518,20 @@ wrap_mode = 1
 
 [node name="Reponse" type="LineEdit" parent="Enigme_Menu"]
 layout_mode = 0
-offset_left = 332.0
-offset_top = 462.0
-offset_right = 843.0
-offset_bottom = 553.0
+offset_left = 150.0
+offset_top = 400.0
+offset_right = 661.0
+offset_bottom = 491.0
 placeholder_text = "Réponse"
+
+[node name="ColorRect" type="ColorRect" parent="Enigme_Menu"]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 375.0
+offset_right = 990.0
+offset_bottom = 515.0
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Enigme_Menu"]
 
 [node name="Inventaire" type="Control" parent="."]
 visible = false
