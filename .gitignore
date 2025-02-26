@@ -15,4 +15,6 @@ data_*/
 mono_crash.*.json
 
 # Python
-./AI/Riddles/__pycache__/
+/AI/Riddles/__pycache__/
+/AI/Riddles/Creation/__pycache__/
+
