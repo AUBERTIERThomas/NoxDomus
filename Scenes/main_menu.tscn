@@ -1,0 +1,157 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkt1uovwy12uv"]
+
+[ext_resource type="Texture2D" uid="uid://bmh2ybrcb5mu4" path="res://Images/ComfyUI_WallSpider.png" id="1_okoa0"]
+[ext_resource type="Script" path="res://MainMenu.gd" id="2_tnoch"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3tkn"]
+bg_color = Color(0.287355, 0.30964, 0.572018, 1)
+border_width_top = 7
+border_color = Color(0.431373, 0.552941, 0.827451, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ja26"]
+bg_color = Color(0.564134, 0.21686, 2.40654e-07, 1)
+border_width_bottom = 7
+border_color = Color(0.6972, 0.534339, 0.104158, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqimv"]
+bg_color = Color(0, 0.490196, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.784314, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yohmx"]
+bg_color = Color(0.215544, 0.0223041, 3.60981e-08, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.539248, 0.311779, 0.0268346, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qa2qm"]
+bg_color = Color(0.564134, 0.21686, 2.40654e-07, 1)
+
+[sub_resource type="Theme" id="Theme_st1d5"]
+Button/font_sizes/font_size = 24
+Button/styles/hover = SubResource("StyleBoxFlat_i3tkn")
+Button/styles/normal = SubResource("StyleBoxFlat_5ja26")
+Button/styles/pressed = SubResource("StyleBoxFlat_pqimv")
+Panel/styles/panel = SubResource("StyleBoxFlat_yohmx")
+TextEdit/colors/font_color = Color(1, 1, 1, 1)
+TextEdit/styles/normal = SubResource("StyleBoxFlat_qa2qm")
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="BG" type="TextureRect" parent="."]
+offset_right = 1150.0
+offset_bottom = 650.0
+texture = ExtResource("1_okoa0")
+expand_mode = 1
+
+[node name="MainMenu_UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1150.0
+offset_bottom = 650.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_st1d5")
+script = ExtResource("2_tnoch")
+
+[node name="PlayButton" type="Button" parent="MainMenu_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.0
+offset_right = 150.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_bottom = NodePath("../OptionsButton")
+text = "Jouer au jeu bordel"
+
+[node name="OptionsButton" type="Button" parent="MainMenu_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 50.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../PlayButton")
+text = "Paramètres wallah"
+
+[node name="PlayerInfos" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+theme = SubResource("Theme_st1d5")
+
+[node name="Panel" type="Panel" parent="PlayerInfos"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="ButtonContainer" type="GridContainer" parent="PlayerInfos"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 650.0
+columns = 2
+
+[node name="Nom" type="TextEdit" parent="PlayerInfos"]
+visibility_layer = 2
+layout_mode = 0
+offset_left = 450.0
+offset_top = 50.0
+offset_right = 530.0
+offset_bottom = 90.0
+text = "Ton nom"
+editable = false
+
+[node name="LineEdit" type="LineEdit" parent="PlayerInfos"]
+visibility_layer = 2
+layout_mode = 0
+offset_left = 550.0
+offset_top = 50.0
+offset_right = 950.0
+offset_bottom = 90.0
+placeholder_text = "Ce nom sera utilisé durant le jeu"
+
+[node name="Button" type="Button" parent="PlayerInfos"]
+layout_mode = 0
+offset_left = 525.0
+offset_top = 550.0
+offset_right = 625.0
+offset_bottom = 600.0
+text = "OK !"

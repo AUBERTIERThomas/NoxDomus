@@ -6,6 +6,8 @@ var upButton
 var leftButton
 var downButton
 var rightButton
+var doomBar
+var doomBarValue
 
 var minimap
 var locPin
@@ -27,6 +29,8 @@ func _ready() -> void:
 	downButton.pressed.connect(self.OnDownButtonClick)
 	rightButton = $ChangeRoom/RightArrow
 	rightButton.pressed.connect(self.OnRightButtonClick)
+	doomBar = $DoomBar
+	doomBarValue = $DoomBarValue
 	minimap = $Minimap
 	locPin = $Minimap/LocPin
 	roomList = minimap.rList
@@ -35,7 +39,6 @@ func _ready() -> void:
 	minimap.changeTexture(0)
 	#print(currentRoom.coordinates)
 	#print(currentRoom.links)
-	
 	ShowButtons()
 	
 	
@@ -99,3 +102,5 @@ func FindNextRoom(dec : Vector2) -> void:
 	minimap.changeTexture(new_i)
 	print(locPin.position)
 	print(currentRoom.coordinates)
+	doomBar.value += 5
+	doomBarValue.text = str(doomBar.value)

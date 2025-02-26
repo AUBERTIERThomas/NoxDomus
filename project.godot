@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NoxDomus"
-run/main_scene="res://testsansriensavoir.tscn"
+run/main_scene="res://Scenes/game_room.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ folder_colors={
 "res://AI/": "red",
 "res://Classes/": "purple",
 "res://Images/": "blue",
-"res://Objets/": "green",
+"res://Objets/": "teal",
+"res://Scenes/": "green",
 "res://Scripts/": "yellow"
 }

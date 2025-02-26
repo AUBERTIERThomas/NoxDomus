@@ -1,10 +1,10 @@
 extends Node3D
 
 #var arch_obj = preload("res://archeobj.obj")
-var wall1 = "res://Images//map3.jpg"
-var wall2 = "res://Images//map3.jpg"
-var wall3 = "res://Images//map3.jpg"
-var wall4 = "res://Images//map3.jpg"
+var wall1 = "res://Images/ComfyUI_WallSpider.png"
+var wall2 = "res://Images/ComfyUI_WallSpider.png"
+var wall3 = "res://Images/ComfyUI_WallSpider.png"
+var wall4 = "res://Images/ComfyUI_WallSpider.png"
 var ceiling = "res://Images//Photo_moi.JPG"
 var ground = "res://Images//CSR.png"
 var c = preload("res://Rouge.tres")
