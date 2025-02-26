@@ -60,7 +60,7 @@ def read_from_csv2(filepath, header=True, delimiter=','):
 
 # ridddles.json file
 def read_from_json(filepath):
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding = "utf8") as f:
         data = json.load(f)
 
         riddles = Riddles()
