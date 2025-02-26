@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=46 format=3 uid="uid://dq6hmfhh5r1oe"]
 
 [ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_j5uer"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="1_mv4t4"]
@@ -14,7 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://nf2445wpq3sa" path="res://Images/Arrow_Down.png" id="11_1gund"]
 [ext_resource type="Texture2D" uid="uid://cmxjpxlmtsnww" path="res://Images/Arrow_Left.png" id="12_sfwst"]
 [ext_resource type="Texture2D" uid="uid://bgtcigo57xvxp" path="res://Images/Arrow_Right.png" id="13_bqpig"]
-[ext_resource type="Script" path="res://Scripts/api_test.gd" id="14_e703i"]
+[ext_resource type="Script" path="res://Scripts/EnigmeAPI.gd" id="14_e703i"]
+[ext_resource type="Texture2D" uid="uid://w6o2yy362njl" path="res://Images/AnswersWait.png" id="15_wtakv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -76,10 +77,19 @@ Button/styles/normal = SubResource("StyleBoxFlat_047c6")
 Button/styles/pressed = SubResource("StyleBoxFlat_3ikts")
 Panel/styles/panel = SubResource("StyleBoxFlat_oeb6j")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qi1b"]
+bg_color = Color(0.833578, 0.5928, 0.253674, 1)
+border_color = Color(0.833578, 0.5928, 0.253674, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7lgm"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Theme" id="Theme_foyba"]
+Button/styles/hover = SubResource("StyleBoxFlat_0qi1b")
 Button/styles/normal = SubResource("StyleBoxFlat_g7lgm")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32g0a"]
@@ -290,7 +300,6 @@ omni_range = 20.0
 omni_attenuation = 2.0
 
 [node name="MainUI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -491,6 +500,7 @@ editable = false
 wrap_mode = 1
 
 [node name="Enigme_Menu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -520,16 +530,15 @@ wrap_mode = 1
 layout_mode = 0
 offset_left = 150.0
 offset_top = 400.0
-offset_right = 661.0
-offset_bottom = 491.0
+offset_right = 650.0
+offset_bottom = 500.0
 placeholder_text = "Réponse"
 
-[node name="ColorRect" type="ColorRect" parent="Enigme_Menu"]
-layout_mode = 0
-offset_left = 850.0
-offset_top = 375.0
-offset_right = 990.0
-offset_bottom = 515.0
+[node name="AnswerFeedback" type="Sprite2D" parent="Enigme_Menu"]
+texture_filter = 1
+position = Vector2(925, 450)
+scale = Vector2(3, 3)
+texture = ExtResource("15_wtakv")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Enigme_Menu"]
 

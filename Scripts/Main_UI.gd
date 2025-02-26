@@ -31,8 +31,10 @@ func _ready() -> void:
 	locPin = $Minimap/LocPin
 	roomList = minimap.rList
 	currentRoom = roomList[0]
-	print(currentRoom.coordinates)
-	print(currentRoom.links)
+	currentRoom.isRevealed = true
+	minimap.changeTexture(0)
+	#print(currentRoom.coordinates)
+	#print(currentRoom.links)
 	
 	ShowButtons()
 	
@@ -86,10 +88,14 @@ func OnRightButtonClick() -> void:
 func FindNextRoom(dec : Vector2) -> void:
 	print(dec)
 	var new_c = currentRoom.coordinates+dec
-	for c in roomList:
-		if (c.coordinates == new_c):
-			currentRoom = c
+	var new_i
+	for i in range(roomList.size()):
+		if (roomList[i].coordinates == new_c):
+			currentRoom = roomList[i]
+			new_i = i
 			break
 	locPin.position = locPin.position - dec * minimap.space
+	currentRoom.isRevealed = true
+	minimap.changeTexture(new_i)
 	print(locPin.position)
 	print(currentRoom.coordinates)

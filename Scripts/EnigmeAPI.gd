@@ -4,13 +4,15 @@ extends Control
 @onready var http_request = $HTTPRequest
 @onready var question_display = $QuestionPanel/TextEdit
 @onready var answer_input = $Reponse
-@onready var color_rect = $ColorRect
+@onready var answer_sprite = $AnswerFeedback
 
 var current_question = ""
 var correct_answer = ""
 
+var answerSprites = [preload("res://Images//AnswersWait.png"),preload("res://Images//AnswersGood.png"),preload("res://Images//AnswersBad.png")]
+
 func _ready():
-	color_rect.color = Color(0, 0, 1)  # Bleu par défaut (pour dire qu'on a rien mis)
+	answer_sprite.texture = answerSprites[0]  # Point d'interrogation par défaut (pour dire qu'on a rien mis)
 	http_request.request_completed.connect(_on_request_completed)
 	answer_input.text_submitted.connect(on_button_pressed)
 	
@@ -19,6 +21,7 @@ func _ready():
 # Executer le code python api.py
 func fetch_riddle():
 	var url = "http://127.0.0.1:5000/riddle/1"
+	print(url)
 	http_request.request(url)
 
 func _on_request_completed(result, response_code, headers, body):
@@ -35,7 +38,6 @@ func _on_request_completed(result, response_code, headers, body):
 			
 			# Réinitialisation
 			answer_input.text = ""
-			color_rect.color = Color(0, 0, 1)  # Bleu par défaut (pour dire qu'on a rien mis)
 			print("Bonne réponse attendue : ", correct_answer)
 		else:
 			question_display.text = "Erreur lors de la récupération de l'énigme."
@@ -46,6 +48,9 @@ func _on_request_completed(result, response_code, headers, body):
 func on_button_pressed(user_answer: String):
 	user_answer = user_answer.strip_edges()  # Supprime les espaces 
 	if user_answer == correct_answer:
-		color_rect.color = Color(0, 1, 0)  # Vert si correct
+		answer_sprite.texture = answerSprites[1]  # Vart si correct
 	else:
-		color_rect.color = Color(1, 0, 0)  # Rouge si incorrect
+		answer_sprite.texture = answerSprites[2]  # Rouge si incorrect
+	await get_tree().create_timer(3.0).timeout # C'est un wait
+	get_node("/root/Node3D/MainUI").show()
+	self.hide()

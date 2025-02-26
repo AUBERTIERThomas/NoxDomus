@@ -2,6 +2,7 @@ extends Control
 
 var currentRoom
 var textureList = [preload("res://Images//Minimap_-3.png"),preload("res://Images//Minimap_-2.png"),preload("res://Images//Minimap_-1.png"),preload("res://Images//Minimap_0.png"),preload("res://Images//Minimap_1.png")]
+var textureHidden = preload("res://Images//Minimap_Hidden.png")
 var tile
 var link
 var pin
@@ -29,9 +30,17 @@ func _ready() -> void:
 	for i in range(rL.roomNumber):
 		var dupl_room = tile.duplicate()
 		dupl_room.position = dupl_room.position - (rList[i].coordinates * space)
-		dupl_room.texture = textureList[rList[i].typeRoom+3]
+		dupl_room.name = str(i)
 		add_child(dupl_room)
+		changeTexture(i)
 	pin.position = pin.position - (currentRoom * space)
 	tile.hide()
 	link.hide()
 	pass # Replace with function body.
+
+func changeTexture(i : int):
+	var r = get_node(str(i))
+	if rList[i].isRevealed == false:
+		r.texture = textureHidden
+	else:
+		r.texture = textureList[rList[i].typeRoom+3]
