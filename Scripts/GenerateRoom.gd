@@ -1,69 +1,55 @@
 extends Node3D
 
-#var arch_obj = preload("res://archeobj.obj")
-var wall1 = "res://Images/ComfyUI_WallSpider.png"
-var wall2 = "res://Images/ComfyUI_WallSpider.png"
-var wall3 = "res://Images/ComfyUI_WallSpider.png"
-var wall4 = "res://Images/ComfyUI_WallSpider.png"
+var fullTextList = ["res://Images/ComfyUI_WallSpider.png","res://Images//Photo_moi.JPG","res://Images//map3.jpg"]
+var wall1
+var wall2
+var wall3
+var wall4
 var ceiling = "res://Images//Photo_moi.JPG"
 var ground = "res://Images//CSR.png"
-var c = preload("res://Rouge.tres")
 var texture
-var child_list
-var text_list
+var childList
+var textList
+
+var minimap
+var roomListNode
+var roomList
+
+var currentRoom
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	child_list = [$Mur1, $Mur2, $Mur3, $Mur4, $Plafond, $Sol]
-	text_list = [wall1, wall2, wall3, wall4, ceiling, ground]
-	#print(child_list.size())
-	for i in range(6):
-		#print(child_list[i])
-		#var v = Vector3(cos(i*PI/2)*10,sin(i*PI/2)*10,0)
-		#var p = Vector3(0,0,90)
-		#if(randi() % 2):
-			#apply_texture(i)
-		#else:
-			#inst_plane(v,p,Vector3(3,3,10))
-			#inst_arch(v,p,Vector3(3,3,10))
-		apply_texture(i)
-	#print(self.child_list)
-	pass # Replace with function body.
+	childList = [$Mur1, $Mur2, $Mur3, $Mur4, $Plafond, $Sol]
+	minimap = $MainUI/Minimap
+	roomListNode = $MainUI/Minimap/RoomList
+	roomList = roomListNode.roomList
+	room_init(0)
 
+func room_init(id : int) -> void:
+	var s = fullTextList.size()
+	wall1 = fullTextList[randi() % s]
+	wall2 = fullTextList[randi() % s]
+	wall3 = fullTextList[randi() % s]
+	wall4 = fullTextList[randi() % s]
+	textList = [wall1, wall2, wall3, wall4, ceiling, ground]
+	for i in range(6):
+		apply_texture(i)
+	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #	pass
 func apply_texture(id: int) -> void:
 	var image = Image.new()
-	image.load(text_list[id])
+	image.load(textList[id])
 	var tex = ImageTexture.create_from_image(image)
 	var mat = StandardMaterial3D.new()
 	mat.albedo_texture = tex
-	child_list[id].set_surface_override_material(0, mat)
+	childList[id].set_surface_override_material(0, mat)
 	pass
 
-func inst_plane(pos: Vector3, rot: Vector3, sc: Vector3) -> void:
-	var plane = MeshInstance3D.new()
-	plane.mesh = PlaneMesh
-	plane.set_surface_override_material(0,c)
-	#plane.material_override = StandardMaterial3D.new()
-	#plane.material_override.albedo_texture = t1
-	plane.position = pos
-	plane.rotation = rot
-	plane.scale = sc
-	self.add_child(plane)
-	print(plane.position)
-	pass
 
-#func inst_arch(pos: Vector3, rot: Vector3, sc: Vector3) -> void:
-	#var arch = MeshInstance3D.new()
-	##arch.mesh = arch_obj
-	##var mat = PlaneMesh.new() 
-	##arch_obj.albedo_texture = t1
-	#arch.mesh = arch_obj
-	#arch.position = pos
-	#arch.rotation = rot
-	#arch.scale = sc
-	#add_child(arch)
-	#pass
+func _on_main_ui_change_room(id : int) -> void:
+	currentRoom = roomList[id]
+	room_init(id)
+	pass # Replace with function body.

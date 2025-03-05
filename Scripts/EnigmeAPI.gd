@@ -48,7 +48,7 @@ func _on_request_completed(result, response_code, headers, body):
 func on_button_pressed(user_answer: String):
 	user_answer = user_answer.strip_edges()  # Supprime les espaces 
 	if user_answer == correct_answer:
-		answer_sprite.texture = answerSprites[1]  # Vart si correct
+		answer_sprite.texture = answerSprites[1]  # Vert si correct
 	else:
 		answer_sprite.texture = answerSprites[2]  # Rouge si incorrect
 	await get_tree().create_timer(3.0).timeout # C'est un wait

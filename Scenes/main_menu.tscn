@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkt1uovwy12uv"]
+[gd_scene load_steps=10 format=3 uid="uid://dkt1uovwy12uv"]
 
 [ext_resource type="Texture2D" uid="uid://bmh2ybrcb5mu4" path="res://Images/ComfyUI_WallSpider.png" id="1_okoa0"]
 [ext_resource type="Script" path="res://MainMenu.gd" id="2_tnoch"]
+[ext_resource type="Script" path="res://Scenes/PlayerInfos.gd" id="3_woabw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3tkn"]
 bg_color = Color(0.287355, 0.30964, 0.572018, 1)
@@ -65,7 +66,6 @@ texture = ExtResource("1_okoa0")
 expand_mode = 1
 
 [node name="MainMenu_UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -117,8 +117,9 @@ anchors_preset = 0
 offset_right = 1150.0
 offset_bottom = 650.0
 theme = SubResource("Theme_st1d5")
+script = ExtResource("3_woabw")
 
-[node name="Panel" type="Panel" parent="PlayerInfos"]
+[node name="BG" type="Panel" parent="PlayerInfos"]
 layout_mode = 0
 offset_right = 1150.0
 offset_bottom = 650.0
@@ -132,23 +133,47 @@ columns = 2
 [node name="Nom" type="TextEdit" parent="PlayerInfos"]
 visibility_layer = 2
 layout_mode = 0
-offset_left = 450.0
+offset_left = 300.0
 offset_top = 50.0
-offset_right = 530.0
+offset_right = 380.0
 offset_bottom = 90.0
 text = "Ton nom"
 editable = false
 
-[node name="LineEdit" type="LineEdit" parent="PlayerInfos"]
+[node name="NomLE" type="TextEdit" parent="PlayerInfos"]
 visibility_layer = 2
 layout_mode = 0
-offset_left = 550.0
+offset_left = 400.0
 offset_top = 50.0
-offset_right = 950.0
+offset_right = 1100.0
 offset_bottom = 90.0
+theme_override_colors/background_color = Color(0.235294, 0.156863, 0.0980392, 1)
 placeholder_text = "Ce nom sera utilisé durant le jeu"
+wrap_mode = 1
 
-[node name="Button" type="Button" parent="PlayerInfos"]
+[node name="Peurs" type="TextEdit" parent="PlayerInfos"]
+visibility_layer = 2
+layout_mode = 0
+offset_left = 188.0
+offset_top = 100.0
+offset_right = 380.0
+offset_bottom = 140.0
+text = "Tes plus grandes peurs"
+editable = false
+wrap_mode = 1
+
+[node name="PeursLE" type="TextEdit" parent="PlayerInfos"]
+visibility_layer = 2
+layout_mode = 0
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 1100.0
+offset_bottom = 220.0
+theme_override_colors/background_color = Color(0.235294, 0.156863, 0.0980392, 1)
+placeholder_text = "Vous pouvez mettre autant d'items que vous voulez, séparés par une virgule"
+wrap_mode = 1
+
+[node name="OK" type="Button" parent="PlayerInfos"]
 layout_mode = 0
 offset_left = 525.0
 offset_top = 550.0

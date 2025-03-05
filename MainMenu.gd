@@ -3,6 +3,8 @@ extends Control
 var playButton
 var optionsButton
 
+var playerInfos
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	playButton = $PlayButton
@@ -18,7 +20,8 @@ func _process(delta: float) -> void:
 	pass
 
 func OnPlayButtonClick() -> void:
-	get_tree().change_scene_to_file("res://Scenes/game_room.tscn")
+	self.hide()
+	get_node("/root/MainMenu/PlayerInfos").show()
 
 func OnOptionsButtonClick() -> void:
-	pass#get_tree().change_scene("res://Scenes/game_room.tscn")
+	pass

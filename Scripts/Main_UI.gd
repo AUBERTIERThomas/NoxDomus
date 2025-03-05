@@ -15,6 +15,8 @@ var locPin
 var currentRoom
 var roomList
 
+signal change_room
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mapButton = $MapButton
@@ -67,10 +69,12 @@ func ShowButtons() -> void: #Je suis le pire programmeur pour avoir fait ça mai
 func OnMapButtonClick() -> void:
 	get_node("Minimap").show()
 	get_node("ChangeRoom").hide()
+	get_node("DoomBar").hide()
 
 func OnReturnButtonClick() -> void:
 	get_node("Minimap").hide()
 	get_node("ChangeRoom").show()
+	get_node("DoomBar").show()
 
 func OnUpButtonClick() -> void:
 	FindNextRoom(Vector2(0,1))
@@ -102,5 +106,6 @@ func FindNextRoom(dec : Vector2) -> void:
 	minimap.changeTexture(new_i)
 	print(locPin.position)
 	print(currentRoom.coordinates)
-	doomBar.value += 5
+	doomBar.value += 2
 	doomBarValue.text = str(doomBar.value)
+	emit_signal("change_room",new_i)
