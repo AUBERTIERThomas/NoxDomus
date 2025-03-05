@@ -267,7 +267,7 @@ material = SubResource("StandardMaterial3D_8pi23")
 script = ExtResource("2_wyqdb")
 
 [node name="_Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2, 0)
 environment = SubResource("Environment_hfxq2")
 fov = 70.0
 near = 0.5
@@ -284,26 +284,26 @@ omni_range = 12.0
 omni_attenuation = 2.0
 
 [node name="Plafond" type="MeshInstance3D" parent="."]
-transform = Transform3D(-10, 8.74228e-07, 0, -8.74228e-07, -10, 0, 0, 0, 10, 0, 8, 0)
+transform = Transform3D(-10, 2.26494e-06, 0, -1.50996e-06, -15, 0, 0, 0, 10, 0, 12, 0)
 mesh = SubResource("PlaneMesh_ib5b8")
 
 [node name="Mur1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.18557e-07, -3, 0, 5, -1.31134e-07, 0, 0, 0, 15, 15, 3, 0)
+transform = Transform3D(-6.55671e-07, -3, 0, -6.55671e-07, 5.73206e-15, -7.5, 15, -1.31134e-07, -3.27835e-07, 15, 4.5, 0)
 mesh = SubResource("PlaneMesh_xmpls")
 skeleton = NodePath("../Sol")
 
 [node name="Mur2" type="MeshInstance3D" parent="."]
-transform = Transform3D(9.55346e-15, 1.31134e-07, -15, 5, -1.31134e-07, 8.86009e-20, -2.18557e-07, -3, -6.55671e-07, 0, 3, 15)
+transform = Transform3D(-15, 2.62268e-07, 3.27835e-07, -6.55671e-07, 5.73206e-15, -7.5, -1.31134e-06, -3, 1.43301e-14, 0, 4.5, 15)
 mesh = SubResource("PlaneMesh_lj7do")
 skeleton = NodePath("../Sol")
 
 [node name="Mur3" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.18557e-07, 3, -1.31134e-06, 5, -1.31134e-07, 0, -1.91069e-14, -2.62268e-07, -15, -15, 3, 0)
+transform = Transform3D(1.96701e-06, 3, -2.86603e-14, -6.55671e-07, 5.73206e-15, -7.5, -15, 3.93402e-07, 3.27835e-07, -15, 4.5, 0)
 mesh = SubResource("PlaneMesh_lj7do")
 skeleton = NodePath("../Sol")
 
 [node name="Mur4" type="MeshInstance3D" parent="."]
-transform = Transform3D(9.55346e-15, 1.31134e-07, 15, 5, -1.31134e-07, -8.86009e-20, 2.18557e-07, 3, -6.55671e-07, 0, 3, -15)
+transform = Transform3D(15, 0, -3.27835e-07, -6.55671e-07, 5.73206e-15, -7.5, 0, 3, 1.43301e-14, 0, 4.5, -15)
 mesh = SubResource("PlaneMesh_bbfoe")
 skeleton = NodePath("../Sol")
 

@@ -9,7 +9,7 @@ func _ready() -> void:
 	for i in range(lightStateList.size()):
 		if ls >= lightStateList[i]:
 			lightState += 1
-	print("état de la lumière : "+str(lightState))
+	print("état de la lumière : "+str(lightState)+" ("+str(ls)+")")
 	match lightState:
 		0: # Allumée
 			self.omni_range = 30
