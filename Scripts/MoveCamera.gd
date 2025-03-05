@@ -3,7 +3,7 @@ extends Camera3D
 var rot_speed = 0.03
 var mov_speed = 10
 var acceleration = 25.0
-var dim_salle = 9
+var dim_salle = 14
 
 var velocity = Vector3.ZERO
 var lookAngles_y = 0 #Vector2.ZERO

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c26u6m68wlygk"
+
+[deps]
+
+files=["res://AI/Riddles/Creation/Riddles.Answer.translation", "res://AI/Riddles/Creation/Riddles.Hint.translation"]
+
+source_file="res://AI/Riddles/Creation/Riddles.csv"
+dest_files=["res://AI/Riddles/Creation/Riddles.Answer.translation", "res://AI/Riddles/Creation/Riddles.Hint.translation"]
+
+[params]
+
+compress=true
+delimiter=0
