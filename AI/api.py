@@ -51,8 +51,9 @@ def verify_riddle():
     - user_answer: the user's answer
 
     Optional parameters:
-    - model: the model used to check the answer. Default is mistral. (in ollama)
+    - model: the model used to check the answer. Default is phi3.5 (in ollama).
     - nb_checks: the number of checks to perform. Default is 3. Must be between 1 and 10.
+        (C'est complètement arbitraire, mais c'est pour éviter de faire trop de checks)
     """
 
     if 'question' not in request.args or 'correct_answer' not in request.args or 'user_answer' not in request.args:
@@ -66,7 +67,7 @@ def verify_riddle():
     user_answer = request.args['user_answer']
 
     # Optional parameters
-    model = request.args.get('model', 'mistral')
+    model = request.args.get('model', 'phi3.5 ')
     nb_checks = int(request.args.get('nb_checks', 3))
 
     if nb_checks < 1 or nb_checks > 10:
@@ -92,6 +93,56 @@ def get_number_of_riddles():
     Get the number of riddles in the riddles pool.
     """
     return jsonify({'number_of_riddles': riddles.get_number_of_riddles()})
+
+################################################################################
+
+@app.route('/image/wall', methods = ['GET'])
+def launch_genimg_wall():
+    """
+    Generate an image of a wall with seamless left and right sides.
+    """
+
+    return jsonify({})
+
+@app.route('/image/floor', methods = ['GET'])
+def launch_genimg_floor():
+    """
+    Generate an tiled image for a floor.
+    """
+
+    return jsonify({})
+
+@app.route('/image/ceiling', methods = ['GET'])
+def launch_genimg_ceiling():
+    """
+    Generate an image for a ceiling.
+    """
+
+    return jsonify({})
+
+@app.route("/image/inpaint", methods = ['GET'])
+def launch_genimg_inpaint():
+    """
+    Generate an inpainted image from a given image.
+    """
+
+    return jsonify({})
+
+@app.route('/image/delete', methods = ['DELETE'])
+def delete_image():
+    """
+    Delete an image that was generated.
+    """
+
+    return jsonify({})
+
+@app.route('image/delete_all', methods = ['DELETE'])
+def delete_all_images():
+    """
+    Delete all images that were generated.
+    """
+
+    return jsonify({})
 
 ################################################################################
 
