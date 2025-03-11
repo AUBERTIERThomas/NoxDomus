@@ -12,7 +12,7 @@ class IsRightAnswer(BaseModel):
 
 def check_if_right_answer(question, correct_answer, answer, model):
     
-    with open("Riddles/Prompts/question_validator.txt", "r") as f:
+    with open("AI/Riddles/Prompts/question_validator.txt", "r") as f:
         system_prompt = f.read()
     # print(system_prompt)
 
