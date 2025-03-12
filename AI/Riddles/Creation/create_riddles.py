@@ -26,7 +26,7 @@ class Riddles(RootModel):
 
 # riddles.csv file
 def read_from_csv(filepath, header=True, delimiter=','):
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding = "utf8") as f:
         csv_reader = csv.reader(f, delimiter=delimiter)
 
         riddles = Riddles()
@@ -42,7 +42,7 @@ def read_from_csv(filepath, header=True, delimiter=','):
     return riddles
 
 def read_from_csv2(filepath, header=True, delimiter=','):
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding = "utf8") as f:
         csv_reader = csv.reader(f, delimiter=delimiter)
 
         riddles = Riddles()
