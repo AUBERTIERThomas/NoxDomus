@@ -3,10 +3,10 @@ from random import choice
 
 class RiddlesHandler:
     def __init__(self):
-        self.riddles = read_from_csv('Riddles/Creation/riddles.csv')
-        self.riddles += read_from_json('Riddles/Creation/riddles.json')
-        self.riddles += read_from_json('Riddles/Creation/riddles2.json')
-        self.riddles += read_from_csv2('Riddles/Creation/Riddles.csv')
+        self.riddles = read_from_csv('AI/Riddles/Creation/riddles.csv')
+        self.riddles += read_from_json('AI/Riddles/Creation/riddles.json')
+        self.riddles += read_from_json('AI/Riddles/Creation/riddles2.json')
+        self.riddles += read_from_csv2('AI/Riddles/Creation/Riddles.csv')
         self.riddles_pool = self.riddles.root.copy()
 
     def reset_riddle_generator(self):
