@@ -3,8 +3,8 @@ from random import choice
 
 class QcmHandler:
     def __init__(self):
-        self.qcms = read_qcm('AI/QCM/Creation/GeneralKnowledge.json')
-        self.qcms += read_qcm('AI/QCM/Creation/Mythology.json')
+        self.qcms = read_qcm('AI/MultipleChoice/GeneralKnowledge.json')
+        self.qcms += read_qcm('AI/MultipleChoice/Mythology.json')
         self.qcms_pool = self.qcms.root.copy()
 
     def reset_qcm_generator(self):
