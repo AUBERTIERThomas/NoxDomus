@@ -22,8 +22,9 @@ folder_colors={
 "res://Classes/": "purple",
 "res://Images/": "blue",
 "res://Objets/": "teal",
-"res://Scenes/": "green",
-"res://Scripts/": "yellow"
+"res://Output/": "green",
+"res://Scenes/": "yellow",
+"res://Scripts/": "orange"
 }
 
 [input]

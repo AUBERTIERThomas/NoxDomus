@@ -7,6 +7,8 @@ var objNone
 
 var objUsed
 
+signal objDone
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	objList = [$Obj_1, $Obj_2, $Obj_3, $Obj_4, $Obj_5, $Obj_6, $Obj_7, $Obj_8, $Obj_9]
@@ -21,10 +23,15 @@ func _ready() -> void:
 			objList[i].disabled = true
 
 func OnObjButtonClick(id : int):
-	print(id+1)
+	print("le bouton")
 	objUsed = objList[id]
 	nbList[id] = nbList[id] - 1 #Ça utilise l'objet
+	leList[id].text = str(nbList[id])
+	if (!nbList[id]): #Si le joueur n'a pas l'objet, on désactive le bouton
+		objList[id].disabled = true
+	emit_signal("objDone")
 	self.hide()
 
 func OnNoneButtonClick():
+	emit_signal("objDone")
 	self.hide()
