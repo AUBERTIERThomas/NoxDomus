@@ -21,7 +21,7 @@ func _ready():
 	fetch_riddle()
 
 func fetch_riddle():
-	var url = "http://127.0.0.1:5000/riddle/0"
+	var url = "http://127.0.0.1:5000/riddle/generate"
 	print(url)
 	http_request.request(url)
 
@@ -47,7 +47,7 @@ func on_button_pressed(user_answer1: String):
 	url2 += "?question=" + current_question.uri_encode() # encodage pour les URL, surtout à cause des caractères spéciaux
 	url2 += "&correct_answer=" + correct_answer.uri_encode()
 	url2 += "&user_answer=" + user_answer1.uri_encode()
-	url2 += "&model=qwen2.5:0.5b" # tester mistral sur une machine avec + de GPU
+	url2 += "&model=phi3.5" # tester mistral sur une machine avec + de GPU
 	print("Réponse de l'utilisateur : ", user_answer1)
 	print(url2)
 	
@@ -75,7 +75,7 @@ func _on_verify_request_completed(result, response_code, headers, body):
 	else:
 		print("Erreur de requête (vérification) : %d" % response_code)
 	
-	answer_input.hide() # J'ai caché directement sinon on peut retaper
 	await get_tree().create_timer(3.0).timeout
 	get_node("/root/Node3D/MainUI").show()
+	answer_sprite.texture = answerSprites[0]
 	self.hide()
