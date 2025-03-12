@@ -78,4 +78,5 @@ func _on_verify_request_completed(result, response_code, headers, body):
 	await get_tree().create_timer(3.0).timeout
 	get_node("/root/Node3D/MainUI").show()
 	answer_sprite.texture = answerSprites[0]
+	fetch_riddle()
 	self.hide()

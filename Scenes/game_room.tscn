@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=53 format=3 uid="uid://dq6hmfhh5r1oe"]
 
 [ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_je4ns"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="2_wyqdb"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://rw2qmhgk22fq" path="res://Images/DoomBar_BG.png" id="15_q1rdq"]
 [ext_resource type="Texture2D" uid="uid://hd0j1ejag80" path="res://Images/DoomBar_Progress.png" id="16_e7q76"]
 [ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="16_g20te"]
+[ext_resource type="Script" path="res://Scenes/QcmAPI.gd" id="17_bffh7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -110,6 +111,10 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 Button/styles/hover = SubResource("StyleBoxFlat_0qi1b")
 Button/styles/normal = SubResource("StyleBoxFlat_g7lgm")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfya4"]
+bg_color = Color(0.312687, 0.562466, 0.233173, 1)
+border_color = Color(2.76752e-07, 0.403683, 0.0554539, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32g0a"]
 bg_color = Color(1, 1, 1, 1)
 border_width_bottom = 10
@@ -187,7 +192,7 @@ Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/font_sizes/font_size = 20
-Button/styles/disabled = SubResource("StyleBoxFlat_32g0a")
+Button/styles/disabled = SubResource("StyleBoxFlat_nfya4")
 Button/styles/focus = SubResource("StyleBoxFlat_32g0a")
 Button/styles/hover = SubResource("StyleBoxFlat_w1cn7")
 Button/styles/normal = SubResource("StyleBoxFlat_smatl")
@@ -487,6 +492,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = SubResource("Theme_ovgxn")
+script = ExtResource("17_bffh7")
 
 [node name="A" type="Button" parent="QCM_Menu"]
 layout_mode = 0
@@ -545,6 +551,14 @@ offset_bottom = 262.0
 text = "Ceci sera la question !"
 editable = false
 wrap_mode = 1
+
+[node name="AnswerFeedback" type="Sprite2D" parent="QCM_Menu"]
+texture_filter = 1
+position = Vector2(575, 152)
+scale = Vector2(5, 5)
+texture = ExtResource("15_g0scu")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="QCM_Menu"]
 
 [node name="Enigme_Menu" type="Control" parent="."]
 visible = false

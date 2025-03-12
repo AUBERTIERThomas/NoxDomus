@@ -75,7 +75,7 @@ func _on_inventaire_obj_done() -> void:
 		0:
 			await get_tree().create_timer(1.0).timeout
 			var typeQuestion = randi() % 100
-			if typeQuestion < 100 :
+			if typeQuestion < 0 :
 				qopen.show()
 			else :
 				qcm.show()
