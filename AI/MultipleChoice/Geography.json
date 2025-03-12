@@ -1,0 +1,605 @@
+{
+    "response_code": 0,
+    "results": [
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Which state of the United States is the smallest?",
+        "correct_answer": "Rhode Island ",
+        "incorrect_answers": [
+          "Maine",
+          "Vermont",
+          "Massachusetts"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Frankenmuth, a US city nicknamed &quot;Little Bavaria&quot;, is located in what state?",
+        "correct_answer": "Michigan",
+        "incorrect_answers": [
+          "Pennsylvania",
+          "Kentucky",
+          "Virginia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "Which of the following Arab countries does NOT have a flag containing only Pan-Arab colours?",
+        "correct_answer": "Qatar",
+        "incorrect_answers": [
+          "Kuwait",
+          "United Arab Emirates",
+          "Jordan"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is the capital of Wisconsin, USA?",
+        "correct_answer": "Madison",
+        "incorrect_answers": [
+          "Milwaukee",
+          "Wisconsin Dells",
+          "Green Bay"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "Where is the fast food chain &quot;Panda Express&quot; headquartered?",
+        "correct_answer": "Rosemead, California",
+        "incorrect_answers": [
+          "Sacramento, California",
+          "Fresno, California",
+          "San Diego, California"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "Which Russian oblast forms a border with Poland?",
+        "correct_answer": "Kaliningrad",
+        "incorrect_answers": [
+          "Samara",
+          "Nizhny Novgorod",
+          "Omsk"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What mountain range lines the border between Spain and France?",
+        "correct_answer": "Pyrenees",
+        "incorrect_answers": [
+          "Alps",
+          "Carpathians",
+          "Urals"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "Which is not a country in Africa?",
+        "correct_answer": "Guyana",
+        "incorrect_answers": [
+          "Senegal",
+          "Liberia",
+          "Somalia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "In 2012 the German-speaking microstate &quot;Liechtenstein&quot; in Central Europe had a population of how many inhabitants?",
+        "correct_answer": "36,600",
+        "incorrect_answers": [
+          "2,400",
+          "90,000",
+          "323,400"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "The mountainous Khyber Pass connects which of the two following countries?",
+        "correct_answer": "Afghanistan and Pakistan",
+        "incorrect_answers": [
+          "India and Nepal",
+          "Pakistan and India",
+          "Tajikistan and Kyrgyzstan"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "Bir Tawil, an uninhabited track of land claimed by no country, is located along the border of which two countries?",
+        "correct_answer": "Egypt and Sudan",
+        "incorrect_answers": [
+          "Israel and Jordan",
+          "Chad and Libya",
+          "Iraq and Saudi Arabia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Gibraltar, located just south of the Iberian peninsula, is a territory of which West Europe country?",
+        "correct_answer": "United Kingdom",
+        "incorrect_answers": [
+          "Spain",
+          "Portugal",
+          "France"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What is the name of the capital of Turkey?",
+        "correct_answer": "Ankara",
+        "incorrect_answers": [
+          "Istanbul",
+          "Izmir",
+          "Bursa"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Which country claims ownership of the disputed state Kosovo?",
+        "correct_answer": "Serbia",
+        "incorrect_answers": [
+          "Croatia",
+          "Albania",
+          "Macedonia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What is the capital of the State of Washington, United States?",
+        "correct_answer": "Olympia",
+        "incorrect_answers": [
+          "Washington D.C.",
+          "Seattle",
+          "Yukon"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "Greenland is a part of which kingdom?",
+        "correct_answer": "Denmark",
+        "incorrect_answers": [
+          "Sweden",
+          "Norway",
+          "United Kingdom"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "The Japanese district Akihabara is also known by what nickname?",
+        "correct_answer": "Electric Town",
+        "incorrect_answers": [
+          "Moon Walk River",
+          "Otaku Central ",
+          "Big Eyes"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "What is the name of New Zealand&#039;s indigenous people?",
+        "correct_answer": "Maori",
+        "incorrect_answers": [
+          "Vikings",
+          "Polynesians",
+          "Samoans"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "What is the 15th letter of the Greek alphabet?",
+        "correct_answer": "Omicron (&Omicron;)",
+        "incorrect_answers": [
+          "Sigma (&Sigma;)",
+          "Pi (&Pi;)",
+          "Nu (&Nu;)"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is the most populous Muslim-majority nation in 2010?",
+        "correct_answer": "Indonesia",
+        "incorrect_answers": [
+          "Saudi Arabia",
+          "Iran",
+          "Sudan"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What city is known as the Rose Capital of the World?",
+        "correct_answer": "Tyler, Texas",
+        "incorrect_answers": [
+          "San Diego, California",
+          "Miami, Florida",
+          "Anaheim, California"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "How many stations does the Central Line have on the London Underground?",
+        "correct_answer": "49",
+        "incorrect_answers": [
+          "51",
+          "43",
+          "47"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "How many sovereign states are members of the United Nations?",
+        "correct_answer": "195",
+        "incorrect_answers": [
+          "201",
+          "153",
+          "178"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "How many countries share a land border with Luxembourg?",
+        "correct_answer": "3",
+        "incorrect_answers": [
+          "4",
+          "2",
+          "5"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What European country is not a part of the EU?",
+        "correct_answer": "Norway",
+        "incorrect_answers": [
+          "Lithuania",
+          "Ireland",
+          "Czechia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is the county seat of King County, Washington?",
+        "correct_answer": "Seattle",
+        "incorrect_answers": [
+          "Bellevue",
+          "Enumclaw",
+          "Skykomish"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What year is on the flag of the US state Wisconsin?",
+        "correct_answer": "1848",
+        "incorrect_answers": [
+          "1634",
+          "1783",
+          "1901"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "What is the largest country in the world?",
+        "correct_answer": "Russia",
+        "incorrect_answers": [
+          "Canada",
+          "China",
+          "United States"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What is the capital of Greenland?",
+        "correct_answer": "Nuuk",
+        "incorrect_answers": [
+          "Sisimiut",
+          "Narsaq",
+          "Maniitsoq"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What African country has Portuguese as its official language?",
+        "correct_answer": "Mozambique",
+        "incorrect_answers": [
+          "Botswana",
+          "Gabon",
+          "Togo"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "Where would you find the &quot;Spanish Steps&quot;?",
+        "correct_answer": "Rome, Italy",
+        "incorrect_answers": [
+          "Barcelona, Spain",
+          "Berlin, Germany",
+          "London, England"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is the tallest mountain in Canada?",
+        "correct_answer": "Mount Logan",
+        "incorrect_answers": [
+          "Mont Tremblant",
+          "Whistler Mountain",
+          "Blue Mountain"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is the largest freshwater lake by volume?",
+        "correct_answer": "Lake Baikal",
+        "incorrect_answers": [
+          "Lake Superior",
+          "Lake Huron",
+          "Lake Michigan"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "If soccer is called football in England, what is American football called in England?",
+        "correct_answer": "American football",
+        "incorrect_answers": [
+          "Combball",
+          "Handball",
+          "Touchdown"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Where is the area commonly known as the Bermuda Triangle?",
+        "correct_answer": "North Atlantic Ocean, between Florida and Puerto Rico",
+        "incorrect_answers": [
+          "North Pacific Ocean, between Japan and the USA",
+          "In the Caribbean Sea",
+          "South Pacific Ocean, far off Chile"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "On which continent is the country of Angola located?",
+        "correct_answer": "Africa",
+        "incorrect_answers": [
+          "South America",
+          "Europe",
+          "Asia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "How many time zones does China have?",
+        "correct_answer": "1",
+        "incorrect_answers": [
+          "3",
+          "4",
+          "2"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "Into which basin does the Jordan River flow into?",
+        "correct_answer": "Dead Sea",
+        "incorrect_answers": [
+          "Aral Sea",
+          "Caspian Sea",
+          "Salton Sea"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Colchester Overpass, otherwise known as &quot;Bunny Man Bridge&quot;, is located where?",
+        "correct_answer": "Fairfax County, Virginia",
+        "incorrect_answers": [
+          "Medford, Oregon",
+          "Braxton County, Virgina",
+          "Lemon Grove, California"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What continent is the country Lesotho in?",
+        "correct_answer": "Africa",
+        "incorrect_answers": [
+          "Asia",
+          "South America",
+          "Europe"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "The Alps are a mountain range on which continent?",
+        "correct_answer": "Europe",
+        "incorrect_answers": [
+          "North America",
+          "Asia",
+          "Africa"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What is the capital of Lithuania?",
+        "correct_answer": "Vilnius",
+        "incorrect_answers": [
+          "Tallinn",
+          "Helsinki",
+          "Riga"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What tiny principality lies between Spain and France?",
+        "correct_answer": "Andorra",
+        "incorrect_answers": [
+          "Liechtenstein",
+          "Monaco",
+          "San Marino"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "What is the fifth largest country by area?",
+        "correct_answer": "Brazil",
+        "incorrect_answers": [
+          "United States",
+          "Australia",
+          "India"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "What is the capital of Indonesia?",
+        "correct_answer": "Jakarta",
+        "incorrect_answers": [
+          "Bandung",
+          "Medan",
+          "Palembang"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is Canada&#039;s largest island?",
+        "correct_answer": "Baffin Island",
+        "incorrect_answers": [
+          "Prince Edward Island",
+          "Vancouver Island",
+          "Newfoundland"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "Which country does Austria not border?",
+        "correct_answer": "France",
+        "incorrect_answers": [
+          "Slovenia",
+          "Switzerland",
+          "Slovakia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Geography",
+        "question": "What is the only state in the United States that does not have a flag in a shape with 4 edges?",
+        "correct_answer": "Ohio",
+        "incorrect_answers": [
+          "Florida",
+          "Idaho",
+          "New Mexico"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "hard",
+        "category": "Geography",
+        "question": "What is the name of the Canadian national anthem?",
+        "correct_answer": "O Canada",
+        "incorrect_answers": [
+          "O Red Maple",
+          "Leaf-Spangled Banner",
+          "March of the Puck Drop"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "medium",
+        "category": "Geography",
+        "question": "Which country has the abbreviation &quot;CH&quot;?",
+        "correct_answer": "Switzerland",
+        "incorrect_answers": [
+          "China",
+          "Canada",
+          "No Country"
+        ]
+      }
+    ]
+  }

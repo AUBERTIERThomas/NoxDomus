@@ -1,0 +1,125 @@
+{
+    "response_code": 0,
+    "results": [
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "What is the name of JoJo&#039;s Bizarre Adventure Part 5?",
+        "correct_answer": "Vento Aureo",
+        "incorrect_answers": [
+          "Vento Oreo",
+          "Vanto Aureo",
+          "Vento Eureo"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "Who was a voice actor for the English dubbing of HOWL&#039;S MOVING CASTLE (2004)?",
+        "correct_answer": "Christian Bale",
+        "incorrect_answers": [
+          "Matt Damon",
+          "Joseph Gordon-Levitt",
+          "Willem Dafoe"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "Who is the author of the manga series &quot;Astro Boy&quot;?",
+        "correct_answer": "Osamu Tezuka",
+        "incorrect_answers": [
+          "Mitsuteri Yokoyama",
+          "Takao Saito",
+          "Yoshihiro Tatsumi"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "What is the age of Ash Ketchum in Pokemon when he starts his journey?",
+        "correct_answer": "10",
+        "incorrect_answers": [
+          "11",
+          "12",
+          "9"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "What is the name of the corgi in Cowboy Bebop?",
+        "correct_answer": "Einstein",
+        "incorrect_answers": [
+          "Edward",
+          "Rocket",
+          "Joel"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "In &quot;Fairy Tail&quot;, what is the nickname of Natsu Dragneel?",
+        "correct_answer": "The Salamander",
+        "incorrect_answers": [
+          "The Dragon Slayer",
+          "The Dragon",
+          "The Demon"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "In &quot;Future Diary&quot;, what is the name of Yuno Gasai&#039;s Phone Diary?",
+        "correct_answer": "Yukiteru Diary",
+        "incorrect_answers": [
+          "Murder Diary",
+          "Escape Diary ",
+          "Justice Diary "
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "In 2013, virtual pop-star Hatsune Miku had a sponsorship with which pizza chain?",
+        "correct_answer": "Domino&#039;s",
+        "incorrect_answers": [
+          "Papa John&#039;s",
+          "Pizza Hut",
+          "Sabarro&#039;s"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "What caused the titular mascot of Yo-Kai Watch, Jibanyan, to become a yokai?",
+        "correct_answer": "Being run over by a truck",
+        "incorrect_answers": [
+          "Ate one too many chocobars",
+          "Through a magical ritual",
+          "When he put on the harmaki"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Japanese Anime &amp; Manga",
+        "question": "In the anime Black Butler, who is betrothed to be married to Ciel Phantomhive?",
+        "correct_answer": "Elizabeth Midford",
+        "incorrect_answers": [
+          "Rachel Phantomhive",
+          "Alexis Leon Midford",
+          "Angelina Dalles"
+        ]
+      }
+    ]
+  }
