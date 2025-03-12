@@ -70,7 +70,7 @@ def read_from_json(filepath):
             riddles.root.append(riddle)
 
     return riddles
-        
+
 
 if __name__ == '__main__':
     riddles1 = read_from_csv2('Riddles.csv')

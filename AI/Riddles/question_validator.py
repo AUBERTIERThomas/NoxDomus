@@ -49,7 +49,7 @@ def check_answer(question, correct_answer, answer, model, nb_checks = 5):
 
 if __name__ == '__main__':
     # model = "qwen2.5"
-    model = "mistral"
+    model = "phi3.5"
     question = "He died for people's entertainment. "
     answer = "gladiator"
     user_answer = "A woman with a sword and shield who fights"

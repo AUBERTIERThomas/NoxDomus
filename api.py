@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 
 from AI.Riddles.riddles import RiddlesHandler
 from AI.Riddles.question_validator import check_answer
+from AI.MultipleChoice.qcms import QcmHandler
 
 from AI.Images.gen_img import Comfyui
 
@@ -12,6 +13,7 @@ available_models = get_model_list()
 app = Flask("NoxDomusAPI")
 app.config["DEBUG"] = True
 riddles = RiddlesHandler()
+qcms = QcmHandler()
 comfyui_img = Comfyui('AI/Images/Workflows/seamless_textures.json')
 
 @app.route('/riddle/generate', methods=['GET'])
@@ -76,6 +78,31 @@ def get_number_of_riddles():
     Get the number of riddles in the riddles pool.
     """
     return jsonify({'number_of_riddles': riddles.get_number_of_riddles()})
+
+@app.route('/qcm/generate', methods=['GET'])
+def get_qcm():
+    """
+    Get a random qcm from the qcm pool.
+    
+    Optional parameters:
+    - authorize_repetition: True or False. Default is False.
+    """
+    auth_repetition= False
+    if 'authorize_repetition' in request.args:
+        # Check if the parameter is a boolean
+        if is_boolean(request.args['authorize_repetition']):
+            auth_repetition = (request.args['authorize_repetition'].lower() == 'true')
+        else:
+            return ErrorJson('authorize_repetition must be a boolean').to_json_c(400)
+    qcm = qcms.generate_random_qcm(auth_repetition)
+    return jsonify(qcm.model_dump())
+
+@app.route('/qcm/number', methods=['GET'])
+def get_number_of_qcms():
+    """
+    Get the number of qcms in the qcm pool.
+    """
+    return jsonify({'number_of_qcms': qcms.get_number_of_qcms()})
 
 ################################################################################
 
