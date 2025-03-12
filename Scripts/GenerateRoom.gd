@@ -11,21 +11,33 @@ var texture
 var childList
 var textList
 
+var mainUI
 var minimap
 var roomListNode
 var roomList
+var inventory
+var inventoryNone
+var qcm
+var qopen
 
 var currentRoom
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	childList = [$Mur1, $Mur2, $Mur3, $Mur4, $Plafond, $Sol]
+	
+	mainUI = $MainUI
 	minimap = $MainUI/Minimap
 	roomListNode = $MainUI/Minimap/RoomList
 	roomList = roomListNode.roomList
+	inventory = $Inventaire
+	inventoryNone = $Inventaire/Obj_None
+	qcm = $QCM_Menu
+	qopen = $Enigme_Menu
 	room_init(0)
 
 func room_init(id : int) -> void:
+	currentRoom = roomList[id]
 	var s = fullTextList.size()
 	wall1 = fullTextList[randi() % s]
 	wall2 = fullTextList[randi() % s]
@@ -34,6 +46,9 @@ func room_init(id : int) -> void:
 	textList = [wall1, wall2, wall3, wall4, ceiling, ground]
 	for i in range(6):
 		apply_texture(i)
+	mainUI.hide()
+	inventory.show()
+	inventoryNone.grab_focus()
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,4 +67,18 @@ func apply_texture(id: int) -> void:
 func _on_main_ui_change_room(id : int) -> void:
 	currentRoom = roomList[id]
 	room_init(id)
+	pass # Replace with function body.
+
+
+func _on_inventaire_obj_done() -> void:
+	match currentRoom.typeRoom:
+		0:
+			await get_tree().create_timer(1.0).timeout
+			var typeQuestion = randi() % 100
+			if typeQuestion < 100 :
+				qopen.show()
+			else :
+				qcm.show()
+		_:
+			mainUI.show()
 	pass # Replace with function body.

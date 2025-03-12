@@ -319,6 +319,7 @@ omni_attenuation = 1.5
 script = ExtResource("4_e8pf1")
 
 [node name="MainUI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -657,7 +658,7 @@ offset_left = 200.0
 offset_top = 240.0
 offset_right = 375.0
 offset_bottom = 415.0
-text = "Objet 1"
+text = "Objet 4"
 
 [node name="LE_4" type="LineEdit" parent="Inventaire/Obj_4"]
 layout_mode = 0
@@ -675,7 +676,7 @@ offset_left = 400.0
 offset_top = 240.0
 offset_right = 575.0
 offset_bottom = 415.0
-text = "Objet 2"
+text = "Objet 5"
 
 [node name="LE_5" type="LineEdit" parent="Inventaire/Obj_5"]
 layout_mode = 0
@@ -693,7 +694,7 @@ offset_left = 600.0
 offset_top = 240.0
 offset_right = 775.0
 offset_bottom = 415.0
-text = "Objet 3"
+text = "Objet 6"
 
 [node name="LE_6" type="LineEdit" parent="Inventaire/Obj_6"]
 layout_mode = 0
@@ -711,7 +712,7 @@ offset_left = 200.0
 offset_top = 440.0
 offset_right = 375.0
 offset_bottom = 615.0
-text = "Objet 1"
+text = "Objet 7"
 
 [node name="LE_7" type="LineEdit" parent="Inventaire/Obj_7"]
 layout_mode = 0
@@ -729,7 +730,7 @@ offset_left = 400.0
 offset_top = 440.0
 offset_right = 575.0
 offset_bottom = 615.0
-text = "Objet 2"
+text = "Objet 8"
 
 [node name="LE_8" type="LineEdit" parent="Inventaire/Obj_8"]
 layout_mode = 0
@@ -747,7 +748,7 @@ offset_left = 600.0
 offset_top = 440.0
 offset_right = 775.0
 offset_bottom = 615.0
-text = "Objet 3"
+text = "Objet 9"
 
 [node name="LE_9" type="LineEdit" parent="Inventaire/Obj_9"]
 layout_mode = 0
@@ -770,3 +771,4 @@ text = "Pas d'objet"
 [connection signal="change_room" from="MainUI" to="." method="_on_main_ui_change_room"]
 [connection signal="change_room" from="MainUI" to="Lampe" method="_on_main_ui_change_room"]
 [connection signal="text_submitted" from="Enigme_Menu/Reponse" to="Enigme_Menu" method="_on_reponse_text_submitted"]
+[connection signal="objDone" from="Inventaire" to="." method="_on_inventaire_obj_done"]

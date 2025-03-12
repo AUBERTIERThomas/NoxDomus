@@ -75,7 +75,7 @@ func _on_verify_request_completed(result, response_code, headers, body):
 	else:
 		print("Erreur de requête (vérification) : %d" % response_code)
 	
-	#answer_input.hide() # J'ai caché directement sinon on peut retaper
+	answer_input.hide() # J'ai caché directement sinon on peut retaper
 	await get_tree().create_timer(3.0).timeout
 	get_node("/root/Node3D/MainUI").show()
-	#self.hide()
+	self.hide()
