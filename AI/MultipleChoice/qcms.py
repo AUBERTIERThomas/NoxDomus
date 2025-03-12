@@ -6,9 +6,10 @@ class QcmHandler:
         self.qcms = read_qcm('AI/MultipleChoice/GeneralKnowledge.json')
         self.qcms += read_qcm('AI/MultipleChoice/Mythology.json')
         self.qcms += read_qcm('AI/MultipleChoice/Mathematics.json')
-        #self.qcms += read_qcm('AI/MultipleChoice/manga.json')
+        #self.qcms += read_qcm('AI/MultipleChoice/Manga.json')
         self.qcms += read_qcm('AI/MultipleChoice/History.json')
         self.qcms += read_qcm('AI/MultipleChoice/Geography.json')
+        self.qcms += read_qcm('AI/MultipleChoice/Computer.json')
         self.qcms_pool = self.qcms.root.copy()
 
     def reset_qcm_generator(self):
