@@ -5,6 +5,8 @@ extends Control
 @onready var question_display = $QuestionPanel/TextEdit
 @onready var answer_button = [$A,$B,$C,$D]
 @onready var answer_sprite = $AnswerFeedback
+@onready var inventory = get_node("/root/Node3D/Inventaire")
+@onready var mainUI = get_node("/root/Node3D/MainUI")
 
 var current_question = ""
 var correct_answer = ""
@@ -54,8 +56,15 @@ func _on_riddle_request_completed(result, response_code, headers, body):
 func on_button_pressed(id: int):
 	if id == correct_answer_id:
 		answer_sprite.texture = answerSprites[0]  # Vart si correct
+		var ggg = randi() % 9
+		print(ggg)
+		inventory.nbList[ggg] += 1
+		inventory.leList[ggg].text = str(inventory.nbList[ggg])
+		inventory.objList[ggg].disabled = false
 	else:
 		answer_sprite.texture = answerSprites[1]  # Rouge si incorrect
+		mainUI.doomBar.value += 1
+		mainUI.doomBarValue.text = str(mainUI.doomBar.value)
 
 	answer_button[correct_answer_id].disabled = true
 	await get_tree().create_timer(3.0).timeout

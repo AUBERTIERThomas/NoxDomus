@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=56 format=3 uid="uid://dq6hmfhh5r1oe"]
 
 [ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_je4ns"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="2_wyqdb"]
@@ -20,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://hd0j1ejag80" path="res://Images/DoomBar_Progress.png" id="16_e7q76"]
 [ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="16_g20te"]
 [ext_resource type="Script" path="res://Scenes/QcmAPI.gd" id="17_bffh7"]
+[ext_resource type="Texture2D" uid="uid://c4dd1l4o3lg1d" path="res://Images/AnswersGood.png" id="19_2y3f6"]
+[ext_resource type="Texture2D" uid="uid://bews5bropc5sy" path="res://Images/AnswersBad.png" id="20_35u7j"]
+[ext_resource type="Texture2D" uid="uid://cflseeqieyvf1" path="res://Images/Minimap_1.png" id="21_81ysl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -782,7 +785,145 @@ offset_right = 1050.0
 offset_bottom = 360.0
 text = "Pas d'objet"
 
+[node name="RandomEvent_Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="BG" type="Panel" parent="RandomEvent_Menu"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="RE_logo" type="Sprite2D" parent="RandomEvent_Menu"]
+texture_filter = 1
+position = Vector2(575, 300)
+scale = Vector2(20, 20)
+texture = ExtResource("21_81ysl")
+
+[node name="RE_LoseDoom" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="BG" type="Panel" parent="RE_LoseDoom"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="RE_LoseDoom/BG"]
+light_mask = 0
+offset_left = 300.0
+offset_top = 225.0
+offset_right = 600.0
+offset_bottom = 375.0
+scale = Vector2(1.5, 1.5)
+text = "-5 de malédiction !
+Quelle veine !"
+wrap_mode = 1
+
+[node name="RE_WinDoom" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="BG" type="Panel" parent="RE_WinDoom"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="RE_WinDoom/BG"]
+light_mask = 0
+offset_left = 250.0
+offset_top = 225.0
+offset_right = 650.0
+offset_bottom = 375.0
+scale = Vector2(1.5, 1.5)
+text = "+5 de malédiction !
+Les chose se compliquent !"
+wrap_mode = 1
+
+[node name="Win_Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="QuestionPanel" type="Panel" parent="Win_Menu"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="Win_Menu/QuestionPanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 275.0
+offset_top = 150.0
+offset_right = 575.0
+offset_bottom = 200.0
+scale = Vector2(1.5, 1.5)
+text = "Vous avez gagné !"
+wrap_mode = 1
+
+[node name="AnswerFeedback" type="Sprite2D" parent="Win_Menu"]
+texture_filter = 1
+position = Vector2(575, 450)
+scale = Vector2(5, 5)
+texture = ExtResource("19_2y3f6")
+
+[node name="Lose_Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="QuestionPanel" type="Panel" parent="Lose_Menu"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="Lose_Menu/QuestionPanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 275.0
+offset_top = 150.0
+offset_right = 575.0
+offset_bottom = 200.0
+scale = Vector2(1.5, 1.5)
+text = "Vous avez perdu..."
+wrap_mode = 1
+
+[node name="AnswerFeedback" type="Sprite2D" parent="Lose_Menu"]
+texture_filter = 1
+position = Vector2(575, 450)
+scale = Vector2(5, 5)
+texture = ExtResource("20_35u7j")
+
 [connection signal="change_room" from="MainUI" to="." method="_on_main_ui_change_room"]
 [connection signal="change_room" from="MainUI" to="Lampe" method="_on_main_ui_change_room"]
+[connection signal="visibility_changed" from="Enigme_Menu" to="Enigme_Menu" method="_on_visibility_changed"]
 [connection signal="text_submitted" from="Enigme_Menu/Reponse" to="Enigme_Menu" method="_on_reponse_text_submitted"]
 [connection signal="objDone" from="Inventaire" to="." method="_on_inventaire_obj_done"]

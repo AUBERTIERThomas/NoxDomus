@@ -11,6 +11,7 @@ var doomBarValue
 
 var minimap
 var locPin
+var locPinStartPos
 
 var currentRoom
 var roomList
@@ -35,6 +36,7 @@ func _ready() -> void:
 	doomBarValue = $DoomBarValue
 	minimap = $Minimap
 	locPin = $Minimap/LocPin
+	locPinStartPos = locPin.position
 	roomList = minimap.rList
 	currentRoom = roomList[0]
 	currentRoom.isRevealed = true
@@ -77,35 +79,38 @@ func OnReturnButtonClick() -> void:
 	get_node("DoomBar").show()
 
 func OnUpButtonClick() -> void:
-	FindNextRoom(Vector2(0,1))
+	FindNextRoom(0,Vector2(0,1))
 	ShowButtons()
 
 func OnLeftButtonClick() -> void:
-	FindNextRoom(Vector2(1,0))
+	FindNextRoom(0,Vector2(1,0))
 	ShowButtons()
 
 func OnDownButtonClick() -> void:
-	FindNextRoom(Vector2(0,-1))
+	FindNextRoom(0,Vector2(0,-1))
 	ShowButtons()
 
 func OnRightButtonClick() -> void:
-	FindNextRoom(Vector2(-1,0))
+	FindNextRoom(0,Vector2(-1,0))
 	ShowButtons()
 
-func FindNextRoom(dec : Vector2) -> void:
-	print(dec)
-	var new_c = currentRoom.coordinates+dec
-	var new_i
+func FindNextRoom(event : int,dec : Vector2) -> void:
+	var new_i = 0
+	var new_c
+	if event == 1 : # Choix d'une salle déjà fait (téléportation)
+		new_c = dec
+	else :  # Changement de salle avec les flèches (classique)
+		new_c = currentRoom.coordinates+dec
 	for i in range(roomList.size()):
 		if (roomList[i].coordinates == new_c):
-			currentRoom = roomList[i]
 			new_i = i
 			break
-	locPin.position = locPin.position - dec * minimap.space
+	currentRoom = roomList[new_i]
 	currentRoom.isRevealed = true
+	locPin.position = locPinStartPos - currentRoom.coordinates * minimap.space
 	minimap.changeTexture(new_i)
 	print(locPin.position)
 	print(currentRoom.coordinates)
-	doomBar.value += 2
+	doomBar.value += 1
 	doomBarValue.text = str(doomBar.value)
 	emit_signal("change_room",new_i)

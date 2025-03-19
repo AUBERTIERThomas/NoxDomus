@@ -3,6 +3,7 @@ extends CSGTorus3D
 var angle
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Vector3(randf_range(-5,5),0,randf_range(-5,5))
 	angle = 0
 	pass # Replace with function body.
 
