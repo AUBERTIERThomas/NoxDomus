@@ -8,6 +8,7 @@ var downButton
 var rightButton
 var doomBar
 var doomBarValue
+var screamerImage
 
 var minimap
 var locPin
@@ -34,6 +35,7 @@ func _ready() -> void:
 	rightButton.pressed.connect(self.OnRightButtonClick)
 	doomBar = $DoomBar
 	doomBarValue = $DoomBarValue
+	screamerImage = $OoohVeryScary
 	minimap = $Minimap
 	locPin = $Minimap/LocPin
 	locPinStartPos = locPin.position
@@ -44,11 +46,15 @@ func _ready() -> void:
 	#print(currentRoom.coordinates)
 	#print(currentRoom.links)
 	ShowButtons()
-	
-	
-	
-	
 	pass # Replace with function body.
+
+func _process(_delta: float) -> void:
+	var screamer = randi() % 10000 # Plus le nombre est petit, plus ça arrive souvent
+	if screamer == 0:
+		screamerImage.show()
+		await get_tree().create_timer(0.75).timeout
+		screamerImage.hide()
+	pass
 
 func ShowButtons() -> void: #Je suis le pire programmeur pour avoir fait ça mais je préferrais éviter de faire une liste de boutons pour la clarté voilà du coup je fais les 4 cas à la main mais bon on pourra pas dire que c'est pas lisible et tout haha allez sur ce bonne lecture.
 	if !currentRoom.links[3]:

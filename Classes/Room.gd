@@ -10,7 +10,7 @@ var extraData : int
 func setup(c : Vector2, type : int) -> void:
 	coordinates = c
 	typeRoom = type
-	isRevealed = false # Mettre en true pour tout révéler
+	isRevealed = true # Mettre en true pour tout révéler
 	links = [false,false,false,false]
 	lightState = 0
 	extraData = 0

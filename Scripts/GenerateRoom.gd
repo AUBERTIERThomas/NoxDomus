@@ -20,8 +20,10 @@ var inventoryNone
 var qcm
 var qopen
 var reMenu
+var reTP
 var reWDoom
 var reLDoom
+var keyMenu
 var winMenu
 var loseMenu
 
@@ -41,8 +43,10 @@ func _ready() -> void:
 	qcm = $QCM_Menu
 	qopen = $Enigme_Menu
 	reMenu = $RandomEvent_Menu
+	reTP = $RE_TP
 	reWDoom = $RE_WinDoom
 	reLDoom = $RE_LoseDoom
+	keyMenu = $KeyRoom_Menu
 	winMenu = $Win_Menu
 	loseMenu = $Lose_Menu
 	room_init(0)
@@ -89,8 +93,14 @@ func _on_inventaire_obj_done() -> void:
 		match currentRoom.typeRoom:
 			-3:
 				if currentRoom.extraData == 0:
+					keyMenu.show()
+					await get_tree().create_timer(1.5).timeout
+					keyMenu.hide()
 					numberOfKeys += 1
 					currentRoom.extraData = 1
+					mainUI.show()
+				else :
+					mainUI.show()
 			-2:
 				if numberOfKeys >= 3:
 					winMenu.show()
@@ -109,8 +119,11 @@ func _on_inventaire_obj_done() -> void:
 				reMenu.hide()
 				var typeEvent = randi() % 100
 				if typeEvent < 30 : # Téléportation aléatoire
+					reTP.show()
 					var newRoom = roomList[randi() % roomListNode.roomNumber].coordinates
-					print(newRoom)
+					#print(newRoom)
+					await get_tree().create_timer(1.5).timeout
+					reTP.hide()
 					mainUI.FindNextRoom(1,newRoom)
 				elif typeEvent < 50 :
 					mainUI.doomBar.value += 5

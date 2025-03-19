@@ -6,7 +6,7 @@ var roomList
 var linkList
 var xLimit = 7
 var yLimit = 6
-var rTypeList = [50]
+var rTypeList = [75]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

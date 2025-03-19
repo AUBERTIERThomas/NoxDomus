@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=58 format=3 uid="uid://dq6hmfhh5r1oe"]
 
 [ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_je4ns"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="2_wyqdb"]
@@ -20,9 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://hd0j1ejag80" path="res://Images/DoomBar_Progress.png" id="16_e7q76"]
 [ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="16_g20te"]
 [ext_resource type="Script" path="res://Scenes/QcmAPI.gd" id="17_bffh7"]
+[ext_resource type="Texture2D" uid="uid://cr12scsc2qwe8" path="res://Images/Photo_moi.JPG" id="17_sgpkf"]
 [ext_resource type="Texture2D" uid="uid://c4dd1l4o3lg1d" path="res://Images/AnswersGood.png" id="19_2y3f6"]
 [ext_resource type="Texture2D" uid="uid://bews5bropc5sy" path="res://Images/AnswersBad.png" id="20_35u7j"]
 [ext_resource type="Texture2D" uid="uid://cflseeqieyvf1" path="res://Images/Minimap_1.png" id="21_81ysl"]
+[ext_resource type="Texture2D" uid="uid://btssbpryfygof" path="res://Images/Minimap_-3.png" id="22_b0ind"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -488,6 +490,13 @@ grow_vertical = 2
 text = "0"
 editable = false
 
+[node name="OoohVeryScary" type="Sprite2D" parent="MainUI"]
+visible = false
+texture_filter = 1
+position = Vector2(575, 350)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("17_sgpkf")
+
 [node name="QCM_Menu" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -806,6 +815,31 @@ position = Vector2(575, 300)
 scale = Vector2(20, 20)
 texture = ExtResource("21_81ysl")
 
+[node name="RE_TP" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="BG" type="Panel" parent="RE_TP"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="RE_TP/BG"]
+light_mask = 0
+offset_left = 300.0
+offset_top = 225.0
+offset_right = 600.0
+offset_bottom = 375.0
+scale = Vector2(1.5, 1.5)
+text = "Téléportation !!!"
+wrap_mode = 1
+
 [node name="RE_LoseDoom" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -857,6 +891,37 @@ scale = Vector2(1.5, 1.5)
 text = "+5 de malédiction !
 Les chose se compliquent !"
 wrap_mode = 1
+
+[node name="KeyRoom_Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="BG" type="Panel" parent="KeyRoom_Menu"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="KeyRoom_Menu/BG"]
+light_mask = 0
+offset_left = 225.0
+offset_top = 150.0
+offset_right = 625.0
+offset_bottom = 200.0
+scale = Vector2(1.5, 1.5)
+text = "Vous avez trouvé une clé !"
+wrap_mode = 1
+
+[node name="RE_logo" type="Sprite2D" parent="KeyRoom_Menu"]
+texture_filter = 1
+position = Vector2(575, 425)
+scale = Vector2(10, 10)
+texture = ExtResource("22_b0ind")
 
 [node name="Win_Menu" type="Control" parent="."]
 visible = false
