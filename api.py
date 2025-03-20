@@ -4,6 +4,8 @@ from AI.Riddles.riddles import RiddlesHandler
 from AI.Riddles.question_validator import check_answer
 from AI.MultipleChoice.qcms import QcmHandler
 
+from AI.commentary import comment
+
 from AI.Images.gen_img import Comfyui
 
 from utils import Status, get_model_list, is_boolean, ErrorJson
@@ -14,7 +16,8 @@ app = Flask("NoxDomusAPI")
 app.config["DEBUG"] = True
 riddles = RiddlesHandler()
 qcms = QcmHandler()
-comfyui_img = Comfyui('AI/Images/Workflows/seamless_textures.json')
+comfyui_img_inpaint = Comfyui('AI/Images/Workflows/inpaint-wall.json')
+comfyui_img = Comfyui('AI/Images/Workflows/seamless-textures-wall.json')
 
 @app.route('/riddle/generate', methods=['GET'])
 def get_riddle():
@@ -105,6 +108,98 @@ def get_number_of_qcms():
     return jsonify({'number_of_qcms': qcms.get_number_of_qcms()})
 
 ################################################################################
+
+@app.route('/alexandre/astier', methods=['GET'])
+def get_commentary():
+    """
+    Get a commentary of a game action.
+
+    Mandatory parameters:
+    - question: the question
+    - correct_answer: the correct answer
+    - user_answer: the user's answer
+
+    Optional parameters:
+    - model: the model used to check the answer. Default is phi3.5 (in ollama).
+    """
+
+
+
+    # msg = comment()
+    # return jsonify({'commentary':msg})
+
+    return ErrorJson("Not implemented yet").to_json_c(501)
+
+
+################################################################################
+
+@app.route('/image/inpaint', methods = ['GET'])
+def inpaint():
+    """
+    Inpaint a given image with a given mask with a given prompt
+
+    Mandatory parameters:
+    - img_path: the path to the image to inpaint on 
+    - mask_path: the path to the mask to use
+    - positive_prompt: the prompt to use
+    - filename: the prefix to use for the output filename
+    
+    Optional parameters:
+    - output_folder: the folder where the image will be saved. Default is `Output`
+    - seed: the seed for the random generation. (useful for reproducibility)
+        If not provided, a random seed will be used.
+    - checkpoint: the name of the checkpoint to use. (not recommended changing it)
+    - negative_prompt: the negative prompt
+    """
+
+    if 'img_path' not in request.args:
+        return ErrorJson('img_path is a required parameter').to_json_c(400)
+    img_path = request.args['img_path']
+    comfyui_img_inpaint.load_image('17', img_path)
+    if 'mask_path' not in request.args:
+        return ErrorJson('mask_path is a required parameter').to_json_c(400)
+    mask_path = request.args['mask_path']
+    comfyui_img_inpaint.load_image('58', mask_path)
+    if 'positive_prompt' not in request.args:
+        return ErrorJson('positive_prompt is a required parameter').to_json_c(400)
+    positive_prompt = request.args['positive_prompt']
+    comfyui_img_inpaint.set_positive_prompt('5', positive_prompt)
+    if 'filename' not in request.args:
+        return ErrorJson('filename is a required parameter').to_json_c(400)
+    filename = request.args['filename']
+
+    if 'negative_prompt' in request.args:
+        comfyui_img_inpaint.set_negative_prompt('6', request.args['negative_prompt'])
+
+    if 'seed' in request.args:
+        comfyui_img_inpaint.set_seed('9', request.args['seed'])
+
+    if 'checkpoint' in request.args:
+        comfyui_img_inpaint.set_ckpt('3', request.args['checkpoint'])
+
+    if 'output_folder' in request.args:
+        output_folder = request.args['output_folder']
+    else:
+        output_folder = 'Output'
+
+    print("Starting ComfyUI inpainting process")
+    try:
+        # Set a timeout for the request
+        # success = comfyui_img_inpaint.run_and_display()
+        success = comfyui_img_inpaint.run_and_save(filename, output_folder)
+        print(f"ComfyUI process completed with result: {success}")
+        
+        if success:
+            # Not an error but flemme, status aussi peut etre OK
+            return ErrorJson('Image generated successfully', Status.OK).to_json_c(200)
+        else:
+            print("ComfyUI process failed")
+            return ErrorJson('Failed to generate image').to_json_c(500)
+
+    except Exception as e:
+        print(f"Exception during image generation: {str(e)}")
+        return ErrorJson(f'Exception during image generation: {str(e)}').to_json_c(500)
+
 
 @app.route('/image/generate', methods = ['GET'])
 def launch_genimg():

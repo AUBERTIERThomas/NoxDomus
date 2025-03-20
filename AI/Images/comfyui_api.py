@@ -6,6 +6,7 @@ import uuid
 import json
 import urllib.request
 import urllib.parse
+import requests
 
 server_address = "127.0.0.1:8188"
 client_id = str(uuid.uuid4())
@@ -135,6 +136,39 @@ def get_images(ws, prompt):
     except Exception as e:
         print(f"Unexpected error in get_images: {str(e)}")
         return {}
+
+##
+## Fonction copiée de:
+## https://github.com/sbszcz/image-upload-comfyui-example/blob/main/run-workflow.py
+## 
+## Modifiée pour charger un masque aussi
+def upload_file(file, subfolder="", overwrite=False, is_mask = False):
+    try:
+        body = {"image": file}
+        data = {}
+        
+        if overwrite:
+            data["overwrite"] = "true"
+  
+        if subfolder:
+            data["subfolder"] = subfolder
+
+        if is_mask:
+            resp = requests.post(f"http://{server_address}/upload/mask", files=body,data=data)
+        else:
+            resp = requests.post(f"http://{server_address}/upload/image", files=body,data=data)
+        
+        if resp.status_code == 200:
+            data = resp.json()
+            path = data["name"]
+            if "subfolder" in data:
+                if data["subfolder"] != "":
+                    path = data["subfolder"] + "/" + path
+        else:
+            print(f"{resp.status_code} - {resp.reason}")
+    except Exception as error:
+        print(error)
+    return path
 
 ################################################################################
 

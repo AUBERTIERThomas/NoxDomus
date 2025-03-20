@@ -5,6 +5,8 @@ from uuid import uuid4
 from random import randint
 import os
 
+from PIL import Image
+
 # Constants
 # TODO: define these constants in a config file
 server_address = "127.0.0.1:8188"
@@ -44,7 +46,25 @@ Args:
     def set_img_height(self, node_id, height):
         self.workflow[node_id]['inputs']['height'] = height
 
+    # def load_image(self, node_id, image_path):
+        # self.workflow[node_id]['inputs']['image'] = image_path
+
+    def load_image(self, node_id, file, subfolder="", overwrite=False):
+        # path = comfyui.upload_file(file, subfolder, overwrite)
+        with open(file, "rb") as f:
+            comfyui_upload_image_path = comfyui.upload_file(f,subfolder,overwrite)
+            self.workflow[node_id]['inputs']['image'] = comfyui_upload_image_path
+
+    def load_mask(self, node_id, file, subfolder="", overwrite=False):
+        # image = Image.open(file).convert("L")
+        # image.save("temp.png")
+        # comfyui.upload_file(file, subfolder, overwrite, is_mask=True)
+        with open(file, "rb") as f:
+            cmfy_img_path = comfyui.upload_file(f,subfolder,overwrite, is_mask=False)
+            self.workflow[node_id]['inputs']['mask'] = cmfy_img_path
+
     # Works with the Assymmetric Tiled KSampler if node exists in the workflow
+    # Do not call if the node is not in the workflow
     def seamless_xaxis(self, node_id, enable):
         a = 0
         if enable:
@@ -52,6 +72,7 @@ Args:
         self.workflow[node_id]['inputs']['tileX'] = a
 
     # Works with the Assymmetric Tiled KSampler if node exists in the workflow
+    # Do not call if the node is not in the workflow
     def seamless_yaxis(self, node_id, enable):
         a = 0
         if enable:
@@ -59,6 +80,7 @@ Args:
         self.workflow[node_id]['inputs']['tileY'] = a
 
     # Works with the Assymmetric Tiled KSampler if node exists in the workflow
+    # Do not call if the node is not in the workflow
     def seamless_both(self, node_id, enable):
         self.seamless_xaxis(node_id, enable)
         self.seamless_yaxis(node_id, enable)
@@ -214,7 +236,7 @@ class Comfyui(CustomizeWorkflow):
         except Exception as e:
             print(f"Error in run_and_display: {str(e)}")
             return False    
-                
+
     # Dangerous territory
 
     def delete_image(self, name):
