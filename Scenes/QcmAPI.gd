@@ -47,11 +47,11 @@ func _on_riddle_request_completed(result, response_code, headers, body):
 					correct_answer_id = i
 				else :
 					answer_button[i].text = incorrect_answers[ra[i]]
-			print("Bonne réponse attendue : ", correct_answer)
+			print("Bonne réponse attendue (QCM) : ", correct_answer)
 		else:
-			question_display.text = "Erreur lors de la récupération de l'énigme."
+			question_display.text = "Erreur lors de la récupération du QCM."
 	else: 
-		question_display.text = "Erreur de requête : %d" % response_code
+		question_display.text = "Erreur de requête (QCM) : %d" % response_code
 
 func on_button_pressed(id: int):
 	if id == correct_answer_id:

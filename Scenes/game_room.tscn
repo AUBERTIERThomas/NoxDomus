@@ -832,6 +832,7 @@ offset_bottom = 620.0
 
 [node name="TextEdit" type="TextEdit" parent="RE_TP/BG"]
 light_mask = 0
+layout_mode = 0
 offset_left = 300.0
 offset_top = 225.0
 offset_right = 600.0
@@ -857,6 +858,7 @@ offset_bottom = 620.0
 
 [node name="TextEdit" type="TextEdit" parent="RE_LoseDoom/BG"]
 light_mask = 0
+layout_mode = 0
 offset_left = 300.0
 offset_top = 225.0
 offset_right = 600.0
@@ -883,6 +885,7 @@ offset_bottom = 620.0
 
 [node name="TextEdit" type="TextEdit" parent="RE_WinDoom/BG"]
 light_mask = 0
+layout_mode = 0
 offset_left = 250.0
 offset_top = 225.0
 offset_right = 650.0
@@ -909,6 +912,7 @@ offset_bottom = 620.0
 
 [node name="TextEdit" type="TextEdit" parent="KeyRoom_Menu/BG"]
 light_mask = 0
+layout_mode = 0
 offset_left = 225.0
 offset_top = 150.0
 offset_right = 625.0
