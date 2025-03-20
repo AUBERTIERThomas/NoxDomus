@@ -136,7 +136,8 @@ def get_commentary():
 @app.route('/image/inpaint', methods = ['GET'])
 def inpaint():
     """
-    Inpaint a given image with a given mask with a given prompt
+    Inpaint a given image with a given mask with a given prompt.
+    If a file with the same filename already exists, it will be overwritten.
 
     Mandatory parameters:
     - img_path: the path to the image to inpaint on 
