@@ -19,8 +19,16 @@ var inventory
 var inventoryNone
 var qcm
 var qopen
+var reMenu
+var reTP
+var reWDoom
+var reLDoom
+var keyMenu
+var winMenu
+var loseMenu
 
 var currentRoom
+var numberOfKeys = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,9 +42,17 @@ func _ready() -> void:
 	inventoryNone = $Inventaire/Obj_None
 	qcm = $QCM_Menu
 	qopen = $Enigme_Menu
+	reMenu = $RandomEvent_Menu
+	reTP = $RE_TP
+	reWDoom = $RE_WinDoom
+	reLDoom = $RE_LoseDoom
+	keyMenu = $KeyRoom_Menu
+	winMenu = $Win_Menu
+	loseMenu = $Lose_Menu
 	room_init(0)
 
 func room_init(id : int) -> void:
+	print("nouvelle salle")
 	currentRoom = roomList[id]
 	var s = fullTextList.size()
 	wall1 = fullTextList[randi() % s]
@@ -71,14 +87,60 @@ func _on_main_ui_change_room(id : int) -> void:
 
 
 func _on_inventaire_obj_done() -> void:
-	match currentRoom.typeRoom:
-		0:
-			await get_tree().create_timer(1.0).timeout
-			var typeQuestion = randi() % 100
-			if typeQuestion < 100 :
-				qopen.show()
-			else :
-				qcm.show()
-		_:
-			mainUI.show()
+	if mainUI.doomBar.value >= 100:
+		loseMenu.show()
+	else :
+		match currentRoom.typeRoom:
+			-3:
+				if currentRoom.extraData == 0:
+					keyMenu.show()
+					await get_tree().create_timer(1.5).timeout
+					keyMenu.hide()
+					numberOfKeys += 1
+					currentRoom.extraData = 1
+					mainUI.show()
+				else :
+					mainUI.show()
+			-2:
+				if numberOfKeys >= 3:
+					winMenu.show()
+				else :
+					mainUI.show()
+			0:
+				await get_tree().create_timer(1.0).timeout
+				var typeQuestion = randi() % 100
+				if typeQuestion < 20 :
+					qopen.show()
+				else :
+					qcm.show()
+			1:
+				reMenu.show()
+				await get_tree().create_timer(2.0).timeout
+				reMenu.hide()
+				var typeEvent = randi() % 100
+				if typeEvent < 30 : # Téléportation aléatoire
+					reTP.show()
+					var newRoom = roomList[randi() % roomListNode.roomNumber].coordinates
+					#print(newRoom)
+					await get_tree().create_timer(1.5).timeout
+					reTP.hide()
+					mainUI.FindNextRoom(1,newRoom)
+				elif typeEvent < 50 :
+					mainUI.doomBar.value += 5
+					mainUI.doomBarValue.text = str(mainUI.doomBar.value)
+					reWDoom.show()
+					await get_tree().create_timer(1.5).timeout
+					reWDoom.hide()
+					mainUI.show()
+				elif typeEvent < 70 :
+					mainUI.doomBar.value -= 5
+					mainUI.doomBarValue.text = str(mainUI.doomBar.value)
+					reLDoom.show()
+					await get_tree().create_timer(1.5).timeout
+					reLDoom.hide()
+					mainUI.show()
+				else :
+					mainUI.show()
+			_: # Cas général (si une salle n'est pas programmée)
+				mainUI.show()
 	pass # Replace with function body.

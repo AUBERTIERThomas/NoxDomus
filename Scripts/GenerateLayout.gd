@@ -6,7 +6,7 @@ var roomList
 var linkList
 var xLimit = 7
 var yLimit = 6
-var rTypeList = [85]
+var rTypeList = [75]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,6 +52,7 @@ func place_room(i : int, type : int):
 	roomList[linkedRoom].links[(r_dec+2)%4] = true
 	create_new_room(new_c,type)
 	roomList[roomList.size()-1].links[r_dec] = true
+	#print(old_c)
 	linkList.append([old_c,new_c])
 	#print(old_c," ",new_c," ",r_dec," ",roomList[linkedRoom].links)
 
