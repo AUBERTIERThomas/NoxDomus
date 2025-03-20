@@ -1,5 +1,6 @@
 import ollama
 from flask import jsonify
+import os
 
 def get_model_list():
     """
@@ -51,7 +52,34 @@ class ErrorJson:
     def to_json_c(self, code):
         return jsonify(self.to_dict()), code
 
-    
+# A class to manipulate files in the system
+class FileHandler:
+    def __init__(self) -> None:
+        pass
 
+    # check if a file exists
+    def file_exists(self, path):
+        return os.path.exists(path)
+
+    # check if a file is a file
+    def is_file(self, path):
+        return os.path.isfile(path)
+
+    # check if a file is a directory
+    def is_dir(self, path):
+        return os.path.isdir(path)
+
+    def delete_file(self, path):
+        if self.file_exists(path) and self.is_file(path):
+            os.remove(path)
+            return True
+        return False
     
-    
+    # delete all files in a directory
+    def delete_files_in_dir(self, path):
+        if self.is_dir(path):
+            files = os.listdir(path)
+            for file in files:
+                self.delete_file(os.path.join(path, file))
+            return True
+        return False

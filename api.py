@@ -8,7 +8,7 @@ from AI.commentary import comment
 
 from AI.Images.gen_img import Comfyui
 
-from utils import Status, get_model_list, is_boolean, ErrorJson
+from utils import Status, get_model_list, is_boolean, ErrorJson, FileHandler
 
 available_models = get_model_list()
 
@@ -291,53 +291,113 @@ def launch_genimg():
         print(f"Exception during image generation: {str(e)}")
         return ErrorJson(f'Exception during image generation: {str(e)}').to_json_c(500)
 
-@app.route('/image/wall', methods = ['GET'])
-def launch_genimg_wall():
-    """
-    Generate an image of a wall with seamless left and right sides.
-    """
+# @app.route('/image/wall', methods = ['GET'])
+# def launch_genimg_wall():
+#     """
+#     Generate an image of a wall with seamless left and right sides.
+#     """
+#
+#     return ErrorJson("Not implemented yet").to_json_c(501)
 
-    return ErrorJson("Not implemented yet").to_json_c(501)
+# @app.route('/image/floor', methods = ['GET'])
+# def launch_genimg_floor():
+#     """
+#     Generate an tiled image for a floor.
+#     """
+#
+#     return ErrorJson("Not implemented yet").to_json_c(501)
 
-@app.route('/image/floor', methods = ['GET'])
-def launch_genimg_floor():
-    """
-    Generate an tiled image for a floor.
-    """
-
-    return ErrorJson("Not implemented yet").to_json_c(501)
-
-@app.route('/image/ceiling', methods = ['GET'])
-def launch_genimg_ceiling():
-    """
-    Generate an image for a ceiling.
-    """
-
-    return ErrorJson("Not implemented yet").to_json_c(501)
-
-@app.route("/image/inpaint", methods = ['GET'])
-def launch_genimg_inpaint():
-    """
-    Generate an inpainted image from a given image.
-    """
-    
-    return ErrorJson("Not implemented yet").to_json_c(501)
+# @app.route('/image/ceiling', methods = ['GET'])
+# def launch_genimg_ceiling():
+#     """
+#     Generate an image for a ceiling.
+#     """
+#
+#     return ErrorJson("Not implemented yet").to_json_c(501)
+#
+# @app.route("/image/inpaint", methods = ['GET'])
+# def launch_genimg_inpaint():
+#     """
+#     Generate an inpainted image from a given image.
+#     """
+#     
+#     return ErrorJson("Not implemented yet").to_json_c(501)
 
 @app.route('/image/delete', methods = ['DELETE'])
 def delete_image():
     """
     Delete an image that was generated.
-    """
 
-    return ErrorJson("Not implemented yet").to_json_c(501)
+    Mandatory parameters:
+    - filename: the name of the image to delete
+    
+    Optional parameters:
+    - folder: the folder of the image to delete. Default is `Output`
+    """
+    
+    if 'folder' in request.args:
+        folder = request.args['folder']
+    else:
+        folder = 'Output'
+
+    if 'filename' not in request.args:
+        return ErrorJson('filename is a required parameter').to_json_c(400)
+    filename = request.args['filename']
+
+    path = f"{folder}/{filename}"
+    
+    file_handler = FileHandler()
+    
+    if file_handler.delete_file(path):
+        return ErrorJson(f"Deleted file: {path}", Status.OK).to_json_c(200)
+    return ErrorJson(f"Failed to delete file: {path}").to_json_c(500)
 
 @app.route('/image/delete_all', methods = ['DELETE'])
 def delete_all_images():
     """
-    Delete all images that were generated.
+    Delete all images that were generated in the current session.
+
+    Optional parameters:
+    - current_session: True or False. Default is True.
+        If set to False, all images in the `Output` folder will be deleted.
+        If set to True, only images generated in the current session will be deleted.
+    - folder: the folder where the images are stored. Default is `Output`
     """
 
-    return ErrorJson("Not implemented yet").to_json_c(501)
+    file_handler = FileHandler()
+    
+    current_session = True
+    if 'current_session' in request.args:
+        if is_boolean(request.args['current_session']):
+            current_session = (request.args['current_session'].lower() == 'true')
+        else:
+            return ErrorJson('current_session must be a boolean').to_json_c(400)
+
+    if 'folder' in request.args:
+        folder = request.args['folder']
+    else:
+        folder = 'Output'
+
+    if not current_session:
+        # Delete all files in the Output folder
+        rep = file_handler.delete_files_in_dir(folder)
+        if rep:
+            return ErrorJson("Deleted all files in the Output folder", Status.OK).to_json_c(200)
+        return ErrorJson("Failed to delete all files in the Output folder").to_json_c(500)
+
+
+    # Case of deleting only images generated in the current session
+    
+    images = comfyui_img.saved_images + comfyui_img_inpaint.saved_images
+
+    for image in images:
+        res = file_handler.delete_file(image)
+        if not res:
+            return ErrorJson(f"Failed to delete file: {image}").to_json_c(500)
+
+    return ErrorJson("Deleted all images generated in the current session", Status.OK).to_json_c(200)
+
+
 
 ################################################################################
 

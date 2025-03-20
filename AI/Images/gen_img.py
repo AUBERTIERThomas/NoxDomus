@@ -100,6 +100,8 @@ class Comfyui(CustomizeWorkflow):
         self.ws = WebSocket()
         self.client_id = str(uuid4())
 
+        self.saved_images = []
+
     def __run(self):
         print("Connecting to the server")
         try:
@@ -173,6 +175,10 @@ class Comfyui(CustomizeWorkflow):
                         print(f"Processing image data for {save_path}")
                         image = Image.open(io.BytesIO(image_data))
                         image.save(save_path)
+
+                        # Add to list of images for this session
+                        # Can all be deleted if api call is made (/image/delete_all)
+                        self.saved_images.append(save_path)
                         
                         print(f"Successfully saved image to: {save_path}")
                         saved_paths.append(save_path)
@@ -237,19 +243,5 @@ class Comfyui(CustomizeWorkflow):
             print(f"Error in run_and_display: {str(e)}")
             return False    
 
-    # Dangerous territory
-
-    def delete_image(self, name):
-        os.remove(name)
-
-    def delete_dir(self, name):
-        os.rmdir(name)
-    
-    def delete_images(self, output_folder):
-        """
-        Warning: no check is done to verify what is deleted. Could be the kernel,
-        not my problem.
-        """
-        self.delete_dir(output_folder)
 
 
