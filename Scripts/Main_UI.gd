@@ -9,6 +9,7 @@ var rightButton
 var doomBar
 var doomBarValue
 var screamerImage
+var screamerList = [preload("res://Images//Screamer0.png"),preload("res://Images//Screamer1.png")]
 
 var minimap
 var locPin
@@ -51,6 +52,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var screamer = randi() % 10000 # Plus le nombre est petit, plus ça arrive souvent
 	if screamer == 0:
+		var sType = randi() % screamerList.size()
+		screamerImage.texture = screamerList[sType]
 		screamerImage.show()
 		await get_tree().create_timer(0.75).timeout
 		screamerImage.hide()

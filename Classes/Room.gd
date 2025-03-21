@@ -5,12 +5,12 @@ var typeRoom : int
 var isRevealed : bool
 var links : Array
 var lightState : int
-var extraData : int
+var extraData : int # Si certains types de salle ont besoin d'une donnée en plus
 
 func setup(c : Vector2, type : int) -> void:
 	coordinates = c
 	typeRoom = type
-	isRevealed = true # Mettre en true pour tout révéler
+	isRevealed = false # Mettre en true pour tout révéler
 	links = [false,false,false,false]
 	lightState = 0
 	extraData = 0

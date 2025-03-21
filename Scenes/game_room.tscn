@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=59 format=3 uid="uid://dq6hmfhh5r1oe"]
 
 [ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_je4ns"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="2_wyqdb"]
@@ -20,11 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://hd0j1ejag80" path="res://Images/DoomBar_Progress.png" id="16_e7q76"]
 [ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="16_g20te"]
 [ext_resource type="Script" path="res://Scenes/QcmAPI.gd" id="17_bffh7"]
-[ext_resource type="Texture2D" uid="uid://cr12scsc2qwe8" path="res://Images/Photo_moi.JPG" id="17_sgpkf"]
+[ext_resource type="Texture2D" uid="uid://cddqyrjtwqqwj" path="res://Images/Screamer0.png" id="17_gk73q"]
 [ext_resource type="Texture2D" uid="uid://c4dd1l4o3lg1d" path="res://Images/AnswersGood.png" id="19_2y3f6"]
 [ext_resource type="Texture2D" uid="uid://bews5bropc5sy" path="res://Images/AnswersBad.png" id="20_35u7j"]
 [ext_resource type="Texture2D" uid="uid://cflseeqieyvf1" path="res://Images/Minimap_1.png" id="21_81ysl"]
 [ext_resource type="Texture2D" uid="uid://btssbpryfygof" path="res://Images/Minimap_-3.png" id="22_b0ind"]
+[ext_resource type="Texture2D" uid="uid://bshhlp5lln8b8" path="res://Images/Minimap_-2.png" id="24_v04o7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pi23"]
 albedo_color = Color(1, 0, 1, 1)
@@ -383,11 +384,23 @@ offset_bottom = 618.0
 text = "Retour
 "
 
-[node name="RoomTile" type="Sprite2D" parent="MainUI/Minimap"]
+[node name="RoomTile" type="TextureButton" parent="MainUI/Minimap"]
 texture_filter = 1
-position = Vector2(575, 525)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 173.0
+offset_right = -11.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(3, 3)
-texture = ExtResource("6_dwbcj")
+disabled = true
+texture_normal = ExtResource("6_dwbcj")
 
 [node name="LinkTile" type="Sprite2D" parent="MainUI/Minimap"]
 texture_filter = 1
@@ -490,12 +503,37 @@ grow_vertical = 2
 text = "0"
 editable = false
 
+[node name="KeyLogo" type="Sprite2D" parent="MainUI"]
+texture_filter = 1
+position = Vector2(50, 50)
+scale = Vector2(3, 3)
+texture = ExtResource("22_b0ind")
+
+[node name="KeyValue" type="TextEdit" parent="MainUI"]
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 75.0
+offset_top = -18.0
+offset_right = 125.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+text = "0/3"
+editable = false
+
 [node name="OoohVeryScary" type="Sprite2D" parent="MainUI"]
 visible = false
+visibility_layer = 512
 texture_filter = 1
-position = Vector2(575, 350)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("17_sgpkf")
+position = Vector2(575, 325)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("17_gk73q")
 
 [node name="QCM_Menu" type="Control" parent="."]
 visible = false
@@ -927,6 +965,38 @@ position = Vector2(575, 425)
 scale = Vector2(10, 10)
 texture = ExtResource("22_b0ind")
 
+[node name="CurseRoom_Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ovgxn")
+
+[node name="QuestionPanel" type="Panel" parent="CurseRoom_Menu"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 1075.0
+offset_bottom = 620.0
+
+[node name="TextEdit" type="TextEdit" parent="CurseRoom_Menu/QuestionPanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 125.0
+offset_top = 30.0
+offset_right = 675.0
+offset_bottom = 230.0
+scale = Vector2(1.5, 1.5)
+text = "Vous avez atteint la source de la malédiction ! Mais il vous manque encore des clés... Allez en chercher puis revenez pour en finir !"
+wrap_mode = 1
+
+[node name="AnswerFeedback" type="Sprite2D" parent="CurseRoom_Menu"]
+texture_filter = 1
+position = Vector2(575, 450)
+scale = Vector2(8, 8)
+texture = ExtResource("24_v04o7")
+
 [node name="Win_Menu" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -993,6 +1063,7 @@ texture = ExtResource("20_35u7j")
 
 [connection signal="change_room" from="MainUI" to="." method="_on_main_ui_change_room"]
 [connection signal="change_room" from="MainUI" to="Lampe" method="_on_main_ui_change_room"]
+[connection signal="room_chosen" from="MainUI/Minimap" to="Inventaire" method="_on_minimap_room_chosen"]
 [connection signal="visibility_changed" from="Enigme_Menu" to="Enigme_Menu" method="_on_visibility_changed"]
 [connection signal="text_submitted" from="Enigme_Menu/Reponse" to="Enigme_Menu" method="_on_reponse_text_submitted"]
 [connection signal="objDone" from="Inventaire" to="." method="_on_inventaire_obj_done"]

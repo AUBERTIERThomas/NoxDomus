@@ -1,6 +1,7 @@
 extends Node3D
 
 var fullTextList = ["res://Images/ComfyUI_WallSpider.png","res://Images//Photo_moi.JPG","res://Images//map3.jpg"]
+var groundText = ["res://Images/Ground0.png","res://Images/Ground0.png"]
 var wall1
 var wall2
 var wall3
@@ -15,6 +16,7 @@ var mainUI
 var minimap
 var roomListNode
 var roomList
+var keyNumber
 var inventory
 var inventoryNone
 var qcm
@@ -24,6 +26,7 @@ var reTP
 var reWDoom
 var reLDoom
 var keyMenu
+var curseMenu
 var winMenu
 var loseMenu
 
@@ -38,6 +41,7 @@ func _ready() -> void:
 	minimap = $MainUI/Minimap
 	roomListNode = $MainUI/Minimap/RoomList
 	roomList = roomListNode.roomList
+	keyNumber = $MainUI/KeyValue
 	inventory = $Inventaire
 	inventoryNone = $Inventaire/Obj_None
 	qcm = $QCM_Menu
@@ -47,6 +51,7 @@ func _ready() -> void:
 	reWDoom = $RE_WinDoom
 	reLDoom = $RE_LoseDoom
 	keyMenu = $KeyRoom_Menu
+	curseMenu = $CurseRoom_Menu
 	winMenu = $Win_Menu
 	loseMenu = $Lose_Menu
 	room_init(0)
@@ -97,7 +102,8 @@ func _on_inventaire_obj_done() -> void:
 					await get_tree().create_timer(1.5).timeout
 					keyMenu.hide()
 					numberOfKeys += 1
-					currentRoom.extraData = 1
+					currentRoom.extraData = 1 # Note la salle comme explorée
+					keyNumber.text = str(numberOfKeys) + "/3"
 					mainUI.show()
 				else :
 					mainUI.show()
@@ -105,11 +111,14 @@ func _on_inventaire_obj_done() -> void:
 				if numberOfKeys >= 3:
 					winMenu.show()
 				else :
+					curseMenu.show()
+					await get_tree().create_timer(3).timeout
+					curseMenu.hide()
 					mainUI.show()
 			0:
 				await get_tree().create_timer(1.0).timeout
 				var typeQuestion = randi() % 100
-				if typeQuestion < 20 :
+				if typeQuestion < 100 :
 					qopen.show()
 				else :
 					qcm.show()

@@ -6,6 +6,7 @@ var roomList
 var linkList
 var xLimit = 7
 var yLimit = 6
+var curseMinDist = 8 # Distance minimale entre la salle maudite et l'entrée (peut être bypass si il n'y a pas assez de salle)
 var rTypeList = [75]
 
 # Called when the node enters the scene tree for the first time.
@@ -20,9 +21,18 @@ func _ready() -> void:
 			if rType >= t:
 				type = type + 1
 		place_room(i,type)
-	for i in range(5):
-		roomList[roomNumber-i-2].typeRoom = -3
-	roomList[roomNumber-1].typeRoom = -2
+	var isCursePlaced = false
+	for i in range(5): # Placement des salles à clef et maudite en fin de liste (celles qui sont en moyenne dans les impasses et loin de l'entrée)
+		var c = roomList[roomNumber-i-1].coordinates
+		if (c.x + c.y >= curseMinDist) and isCursePlaced == false :
+			roomList[roomNumber-i-1].typeRoom = -2
+			isCursePlaced = true
+		else :
+			roomList[roomNumber-i-1].typeRoom = -3
+	if isCursePlaced == false :
+		roomList[roomNumber-6].typeRoom = -2
+	else :
+		roomList[roomNumber-6].typeRoom = -3
 	add_links(roomNumber*0.2)
 	
 func create_new_room(c : Vector2, type : int):

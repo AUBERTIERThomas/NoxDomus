@@ -2,7 +2,9 @@ extends Control
 
 var currentRoom
 var textureList = [preload("res://Images//Minimap_-3.png"),preload("res://Images//Minimap_-2.png"),preload("res://Images//Minimap_-1.png"),preload("res://Images//Minimap_0.png"),preload("res://Images//Minimap_1.png")]
+var textureListS = [preload("res://Images//Minimap_-3_S.png"),preload("res://Images//Minimap_-2_S.png"),preload("res://Images//Minimap_-1_S.png"),preload("res://Images//Minimap_0_S.png"),preload("res://Images//Minimap_1_S.png")]
 var textureHidden = preload("res://Images//Minimap_Hidden.png")
+var textureHiddenS = preload("res://Images//Minimap_Hidden_S.png")
 var tile
 var link
 var pin
@@ -10,6 +12,8 @@ var rL
 var rList
 var lList
 var space
+
+signal room_chosen
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,11 +30,13 @@ func _ready() -> void:
 		var dulp_link = link.duplicate()
 		dulp_link.position = dulp_link.position - ((lList[i][0]+lList[i][1]) * 0.5 * space)
 		add_child(dulp_link)
-	tile.texture = textureList[1]
+	tile.texture_disabled = textureList[1]
+	tile.texture_normal = textureListS[1]
 	for i in range(rL.roomNumber):
 		var dupl_room = tile.duplicate()
 		dupl_room.position = dupl_room.position - (rList[i].coordinates * space)
 		dupl_room.name = str(i)
+		dupl_room.pressed.connect(OnRoomClick.bind(i))
 		add_child(dupl_room)
 		changeTexture(i)
 	pin.position = pin.position - (currentRoom * space)
@@ -41,6 +47,11 @@ func _ready() -> void:
 func changeTexture(i : int):
 	var r = get_node(str(i))
 	if rList[i].isRevealed == false:
-		r.texture = textureHidden
+		r.texture_disabled = textureHidden
+		r.texture_normal = textureHiddenS
 	else:
-		r.texture = textureList[rList[i].typeRoom+3]
+		r.texture_disabled = textureList[rList[i].typeRoom+3]
+		r.texture_normal = textureListS[rList[i].typeRoom+3]
+
+func OnRoomClick(id : int):
+	emit_signal("room_chosen",id)
