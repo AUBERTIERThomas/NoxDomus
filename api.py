@@ -8,7 +8,7 @@ from AI.commentary import comment
 
 from AI.Images.gen_img import Comfyui
 
-from utils import Status, get_model_list, is_boolean, ErrorJson, FileHandler
+from utils import Status, get_model_list, is_boolean, ErrorJson, FileHandler, load_model
 
 available_models = get_model_list()
 
@@ -18,6 +18,7 @@ riddles = RiddlesHandler()
 qcms = QcmHandler()
 comfyui_img_inpaint = Comfyui('AI/Images/Workflows/inpaint-wall.json')
 comfyui_img = Comfyui('AI/Images/Workflows/seamless-textures-wall.json')
+
 
 @app.route('/riddle/generate', methods=['GET'])
 def get_riddle():
@@ -74,6 +75,48 @@ def verify_riddle():
 
     check = check_answer(question, correct_answer, user_answer, model, nb_checks)
     return jsonify({'is_right': check})
+
+@app.route('/load_model', methods=['GET'])
+def load_model_in_memory():
+    """
+    Load an LLM model from Ollama in memory.
+    Can be loaded indefinitely or for a given time.
+    To stop the model, set a small time (ex: 1s) and keep_alive to False.
+
+    Mandatory parameters:
+    - model: the model to load
+
+    Optional parameters:
+    - keep_alive: True or False. Default is False.
+    - time: the time to keep the model in memory. Default is 5 min if keep_alive is False.
+        If keep_alive is True, this parameter is ignored.
+        format is the same as the one used in the Ollama API.
+        ex: 5 minutes: "5m"
+    """
+
+    if 'model' not in request.args:
+        return ErrorJson('model is a required parameter').to_json_c(400)
+    model = request.args['model']
+
+    if model not in available_models:
+        return ErrorJson(f"Model {model} is not available. Available models are: {available_models}").to_json_c(400)
+
+    keep_alive = False
+    if 'keep_alive' in request.args:
+        if is_boolean(request.args['keep_alive']):
+            keep_alive = (request.args['keep_alive'].lower() == 'true')
+        else:
+            return ErrorJson('keep_alive must be a boolean').to_json_c(400)
+
+    if 'time' in request.args:
+        time = request.args['time']
+    else:
+        time = '5m'
+
+    res = load_model(model, keep_alive, time)
+
+    # On utilise pas res. C'est pour vérifier que le modèle est bien chargé
+    return ErrorJson(f"Model {model} loaded in memory", Status.OK).to_json_c(200)
 
 @app.route('/riddle/number', methods=['GET'])
 def get_number_of_riddles():

@@ -12,6 +12,17 @@ def get_model_list():
     models = [models.replace(':latest', '') for models in models]
     return models
 
+def load_model(model_name, keep_alive=True, timeout="5m"):
+    """
+    Load a model from the Ollama API. (with an empty request)
+    """
+    if keep_alive:
+        res = ollama.generate(model_name, prompt="", keep_alive=-1)
+
+    else:
+        res = ollama.generate(model_name, prompt="", keep_alive=timeout)
+    return res
+
 def is_boolean(value):
     """
     Check if a string is a boolean.
