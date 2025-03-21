@@ -1,8 +1,10 @@
 extends Node
-
-var coordinates : Vector3
-var typeProp : int
-var object
+#---------------------------------------------------------------------------------
+# CLASSE : Objet décoratif (pas utilisé)
+#---------------------------------------------------------------------------------
+var coordinates : Vector3 # Position dans la salle.
+var typeProp : int # Type d'objet.
+var object # Instance de l'objet.
 
 func setup(type : int) -> void:
 	typeProp = type
