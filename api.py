@@ -4,7 +4,7 @@ from AI.Riddles.riddles import RiddlesHandler
 from AI.Riddles.question_validator import check_answer
 from AI.MultipleChoice.qcms import QcmHandler
 
-from AI.commentary import comment
+from AI.commentary import comment, Commentary
 
 from AI.Images.gen_img import Comfyui
 
@@ -161,17 +161,39 @@ def get_commentary():
     - question: the question
     - correct_answer: the correct answer
     - user_answer: the user's answer
+    - is_user_right: True or False
 
     Optional parameters:
     - model: the model used to check the answer. Default is phi3.5 (in ollama).
     """
 
+    if 'question' not in request.args:
+        return ErrorJson('question is a required parameter').to_json_c(400)
+    question = request.args['question']
 
+    if 'correct_answer' not in request.args:
+        return ErrorJson('correct_answer is a required parameter').to_json_c(400)
+    correct_answer = request.args['correct_answer']
 
-    # msg = comment()
-    # return jsonify({'commentary':msg})
+    if 'user_answer' not in request.args:
+        return ErrorJson('user_answer is a required parameter').to_json_c(400)
+    user_answer = request.args['user_answer']
 
-    return ErrorJson("Not implemented yet").to_json_c(501)
+    if 'is_user_right' not in request.args:
+        return ErrorJson('is_user_right is a required parameter').to_json_c(400)
+    # Check if the parameter is a Boolean
+    if is_boolean(request.args['is_user_right']):
+        is_user_right = (request.args['is_user_right'].lower() == 'true')
+    else:
+        return ErrorJson('is_user_right must be a boolean').to_json_c(400)
+    
+    model = 'phi3.5'
+    if 'model' in request.args:
+        model = request.args['model']
+
+    response = comment(is_user_right, question, correct_answer, user_answer, model)
+
+    return jsonify(response.model_dump())
 
 
 ################################################################################
