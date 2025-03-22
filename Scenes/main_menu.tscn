@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dkt1uovwy12uv"]
 
 [ext_resource type="Texture2D" uid="uid://bmh2ybrcb5mu4" path="res://Images/ComfyUI_WallSpider.png" id="1_okoa0"]
-[ext_resource type="Script" path="res://MainMenu.gd" id="2_tnoch"]
-[ext_resource type="Script" path="res://Scenes/PlayerInfos.gd" id="3_woabw"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="2_tnoch"]
+[ext_resource type="Script" path="res://Scripts/PlayerInfos.gd" id="3_woabw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3tkn"]
 bg_color = Color(0.287355, 0.30964, 0.572018, 1)
@@ -93,7 +93,7 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_bottom = NodePath("../OptionsButton")
-text = "Jouer au jeu bordel"
+text = "Jouer"
 
 [node name="OptionsButton" type="Button" parent="MainMenu_UI"]
 layout_mode = 1
@@ -109,7 +109,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_top = NodePath("../PlayButton")
-text = "Paramètres wallah"
+text = "Paramètres"
 
 [node name="PlayerInfos" type="Control" parent="."]
 layout_mode = 3
@@ -180,3 +180,5 @@ offset_top = 550.0
 offset_right = 625.0
 offset_bottom = 600.0
 text = "OK !"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="PlayerInfos"]

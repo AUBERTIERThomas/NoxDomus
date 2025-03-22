@@ -1,6 +1,9 @@
 extends Control
-
-# Références aux nœuds
+#---------------------------------------------------------------------------------
+# Gère la communication entre l'API api.py et le menu d'énigme.
+# Cela comprend récupérer une énigme, évaluer la réponse du joueur avec un modèle
+# d'IA et agir en conséquence.
+#---------------------------------------------------------------------------------
 @onready var http_request = $HTTPRequest
 @onready var question_display = $QuestionPanel/TextEdit
 @onready var answer_input = $Reponse
@@ -13,15 +16,17 @@ var correct_answer = ""
 var user_answer = ""
 var isShown = false
 
+# Sprites pour l'état de la réponse (en attente/bonne/fausse).
 var answerSprites = [preload("res://Images//AnswersWait.png"),preload("res://Images//AnswersGood.png"),preload("res://Images//AnswersBad.png")]
 
 func _ready():
-	answer_sprite.texture = answerSprites[0]  # Point d'interrogation par défaut
+	answer_sprite.texture = answerSprites[0]  # Point d'interrogation par défaut.
 	answer_input.text = ""
-	answer_input.text_submitted.connect(on_button_pressed)
+	answer_input.text_submitted.connect(on_button_pressed) # Déclanche la fonction lorsqu'on appuie sur "Entree" dans le LineEdit.
 	
 	fetch_riddle()
 
+# Demande une énigme de la base, lance la fonction suivante une fois la requête finie.
 func fetch_riddle():
 	var url = "http://127.0.0.1:5000/riddle/generate"
 	print(url)
@@ -29,6 +34,7 @@ func fetch_riddle():
 	http_request.request_completed.connect(_on_riddle_request_completed)
 	http_request.request(url)
 
+# Récupère l'énigme et la réponse.
 func _on_riddle_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:  # Si la requête réussit
 		var json = JSON.parse_string(body.get_string_from_utf8())
@@ -40,18 +46,17 @@ func _on_riddle_request_completed(_result, response_code, _headers, body):
 			print("Bonne réponse attendue (énigme) : ", correct_answer)
 		else:
 			question_display.text = "Erreur lors de la récupération de l'énigme."
-	else: 
+	else: # Survient notamment si l'API n'est pas lançée.
 		question_display.text = "Erreur de requête (énigme): %d" % response_code
 
+# Lorsque le joueur envoie sa réponse. Demande à l'IA si la réponse est correcte, lance la fonction suivante une fois la requête finie.
 func on_button_pressed(user_answer1: String):
-	#user_answer1 = user_answer1.strip_edges()  # Supprime les espaces 
-	#var url2 = "http://127.0.0.1:5000/riddle/verify?question=%s&correct_answer=%s&user_answer=%s&model=qwen2.5:0.5b" % [current_question.uri_encode(), correct_answer1.uri_encode(), user_answer1.uri_encode()]
 	var url2 = "http://127.0.0.1:5000/riddle/verify"
 	user_answer = user_answer1
-	url2 += "?question=" + current_question.uri_encode() # encodage pour les URL, surtout à cause des caractères spéciaux
+	url2 += "?question=" + current_question.uri_encode() # Encodage pour les URL, surtout à cause des caractères spéciaux.
 	url2 += "&correct_answer=" + correct_answer.uri_encode()
 	url2 += "&user_answer=" + user_answer1.uri_encode()
-	url2 += "&model=phi3.5" # tester mistral sur une machine avec + de GPU
+	url2 += "&model=phi3.5" # Tester mistral sur une machine avec + de GPU (càd beaucoup).
 	print("Réponse de l'utilisateur : ", user_answer1)
 	print(url2)
 	
@@ -59,23 +64,27 @@ func on_button_pressed(user_answer1: String):
 	http_request.request_completed.connect(_on_verify_request_completed)
 	http_request.request(url2)
 
+# Récupère le résultat de l'IA et le met en application.
 func _on_verify_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "is_right" in json:
 			var is_right = json["is_right"]
-			#print(user_answer)
-			#print(correct_answer)
+			
+			# Bonne réponse
 			if is_right or user_answer == correct_answer:
 				answer_sprite.texture = answerSprites[1] 
 				print("Réponse correcte")
-				var ggg = randi() % 9
+				# Don d'objet
+				var ggg = randi() % 5
 				print(ggg)
 				inventory.nbList[ggg] += 1
 				inventory.leList[ggg].text = str(inventory.nbList[ggg])
 				inventory.objList[ggg].disabled = false
-				# il y a des modèles qui n'arrivent meme pas à voir que c'est == de temps en temps ...
-				if not is_right: print("modèle bizarre") 
+				# Il y a des modèles qui n'arrivent meme pas à voir que c'est == de temps en temps ...
+				if not is_right: print("modèle bizarre") # Je ne cautionne pas
+			
+			# Mauvaise réponse
 			else:
 				answer_sprite.texture = answerSprites[2]
 				mainUI.doomBar.value += 1
@@ -90,5 +99,5 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	get_node("/root/Node3D/MainUI").show()
 	answer_sprite.texture = answerSprites[0]
 	answer_input.text = ""
-	fetch_riddle()
+	fetch_riddle() # Demande à préparer la prochaine énigme.
 	self.hide()
