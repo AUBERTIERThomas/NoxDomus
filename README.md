@@ -22,6 +22,16 @@
     - [Masquerade Nodes](https://github.com/BadCafeCode/masquerade-nodes-comfyui): mask-related nodes for ComfyUI
     - [Tiled KSampler](https://github.com/FlyingFireCo/tiled_ksampler) (for tiled images generation)
 
+- Stable Diffusion models: The models used in the game are not included in this repository and should be installed from ComfyUI Manager. The models used are:
+    - [stable-diffusion-xl-base-1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0): To create images from text.
+    - [dreamshaper-8-inpainting](https://huggingface.co/Lykon/dreamshaper-8-inpainting): To inpaint images.
+
+### System requirements
+
+The game is designed to run on a computer with a GPU.
+
+Make sure to have a 
+
 ## Installation
 
 Clone the repository and install the requirements.
