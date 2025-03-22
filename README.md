@@ -3,22 +3,22 @@
 ## Requirements
 
 - [Ollama](https://github.com/ollama/ollama): LLM framework.
-Pull `phi3.5` with `ollama pull phi3.5`.
-Other models can be used with our api, but the code will need to be adapted, by changing the model name in the api call (in EnigmeAPI.gd).
+    - Pull `phi3.5` with `ollama pull phi3.5`.
+    - Other models can be used, but the code will need to be adapted, by changing the model name in the api call (in EnigmeAPI.gd).
 
 - Python3 and some packages: `pip install -r requirements.txt`
 
 - [Godot](https://godotengine.org/): Game engine
 
 - [comfy-cli](https://github.com/Comfy-Org/comfy-cli): Command Line Interface for Managing ComfyUI (Optional)
-comfy-cli allows you to easily lauch the ComfyUI api server, and to manage other aspects of ComfyUI, as well as to install ComfyUI itself.
+    - comfy-cli allows you to easily lauch the ComfyUI api server, and to manage other aspects of ComfyUI, as well as to install ComfyUI itself.
 
 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI): Diffusion model GUI and api
 
 - Additional requirements for ComfyUI:
     - [ComfyUI Manager](https://github.com/ltdrdata/ComfyUI-Manager): extension for ComfyUI (Optional but recommended)
-        It allows to easily manage and install new nodes and models.
-        It should be installed with comfy-cli.
+        - It allows to easily manage and install new nodes and models.
+        - It should be installed with comfy-cli.
     - [Masquerade Nodes](https://github.com/BadCafeCode/masquerade-nodes-comfyui): mask-related nodes for ComfyUI
     - [Tiled KSampler](https://github.com/FlyingFireCo/tiled_ksampler) (for tiled images generation)
 
