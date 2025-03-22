@@ -1,0 +1,5 @@
+flask
+ollama
+pydantic
+websocket-client
+requests
