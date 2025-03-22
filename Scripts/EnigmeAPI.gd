@@ -75,7 +75,8 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 			if is_right or user_answer == correct_answer:
 				answer_sprite.texture = answerSprites[1] 
 				print("Réponse correcte")
-				var ggg = randi() % 9
+				# Don d'objet
+				var ggg = randi() % 5
 				print(ggg)
 				inventory.nbList[ggg] += 1
 				inventory.leList[ggg].text = str(inventory.nbList[ggg])

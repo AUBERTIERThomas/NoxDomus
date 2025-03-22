@@ -140,7 +140,7 @@ func _on_inventaire_obj_done() -> void:
 					inventory.freeQuestion -= 1
 					mainUI.show()
 			1: # Salle à événement
-				if inventory.freeQuestion == 0 :
+				if inventory.freeEvent == 0 :
 					reMenu.show()
 					await get_tree().create_timer(2.0).timeout
 					reMenu.hide()
@@ -153,6 +153,7 @@ func _on_inventaire_obj_done() -> void:
 						await get_tree().create_timer(1.5).timeout
 						reTP.hide()
 						mainUI.FindNextRoom(1,newRoom)
+						mainUI.ShowButtons()
 					# +5 de malédiction
 					elif typeEvent < 50 :
 						mainUI.doomBar.value += 5

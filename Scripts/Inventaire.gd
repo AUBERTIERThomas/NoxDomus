@@ -27,7 +27,7 @@ signal obj2
 func _ready() -> void:
 	objList = [$Obj_1, $Obj_2, $Obj_3, $Obj_4, $Obj_5, $Obj_6, $Obj_7, $Obj_8, $Obj_9]
 	leList = [$Obj_1/LE_1, $Obj_2/LE_2, $Obj_3/LE_3, $Obj_4/LE_4, $Obj_5/LE_5, $Obj_6/LE_6, $Obj_7/LE_7, $Obj_8/LE_8, $Obj_9/LE_9]
-	nbList = [5, 10, 10, 5, 5, 0, 0, 0, 0] # À modifier (inventaire non vide pour les tests).
+	nbList = [1, 1, 1, 1, 1, 0, 0, 0, 0] # À modifier (inventaire non vide pour les tests).
 	objNone = $Obj_None
 	objNone.pressed.connect(OnNoneButtonClick)
 	freeQuestion = 0
@@ -89,6 +89,7 @@ func OnObjButtonClick(id : int):
 				mainUI.FindNextRoom(1,roomList[objData].coordinates)
 				objData = -1
 			CloseMinimap()
+			mainUI.ShowButtons()
 		3 : # Permet de valider automatiquement la prochaine question.
 			print("Objet 4")
 			freeQuestion += 1

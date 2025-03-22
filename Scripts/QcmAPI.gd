@@ -62,7 +62,8 @@ func _on_riddle_request_completed(result, response_code, headers, body):
 func on_button_pressed(id: int):
 	if id == correct_answer_id:
 		answer_sprite.texture = answerSprites[0]  # Vart si correct
-		var ggg = randi() % 9
+		# Don d'objet
+		var ggg = randi() % 5
 		print(ggg)
 		inventory.nbList[ggg] += 1
 		inventory.leList[ggg].text = str(inventory.nbList[ggg])
