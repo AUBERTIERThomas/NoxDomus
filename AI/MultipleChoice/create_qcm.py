@@ -3,6 +3,9 @@ from typing import List
 import json
 
 class Qcm(BaseModel):
+    """
+    Qcm class to store a multiple choice question.
+    """
     question: str = Field(default="")
     correct_answer: str = Field(default="")
     incorrect_answers: List[str] = Field(default=[])
@@ -23,6 +26,9 @@ class Qcms(RootModel):
         return self
 
 def read_qcm(filepath):
+    """
+    Utility function to read a Qcm object from a json file in a specific format.
+    """
     with open(filepath, 'r', encoding = "utf8") as f:
         data = json.load(f)
         

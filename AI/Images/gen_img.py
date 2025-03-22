@@ -15,9 +15,12 @@ server_address = "127.0.0.1:8188"
 # The node_id is the id of the node in the workflow json file (it depends)
 class CustomizeWorkflow():
     """
-    Class to customize the prompt of a node in the workflow
+    Class to customize the prompt of a node in the workflow.
+    This is not 100% complete given all the possible nodes and combinations and things.
 
-Args:
+    Used to group the same kinds of functions together to make other code easier to read.
+
+    Args:
     - workflow_path: path to the workflow json file
     """
     def __init__(self, workflow_path):
@@ -207,7 +210,7 @@ class Comfyui(CustomizeWorkflow):
 
     def run_and_display(self):
         """
-        Run the workflow and return image data.
+        Run the workflow and display the images.
         Returns True if successful, False otherwise.
         """
         print("Starting image generation")

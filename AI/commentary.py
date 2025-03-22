@@ -6,9 +6,17 @@ class LlmException(Exception):
     pass
 
 class Response(BaseModel):
+    """
+    Response from the llm model.
+    Used to validate the json response.
+    """
     response: str = Field(default="")
 
 class Commentary(BaseModel):
+    """
+    Commentary from the llm model.
+    Basically the same as `Response` but with stats.
+    """
     response: str = Field(default="")
     total_duration: int | None = Field(default=0)
     load_duration: int | None = Field(default=0)
@@ -19,7 +27,9 @@ class Commentary(BaseModel):
     model: str | None = Field(default="")
 
 def comment(is_user_right, question, correct_answer, user_answer, model = "qwen2.5"):
-
+    """
+    Get a commentary on game action from the llm model using the prompt in `Prompts/commentary.txt`.
+    """
     with open("Prompts/commentary.txt", "r") as f:
         system_prompt = f.read()
     # print(system_prompt)

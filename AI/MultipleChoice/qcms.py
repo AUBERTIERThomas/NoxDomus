@@ -2,11 +2,16 @@ from .create_qcm import read_qcm
 from random import choice
 
 class QcmHandler:
+    """
+    This class is used to generate multiple choice questions for the user to solve.
+
+    Questions are read from .json files and stored in a list.
+    """
     def __init__(self):
         self.qcms = read_qcm('AI/MultipleChoice/GeneralKnowledge.json')
         self.qcms += read_qcm('AI/MultipleChoice/Mythology.json')
         self.qcms += read_qcm('AI/MultipleChoice/Mathematics.json')
-        #self.qcms += read_qcm('AI/MultipleChoice/Manga.json')
+        self.qcms += read_qcm('AI/MultipleChoice/Manga.json')
         self.qcms += read_qcm('AI/MultipleChoice/History.json')
         self.qcms += read_qcm('AI/MultipleChoice/Geography.json')
         self.qcms += read_qcm('AI/MultipleChoice/Computer.json')

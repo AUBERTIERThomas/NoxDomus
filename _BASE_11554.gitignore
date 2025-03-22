@@ -6,8 +6,6 @@
 export.cfg
 export_presets.cfg
 
-**/*.import
-
 # Imported translations (automatically generated from CSV files)
 *.translation
 
@@ -17,4 +15,8 @@ data_*/
 mono_crash.*.json
 
 # Python
-**/__pycache__/
+AI/Images/__pycache__/
+AI/Riddles/__pycache__/
+AI/Riddles/Creation/__pycache__/
+__pycache__/
+

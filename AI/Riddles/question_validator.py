@@ -8,10 +8,15 @@ class LlmException(Exception):
 
 # Output json schema for the model response
 class IsRightAnswer(BaseModel):
+    """
+    Used to validate the json response of the llm.
+    """
     is_right: bool = Field(default=False)
 
 def check_if_right_answer(question, correct_answer, answer, model):
-    
+    """
+    Check if the answer is correct using the llm model using the prompt in `Prompts/question_validator.txt`.
+    """
     with open("AI/Prompts/question_validator.txt", "r") as f:
         system_prompt = f.read()
     # print(system_prompt)
@@ -38,6 +43,11 @@ def check_if_right_answer(question, correct_answer, answer, model):
     return IsRightAnswer.model_validate_json(response.message.content)
 
 def check_answer(question, correct_answer, answer, model, nb_checks = 5):
+    """
+    Check if the answer is correct using the llm model using the prompt in `Prompts/question_validator.txt`.
+
+    Return the majority vote of the `nb_checks` checks. Calls `check_if_right_answer` function.
+    """
     answers = []
     for _ in range(nb_checks):
         response = check_if_right_answer(question, correct_answer, answer, model)

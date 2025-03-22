@@ -2,6 +2,11 @@ from .Creation.create_riddles import read_from_csv, read_from_json, read_from_cs
 from random import choice
 
 class RiddlesHandler:
+    """
+    This class is used to generate riddles for the user to solve.
+
+    Riddles are read from .json and .csv files and stored in a list.
+    """
     def __init__(self):
         self.riddles = read_from_csv('AI/Riddles/Creation/riddles.csv')
         self.riddles += read_from_json('AI/Riddles/Creation/riddles.json')

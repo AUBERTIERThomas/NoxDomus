@@ -1,3 +1,5 @@
+# Majority of the code is from ComfyUI's example code + extra bits
+#
 #This is an example that uses the websockets api to know when a prompt execution is done
 #Once the prompt execution is done it downloads the images using the /history endpoint
 

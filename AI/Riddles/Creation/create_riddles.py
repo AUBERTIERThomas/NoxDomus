@@ -4,6 +4,9 @@ import csv
 import json
 
 class Riddle(BaseModel):
+    """
+    Riddle class to store a single riddle.
+    """
     question: str = Field(default="")
     answer: str = Field(default="")
 
@@ -24,8 +27,10 @@ class Riddles(RootModel):
         self.root += other.root
         return self
 
-# riddles.csv file
 def read_from_csv(filepath, header=True, delimiter=','):
+    """
+    Utility function to read riddles from a csv file in a specific format.
+    """
     with open(filepath, 'r', encoding = "utf8") as f:
         csv_reader = csv.reader(f, delimiter=delimiter)
 
@@ -42,6 +47,10 @@ def read_from_csv(filepath, header=True, delimiter=','):
     return riddles
 
 def read_from_csv2(filepath, header=True, delimiter=','):
+    """
+    Utility function to read riddles from a csv file in a specific format.
+    (Different format than `read_from_csv` function)
+    """
     with open(filepath, 'r', encoding = "utf8") as f:
         csv_reader = csv.reader(f, delimiter=delimiter)
 
@@ -58,8 +67,10 @@ def read_from_csv2(filepath, header=True, delimiter=','):
     return riddles
 
 
-# ridddles.json file
 def read_from_json(filepath):
+    """
+    Utility function to read riddles from a json file in a specific format.
+    """
     with open(filepath, 'r', encoding = "utf8") as f:
         data = json.load(f)
 
