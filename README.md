@@ -29,8 +29,7 @@
 ### System requirements
 
 The game is designed to run on a computer with a GPU.
-
-Make sure to have a 
+Make sure to have a GPU with enough VRAM to run the models.
 
 ## Installation
 
