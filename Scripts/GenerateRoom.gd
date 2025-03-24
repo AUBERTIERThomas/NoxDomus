@@ -2,7 +2,7 @@ extends Node3D
 #---------------------------------------------------------------------------------
 # Gère le fonctionnement de la salle en cours, ainsi que son changement.
 #---------------------------------------------------------------------------------
-var wallTextList = ["res://Images/ComfyUI_WallSpider.png","res://Images//Photo_moi.JPG","res://Images//_Wall0.png"] # Liste des textures possibles pour le mur.
+var wallTextList = ["res://Images/_Wall0.png","res://Images//_Wall0_0.png","res://Images//_Wall0_1.png"] # Liste des textures possibles pour le mur.
 var groundTextList = ["res://Images/Ground0.png","res://Images/Ground0.png"] # Liste des textures possibles pour le sol.
 var ceilingTextList = ["res://Images//map3.jpg"]  # Liste des textures possibles pour le plafond.
 

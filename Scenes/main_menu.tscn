@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dkt1uovwy12uv"]
 
-[ext_resource type="Texture2D" uid="uid://bmh2ybrcb5mu4" path="res://Images/ComfyUI_WallSpider.png" id="1_okoa0"]
+[ext_resource type="Texture2D" uid="uid://blldrxsmvk1py" path="res://Images/ComfyUI_WallSpider.png" id="1_okoa0"]
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="2_tnoch"]
 [ext_resource type="Script" path="res://Scripts/PlayerInfos.gd" id="3_woabw"]
 
@@ -112,6 +112,7 @@ focus_neighbor_top = NodePath("../PlayButton")
 text = "Paramètres"
 
 [node name="PlayerInfos" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1150.0

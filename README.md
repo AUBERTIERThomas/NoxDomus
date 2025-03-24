@@ -42,6 +42,8 @@ Clone the repository and install the requirements.
     - Background runnning can be stopped with `comfy stop`.
 - `python3 api.py` to run NoxDomus api server
 - Lauch the game in Godot. The game will connect to the NoxDomus api server via port 5000.
+    - Go in the project menu, in the project settings
+    - Click on execution and set the main scene to `main_menu.tscn`
 
 ## Documentation
 

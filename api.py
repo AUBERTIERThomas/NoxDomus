@@ -239,6 +239,8 @@ def inpaint():
 
     if 'seed' in request.args:
         comfyui_img_inpaint.set_seed('9', request.args['seed'])
+    else:
+        comfyui_img.set_random_seed('9')
 
     if 'checkpoint' in request.args:
         comfyui_img_inpaint.set_ckpt('3', request.args['checkpoint'])
