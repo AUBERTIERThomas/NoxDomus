@@ -10,6 +10,7 @@ extends Control
 @onready var answer_sprite = $AnswerFeedback
 @onready var inventory = get_node("/root/Node3D/Inventaire")
 @onready var mainUI = get_node("/root/Node3D/MainUI")
+@onready var commentary_display = $CommentaryPanel/TextEdit
 
 var current_question = ""
 var correct_answer = ""
@@ -20,6 +21,7 @@ var isShown = false
 var answerSprites = [preload("res://Images//AnswersWait.png"),preload("res://Images//AnswersGood.png"),preload("res://Images//AnswersBad.png")]
 
 func _ready():
+	$CommentaryPanel.hide()
 	answer_sprite.texture = answerSprites[0]  # Point d'interrogation par défaut.
 	answer_input.text = ""
 	answer_input.text_submitted.connect(on_button_pressed) # Déclanche la fonction lorsqu'on appuie sur "Entree" dans le LineEdit.
@@ -30,7 +32,7 @@ func _ready():
 func fetch_riddle():
 	var url = "http://127.0.0.1:5000/riddle/generate"
 	print(url)
-	http_request.request_completed.disconnect(_on_verify_request_completed)
+	http_request.request_completed.disconnect(_on_commentary_request_completed)
 	http_request.request_completed.connect(_on_riddle_request_completed)
 	http_request.request(url)
 
@@ -66,13 +68,15 @@ func on_button_pressed(user_answer1: String):
 
 # Récupère le résultat de l'IA et le met en application.
 func _on_verify_request_completed(_result, response_code, _headers, body):
+	var res
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "is_right" in json:
 			var is_right = json["is_right"]
 			
+			res = (is_right or user_answer == correct_answer)
 			# Bonne réponse
-			if is_right or user_answer == correct_answer:
+			if res:
 				answer_sprite.texture = answerSprites[1] 
 				print("Réponse correcte")
 				# Don d'objet
@@ -95,7 +99,44 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	else:
 		print("Erreur de requête (vérification) : %d" % response_code)
 	
-	await get_tree().create_timer(3.0).timeout
+	#await get_tree().create_timer(3.0).timeout
+	#get_node("/root/Node3D/MainUI").show()
+	#answer_sprite.texture = answerSprites[0]
+	#answer_input.text = ""
+	##fetch_riddle() # Demande à préparer la prochaine énigme.
+	$QuestionPanel.hide()
+	answer_input.hide()
+	answer_sprite.hide()
+	$CommentaryPanel.show()
+	commentary_display.show()
+	fetch_commentary(res)
+	
+func fetch_commentary(res: bool):
+	var url = "http://127.0.0.1:5000/alexandre/astier"
+	url += "?question=" + current_question.uri_encode()
+	url += "&correct_answer=" + correct_answer.uri_encode()
+	url += "&user_answer=" + user_answer.uri_encode()
+	url += "&is_user_right=" + str(res).to_lower()
+	url += "&model=phi3.5"
+
+	print("Requête commentaire :", url)
+
+	http_request.request_completed.disconnect(_on_verify_request_completed)
+	http_request.request_completed.connect(_on_commentary_request_completed)
+	http_request.request(url)
+
+func _on_commentary_request_completed(_result, response_code, _headers, body):
+	if response_code == 200:
+		var json = JSON.parse_string(body.get_string_from_utf8())
+		if json and "response" in json:
+			var comment = json["response"]
+			commentary_display.text = comment
+			print("Commentaire :", comment)
+		else:
+			commentary_display.text = "Erreur lors de la récupération du commentaire."
+	else:
+		commentary_display.text = "Erreur de requête (commentaire) : %d" % response_code
+	await get_tree().create_timer(8.0).timeout
 	get_node("/root/Node3D/MainUI").show()
 	answer_sprite.texture = answerSprites[0]
 	answer_input.text = ""
