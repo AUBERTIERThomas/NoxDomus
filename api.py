@@ -20,6 +20,15 @@ qcms = QcmHandler()
 comfyui_img_inpaint = Comfyui('AI/Images/Workflows/inpaint-wall.json')
 comfyui_img = Comfyui('AI/Images/Workflows/seamless-textures-wall.json')
 
+@app.route('/', methods=['GET'])
+def home():
+
+    with open('home.html', 'r') as file:
+        page = file.read()
+    return page
+
+
+###############################################################################
 
 @app.route('/riddle/generate', methods=['GET'])
 def get_riddle():

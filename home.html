@@ -1,0 +1,241 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Nox Domus API</title>
+</head>
+<body>
+<h1>Bienvenue sur l'API de NoxDomus</h1>
+
+<p>Ici, vous trouverez la documentation de l'API de NoxDomus.</p>
+
+<p>Si vous ne savez pas comment appeler les paramètres dans des requêtes HTML, la réponse est simple.</p>
+
+<p>Il suffit de rajouter un "?" à la fin de l'URL, suivi des paramètres, séparés par des "&".</p>
+<p>Exemple : <a href="/riddle/generate?authorize_repetition=true">/riddle/generate?authorize_repetition=true</a></p>
+
+<h3>Les routes disponibles : </h3>
+
+<ul>
+    <li><code>/riddle/generate</code></li>
+
+    <h4> Description : </h4>
+    <p> Récupère une énigme aléatoire dans la base de données, cf les différents fichiers json</p>
+
+    <h4> Paramètres optionnels : </h4>
+    <ul>
+        <li><code>authorize_repetition</code> : true/false (défaut : false) - Autorise la répétition des énigmes</li>
+    </ul>
+    
+    <br>
+
+    <li><code>/riddle/verify</code></li>
+
+    <h4> Description : </h4>
+    <p> Vérifie la réponse à une énigme donnée grâce à un LLM local s'éxécutant avec Ollama.</p>
+    <p> Il est possible d'effectuer la vérification plusieurs fois et de prendre la moyenne des réponses données par le LLM car il s'agit d'un processus aléatoire. Cela est censé augmenter la fiabilité de la réponse.</p>
+
+    <h4> Paramètres obligatoires : </h4>
+    <ul>
+        <li><code>question</code> : l'énigme à vérifier</li>
+        <li><code>correct_answer</code> : la réponse attendue</li>
+        <li><code>user_answer</code> : la réponse donnée par l'utilisateur</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+    <ul>
+        <li><code>model</code> : le modèle à utiliser pour la vérification (défaut: "phi3.5")</li>
+        <li><code>nb_checks</code> : le nombre de vérifications à effectuer (défaut: 3)</li>
+
+    </ul>
+
+    <br>
+
+    <li><code>/riddle/load_model</code></li>
+    
+    <h4> Description : </h4>
+    <p> Charge un modèle LLM depuis Ollama en mémoire.</p>
+    <p> C'est utile pour éviter de charger le modèle à chaque vérification d'énigme dans le cas où il se décharge de la mémoire avant la prochaine vérification. (5min par défaut dans Ollama). Charger le modèle prend plus de temps que la vérification en elle-même.</p>
+    
+    <h4> Paramètres obligatoires : </h4>
+    <ul>
+        <li><code>model</code> : le modèle à charger</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+    <ul>
+        <li><code>keep_alive</code> : true/false (défaut : false) - Garde le modèle en mémoire indéfiniment</li>
+        <li><code>time</code> : le temps avant de décharger le modèle. Ce paramètre est ignoré si keep_alive est à true. Le format du temps est le même qu'indiqué dans l'api d'ollama.</li>
+
+    </ul>
+
+    <br>
+
+    <li><code>/riddle/number</code></li>
+
+    <h4> Description : </h4>
+    <p> Récupère le nombre total d'énigmes disponibles. </p>
+
+    <br>
+
+    <li><code>/qcm/generate</code></li>
+
+    <h4> Description : </h4>
+    <p> Récupère un QCM aléatoire dans la base de données, cf les différents fichiers json et csv.</p>
+
+    <h4> Paramètres optionnels : </h4>
+
+    <ul>
+        <li><code>authorize_repetition</code> : true/false (défaut : false) - Autorise la répétition des questions</li>
+    </ul>
+
+    <br>
+
+    <li><code>/qcm/number</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Récupère le nombre total de QCM disponibles. </p>
+
+    <br>
+
+    <li><code>/alexandre/astier</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Utilise un LLM pour commenter une action du jeu en cours. </p>
+
+    <h4> Paramètres obligatoires : </h4>
+    
+    <ul>
+        <li><code>question</code> : la question qui a été posée</li>
+        <li><code>correct_answer</code> : la réponse attendue</li>
+        <li><code>user_answer</code> : la réponse donnée par l'utilisateur</li>
+        <li><code>is_user_right</code> : true/false - si l'utilisateur a donné la bonne réponse. Cela est utile dans le cas ou les deux réponses ne sont pas strictement identiques mais équivalentes.</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+
+    <ul>
+        <li><code>model</code> : le modèle à utiliser pour la vérification (défaut: "phi3.5")</li>
+    </ul>
+
+    <br>
+
+    <li><code>/enhance_prompt</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Utilise un LLM pour améliorer le prompt à donner au modèle de génération d'image Stable Diffusion pour l'inpainting des murs du jeu. </p>
+
+    <h4> Paramètres obligatoires : </h4>
+
+    <ul>
+        <li><code>prompt</code> : le prompt à améliorer</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+
+    <ul>
+        <li><code>model</code> : le modèle à utiliser pour l'amélioration (défaut: "phi3.5")</li>
+    </ul>
+
+    <br>
+
+    <li><code>/image/inpaint</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Utilise un modèle de génération d'image Stable Diffusion pour l'inpainting des murs du jeu. Appelle l'api de ComfyUI pour générer la nouvelle image à partir d'un workflow préféfini. </p>
+    
+    <h4> Paramètres obligatoires : </h4>
+
+    <ul>
+        <li><code>image_path</code> : le chemin de l'image à "inpainter" dessus</li>
+        <li><code>mask_path</code> : le chemin du masque à utiliser pour l'inpainting</li>
+        <li><code>positive_prompt</code> : le prompt à donner au modèle pour générer l'image</li>
+        <li><code>filename</code> : le nom du fichier de sortie. Si un fichier porte le même nom, il sera écrasé.</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+
+    <ul>
+        <li><code>output_folder</code> : le dossier de sortie de l'image. (défaut: "Output")</li>
+        <li><code>seed</code> : la seed à utiliser pour la génération de l'image. Utile pour des tests. (défaut: nombre aléatoire)</li>
+        <li><code>checkpoint</code> : le checkpoint à utiliser pour la génération de l'image. (Pas recommandé de changer ce paramètre sans raison, sauf si vous savez ce que vous faites)</li>
+        <li><code>negative_prompt</code> : le prompt à donner au modèle pour générer l'image négative. Par défaut un prompt adapté au cas d'utilisation est donné.</li>
+    </ul>
+
+    <br>
+
+    <li><code>/image/generate</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Utilise un modèle de génération d'image Stable Diffusion pour générer une image à partir d'un prompt donné. Appelle l'api de ComfyUI pour générer l'image à partir d'un workflow préféfini (différent de celui de l'inpainting). </p>
+    <p> Pour générer un mur du jeu, mettez la largeur deux fois plus grande que la hauteur. </p>
+    <p> À noter que SDXL (le modèle utilisé par défaut) fonctionne le mieux avec des images de 1024x1024 pixels ou ratio similaire. Dans les faits il est possible de générer des images de n'importe quelle taille, tant qu'on ne déconne pas trop avec la taille. </p>
+
+    <h4> Paramètres obligatoires : </h4>
+
+    <ul>
+        <li><code>name</code> : le nom de l'image qui sera générée. Aucune garanties si deux images portent le même nom.</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+
+    <ul>
+        <li><code>output_folder</code> : le dossier de sortie de l'image. (défaut: "Output")</li>
+        <li><code>positive_prompt</code> : le prompt positif à donner au modèle pour générer l'image</li>
+        <li><code>negative_prompt</code> : le prompt négatif à donner au modèle pour générer l'image</li>
+        <li><code>seed</code> : la seed à utiliser pour la génération de l'image. Utile pour des tests. (défaut: nombre aléatoire)</li>
+        <li><code>checkpoint</code> : le checkpoint à utiliser pour la génération de l'image. (Pas recommandé de changer ce paramètre sans raison, sauf si vous savez ce que vous faites)</li>
+        <li><code>width</code> : la largeur de l'image. (défaut: 1024)</li>
+        <li><code>height</code> : la hauteur de l'image. (défaut: 1024)</li>
+        <li><code>seamless_xaxis</code> : true/false - si l'image doit être sans couture sur l'axe x. (défaut: false)</li>
+        <li><code>seamless_yaxis</code> : true/false - si l'image doit être sans couture sur l'axe y. (défaut: false)</li>
+    </ul>
+
+    <br>
+
+    <h3> À partir de maintenant, à vos risques et périls. </h3>
+    
+    <li><code>/image/delete</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Supprime une image générée. (Ou fichier en général)</p>
+    <p> Ici la méthode HTTP est DELETE, et non pas GET </p>
+
+    <h4> Paramètres obligatoires : </h4>
+
+    <ul>
+        <li><code>filename</code> : le nom de l'image à supprimer</li>
+    </ul>
+
+    <h4> Paramètres optionnels : </h4>
+    
+    <ul>
+        <li><code>folder</code> : le dossier de l'image à supprimer. (défaut: "Output")</li>
+    </ul>
+
+    <br>
+
+    <li><code>/image/delete_all</code></li>
+
+    <h4> Description : </h4>
+
+    <p> Supprime toutes les images générées dans la session actuelle.</p>
+
+    <h4> Paramètres optionnels : </h4>
+
+    <ul>
+        <li><code>current_session</code> : true/false (défaut: true) - Si true, supprime seulement les images générées dans la session actuelle. Si false, supprime toutes les images dans le dossier spécifié.</li>
+        <li><code>folder</code> : le dossier des images à supprimer. (défaut: "Output")</li>
+    </ul>
+
+</ul>
+
+Coucou les amis, c'est moi, le texte de fin de la page.
+
+</body>
+</html> 
