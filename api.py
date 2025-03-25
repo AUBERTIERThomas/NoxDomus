@@ -7,6 +7,7 @@ from AI.MultipleChoice.qcms import QcmHandler
 from AI.commentary import comment, Commentary
 
 from AI.Images.gen_img import Comfyui
+from AI.Images.prompt_enhancer import enhance_prompt
 
 from utils import Status, get_model_list, is_boolean, ErrorJson, FileHandler, load_model
 
@@ -197,6 +198,33 @@ def get_commentary():
 
 
 ################################################################################
+
+@app.route('/enhance_prompt', methods = ['GET'])
+def prompt_enhancer():
+    """
+    Enhance a prompt with the llm model using the prompt in `AI/Prompts/prompt_enhancer.txt`.
+
+    Mandatory parameters:
+    - prompt: the prompt to enhance
+
+    Optional parameters:
+    - model: the model to use. Default is phi3.5.
+    """
+
+    if 'prompt' not in request.args:
+        return ErrorJson('prompt is a required parameter').to_json_c(400)
+    prompt = request.args['prompt']
+
+    model = 'phi3.5'
+    if 'model' in request.args:
+        model = request.args['model']
+
+    enhanced = enhance_prompt(prompt, model)
+    
+    # Additional manual enhancing
+    enhanced.enhanced_prompt += ", (masterpiece), (4K), horror style, realisitic, (intricately imbricated within a crumbling wall), evoking a dark and eerie atmosphere, touch of the macabre"
+
+    return jsonify(enhanced.model_dump())
 
 @app.route('/image/inpaint', methods = ['GET'])
 def inpaint():

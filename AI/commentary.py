@@ -26,11 +26,11 @@ class Commentary(BaseModel):
     created_at: str | None = Field(default="")
     model: str | None = Field(default="")
 
-def comment(is_user_right, question, correct_answer, user_answer, model = "qwen2.5"):
+def comment(is_user_right, question, correct_answer, user_answer, model = "phi3.5"):
     """
     Get a commentary on game action from the llm model using the prompt in `Prompts/commentary.txt`.
     """
-    with open("Prompts/commentary.txt", "r") as f:
+    with open("AI/Prompts/commentary.txt", "r") as f:
         system_prompt = f.read()
     # print(system_prompt)
 
