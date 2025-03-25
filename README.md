@@ -47,5 +47,5 @@ Clone the repository and install the requirements.
 
 ## Documentation
 
-The API in `api.py` is well commented.
+The API in `api.py` is well commented. A simple documentation is available at `localhost:5000/` Also available in english at `localhost:5000/en`
 The game is also commented. It is recommanded to launch Godot to read the code.

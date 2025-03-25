@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nox Domus API</title>
+</head>
+<body>
+<h1>Welcome to the NoxDomus API</h1>
+
+<p>Here, you will find the documentation for the NoxDomus API.</p>
+
+<p> La version française de cette page est disponible <a href="/">ici</a>.</p>
+
+<p>If you don't know how to call parameters in HTML requests, the answer is simple.</p>
+
+<p>Just add a "?" at the end of the URL, followed by the parameters, separated by "&".</p>
+<p>Example: <a href="/riddle/generate?authorize_repetition=true">/riddle/generate?authorize_repetition=true</a></p>
+
+<h3>Available routes:</h3>
+
+<ul>
+    <li><code>/riddle/generate</code></li>
+
+    <h4>Description:</h4>
+    <p>Retrieves a random riddle from the database, see the various JSON files.</p>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>authorize_repetition</code>: true/false (default: false) - Allows repetition of riddles</li>
+    </ul>
+    
+    <br>
+
+    <li><code>/riddle/verify</code></li>
+
+    <h4>Description:</h4>
+    <p>Verifies the answer to a given riddle using a local LLM running with Ollama.</p>
+    <p>It is possible to perform verification multiple times and take the average of the responses given by the LLM, as this is a random process. This is supposed to increase the reliability of the response.</p>
+
+    <h4>Mandatory parameters:</h4>
+    <ul>
+        <li><code>question</code>: the riddle to verify</li>
+        <li><code>correct_answer</code>: the expected answer</li>
+        <li><code>user_answer</code>: the user's answer</li>
+    </ul>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>model</code>: the model to use for verification (default: "phi3.5")</li>
+        <li><code>nb_checks</code>: the number of verifications to perform (default: 3)</li>
+    </ul>
+
+    <br>
+
+    <li><code>/riddle/load_model</code></li>
+    
+    <h4>Description:</h4>
+    <p>Loads an LLM model from Ollama into memory.</p>
+    <p>This is useful to avoid loading the model every time a riddle verification is performed in case it is unloaded from memory before the next verification (default: 5 minutes in Ollama). Loading the model takes more time than the verification itself.</p>
+    
+    <h4>Mandatory parameters:</h4>
+    <ul>
+        <li><code>model</code>: the model to load</li>
+    </ul>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>keep_alive</code>: true/false (default: false) - Keeps the model in memory indefinitely</li>
+        <li><code>time</code>: the time before unloading the model. This parameter is ignored if keep_alive is true. The time format follows the one specified in the Ollama API.</li>
+    </ul>
+
+    <br>
+
+    <li><code>/riddle/number</code></li>
+
+    <h4>Description:</h4>
+    <p>Retrieves the total number of available riddles.</p>
+
+    <br>
+
+    <li><code>/qcm/generate</code></li>
+
+    <h4>Description:</h4>
+    <p>Retrieves a random multiple-choice question (MCQ) from the database, see the various JSON and CSV files.</p>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>authorize_repetition</code>: true/false (default: false) - Allows repetition of questions</li>
+    </ul>
+
+    <br>
+
+    <li><code>/qcm/number</code></li>
+
+    <h4>Description:</h4>
+    <p>Retrieves the total number of available MCQs.</p>
+
+    <br>
+
+    <li><code>/alexandre/astier</code></li>
+
+    <h4>Description:</h4>
+    <p>Uses an LLM to comment on an action from the ongoing game.</p>
+
+    <h4>Mandatory parameters:</h4>
+    <ul>
+        <li><code>question</code>: the question that was asked</li>
+        <li><code>correct_answer</code>: the expected answer</li>
+        <li><code>user_answer</code>: the user's answer</li>
+        <li><code>is_user_right</code>: true/false - whether the user gave the correct answer. This is useful when the two answers are not strictly identical but equivalent.</li>
+    </ul>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>model</code>: the model to use for verification (default: "phi3.5")</li>
+    </ul>
+
+    <br>
+
+    <li><code>/enhance_prompt</code></li>
+
+    <h4>Description:</h4>
+    <p>Uses an LLM to enhance the prompt for the Stable Diffusion image generation model for inpainting the game's walls.</p>
+
+    <h4>Mandatory parameters:</h4>
+    <ul>
+        <li><code>prompt</code>: the prompt to enhance</li>
+    </ul>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>model</code>: the model to use for enhancement (default: "phi3.5")</li>
+    </ul>
+
+    <br>
+
+    <h3>From now on, proceed at your own risk.</h3>
+    
+    <li><code>/image/delete</code></li>
+
+    <h4>Description:</h4>
+    <p>Deletes a generated image (or file in general).</p>
+    <p>Here, the HTTP method is DELETE, not GET.</p>
+
+    <h4>Mandatory parameters:</h4>
+    <ul>
+        <li><code>filename</code>: the name of the image to delete</li>
+    </ul>
+
+    <h4>Optional parameters:</h4>
+    <ul>
+        <li><code>folder</code>: the folder of the image to delete (default: "Output")</li>
+    </ul>
+
+</ul>
+
+Hello friends, it's me, the ending text of the page.
+
+</body>
+</html>

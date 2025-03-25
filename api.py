@@ -27,6 +27,12 @@ def home():
         page = file.read()
     return page
 
+@app.route('/en', methods = ['GET'])
+def home_en():
+
+    with open('home-en.html', 'r') as file:
+        page = file.read()
+    return page
 
 ###############################################################################
 
