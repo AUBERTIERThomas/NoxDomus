@@ -10,7 +10,8 @@ extends Control
 @onready var answer_sprite = $AnswerFeedback
 @onready var inventory = get_node("/root/Node3D/Inventaire")
 @onready var mainUI = get_node("/root/Node3D/MainUI")
-@onready var commentary_display = $CommentaryPanel/TextEdit
+@onready var commentary_display = get_node("/root/Node3D/MainUI/CommentaryPanel")
+@onready var commentary_text = get_node("/root/Node3D/MainUI/CommentaryPanel/TextEdit")
 
 var current_question = ""
 var correct_answer = ""
@@ -21,7 +22,6 @@ var isShown = false
 var answerSprites = [preload("res://Images//AnswersWait.png"),preload("res://Images//AnswersGood.png"),preload("res://Images//AnswersBad.png")]
 
 func _ready():
-	$CommentaryPanel.hide()
 	answer_sprite.texture = answerSprites[0]  # Point d'interrogation par défaut.
 	answer_input.text = ""
 	answer_input.text_submitted.connect(on_button_pressed) # Déclanche la fonction lorsqu'on appuie sur "Entree" dans le LineEdit.
@@ -99,19 +99,15 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	else:
 		print("Erreur de requête (vérification) : %d" % response_code)
 	
-	#await get_tree().create_timer(3.0).timeout
-	#get_node("/root/Node3D/MainUI").show()
-	#answer_sprite.texture = answerSprites[0]
-	#answer_input.text = ""
-	##fetch_riddle() # Demande à préparer la prochaine énigme.
-	$QuestionPanel.hide()
-	answer_input.hide()
-	answer_sprite.hide()
-	$CommentaryPanel.show()
-	commentary_display.show()
+	await get_tree().create_timer(3.0).timeout
+	get_node("/root/Node3D/MainUI").show()
+	answer_sprite.texture = answerSprites[0]
+	answer_input.text = ""
 	fetch_commentary(res)
+	self.hide()
 	
 func fetch_commentary(res: bool):
+	commentary_display.show()
 	var url = "http://127.0.0.1:5000/alexandre/astier"
 	url += "?question=" + current_question.uri_encode()
 	url += "&correct_answer=" + correct_answer.uri_encode()
@@ -130,15 +126,15 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "response" in json:
 			var comment = json["response"]
-			commentary_display.text = comment
+			commentary_text.text = comment
 			print("Commentaire :", comment)
 		else:
-			commentary_display.text = "Erreur lors de la récupération du commentaire."
+			commentary_text.text = "Erreur lors de la récupération du commentaire."
 	else:
-		commentary_display.text = "Erreur de requête (commentaire) : %d" % response_code
-	await get_tree().create_timer(8.0).timeout
-	get_node("/root/Node3D/MainUI").show()
-	answer_sprite.texture = answerSprites[0]
-	answer_input.text = ""
-	fetch_riddle() # Demande à préparer la prochaine énigme.
-	self.hide()
+		commentary_text.text = "Erreur de requête (commentaire) : %d" % response_code
+	#await get_tree().create_timer(8.0).timeout
+	#get_node("/root/Node3D/MainUI").show()
+	#answer_sprite.texture = answerSprites[0]
+	#answer_input.text = ""
+	#fetch_riddle() # Demande à préparer la prochaine énigme.
+	#self.hide()

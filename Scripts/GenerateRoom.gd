@@ -22,6 +22,8 @@ var minimap
 var roomListNode
 var roomList
 var keyNumber
+var commentaryPanel
+var commentaryText
 var inventory
 var inventoryNone
 var qcm
@@ -47,6 +49,8 @@ func _ready() -> void:
 	roomListNode = $MainUI/Minimap/RoomList
 	roomList = roomListNode.roomList
 	keyNumber = $MainUI/KeyValue
+	commentaryPanel = $MainUI/CommentaryPanel
+	commentaryText = $MainUI/CommentaryPanel/TextEdit
 	inventory = $Inventaire
 	inventoryNone = $Inventaire/Obj_None
 	qcm = $QCM_Menu
@@ -82,6 +86,8 @@ func room_init(id : int) -> void:
 	for i in range(6):
 		apply_texture(i)
 	mainUI.hide()
+	commentaryPanel.hide()
+	commentaryText.text = ""
 	inventory.show()
 	inventoryNone.grab_focus()
 
@@ -169,7 +175,7 @@ func _on_inventaire_obj_done() -> void:
 						reWDoom.hide()
 						mainUI.show()
 					# -5 de malédiction
-					elif typeEvent < 20 :
+					elif typeEvent < 90 :
 						mainUI.doomBar.value -= 5
 						mainUI.doomBarValue.text = str(mainUI.doomBar.value)
 						reLDoom.show()

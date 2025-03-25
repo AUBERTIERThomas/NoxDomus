@@ -10,6 +10,8 @@ extends Control
 @onready var answer_sprite = $AnswerFeedback
 @onready var inventory = get_node("/root/Node3D/Inventaire")
 @onready var mainUI = get_node("/root/Node3D/MainUI")
+@onready var commentary_display = get_node("/root/Node3D/MainUI/CommentaryPanel")
+@onready var commentary_text = get_node("/root/Node3D/MainUI/CommentaryPanel/TextEdit")
 
 var current_question = ""
 var correct_answer = ""
@@ -30,6 +32,8 @@ func _ready():
 func fetch_riddle():
 	var url = "http://127.0.0.1:5000/qcm/generate"
 	print(url)
+	http_request.request_completed.disconnect(_on_commentary_request_completed)
+	http_request.request_completed.connect(_on_riddle_request_completed)
 	http_request.request(url)
 
 # Récupère le QCM et les réponses. Identifie la bonne parmi les 4, puis les place aléatoirement sur les boutons.
@@ -78,5 +82,33 @@ func on_button_pressed(id: int):
 	get_node("/root/Node3D/MainUI").show()
 	answer_sprite.texture = null # Cache l'indicateur du résultat.
 	answer_button[correct_answer_id].disabled = false
+	#fetch_commentary(id == correct_answer_id, id)
 	fetch_riddle()
 	self.hide()
+
+func fetch_commentary(res: bool, ans_id : int):
+	commentary_display.show()
+	var url = "http://127.0.0.1:5000/alexandre/astier"
+	url += "?question=" + current_question.uri_encode()
+	url += "&correct_answer=" + correct_answer.uri_encode()
+	url += "&user_answer=" + answer_button[ans_id].text.uri_encode()
+	url += "&is_user_right=" + str(res).to_lower()
+	url += "&model=phi3.5"
+
+	print("Requête commentaire :", url)
+
+	http_request.request_completed.disconnect(_on_riddle_request_completed)
+	http_request.request_completed.connect(_on_commentary_request_completed)
+	http_request.request(url)
+
+func _on_commentary_request_completed(_result, response_code, _headers, body):
+	if response_code == 200:
+		var json = JSON.parse_string(body.get_string_from_utf8())
+		if json and "response" in json:
+			var comment = json["response"]
+			commentary_text.text = comment
+			print("Commentaire :", comment)
+		else:
+			commentary_text.text = "Erreur lors de la récupération du commentaire."
+	else:
+		commentary_text.text = "Erreur de requête (commentaire) : %d" % response_code
