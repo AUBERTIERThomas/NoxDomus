@@ -2,9 +2,9 @@ extends Node3D
 #---------------------------------------------------------------------------------
 # Gère le fonctionnement de la salle en cours, ainsi que son changement.
 #---------------------------------------------------------------------------------
-var wallTextList = ["res://Images/_Wall0.png","res://Images//_Wall0_0.png","res://Images//_Wall0_1.png"] # Liste des textures possibles pour le mur.
-var groundTextList = ["res://Images/Ground0.png","res://Images/Ground0.png"] # Liste des textures possibles pour le sol.
-var ceilingTextList = ["res://Images//map3.jpg"]  # Liste des textures possibles pour le plafond.
+var wallTextList = ["res://Output/Walls/_Wall0.png"] # Liste des textures possibles pour le mur.
+var groundTextList = [] # Liste des textures possibles pour le sol.
+var ceilingTextList = []  # Liste des textures possibles pour le plafond.
 
 # Liste des meshs
 var wall1
@@ -59,6 +59,12 @@ func _ready() -> void:
 	curseMenu = $CurseRoom_Menu
 	winMenu = $Win_Menu
 	loseMenu = $Lose_Menu
+	for i in range(4):
+		wallTextList.append("res://Output/Walls/_Wall0_"+str(i)+".png")
+	for i in range(1):
+		ceilingTextList.append("res://Output/Ceilings/Ceiling"+str(i)+".png")
+	for i in range(6):
+		groundTextList.append("res://Output/Grounds/Ground"+str(i)+".png")
 	room_init(0)
 
 # Applique les textures aux surfaces, identifie la salle actuelle et active les menus de jeu.
@@ -146,7 +152,7 @@ func _on_inventaire_obj_done() -> void:
 					reMenu.hide()
 					var typeEvent = randi() % 100
 					# Téléportation aléatoire
-					if typeEvent < 30 :
+					if typeEvent < 35 :
 						reTP.show()
 						var newRoom = roomList[randi() % roomListNode.roomNumber].coordinates
 						#print(newRoom)
@@ -155,7 +161,7 @@ func _on_inventaire_obj_done() -> void:
 						mainUI.FindNextRoom(1,newRoom)
 						mainUI.ShowButtons()
 					# +5 de malédiction
-					elif typeEvent < 50 :
+					elif typeEvent < 70 :
 						mainUI.doomBar.value += 5
 						mainUI.doomBarValue.text = str(mainUI.doomBar.value)
 						reWDoom.show()
@@ -163,7 +169,7 @@ func _on_inventaire_obj_done() -> void:
 						reWDoom.hide()
 						mainUI.show()
 					# -5 de malédiction
-					elif typeEvent < 70 :
+					elif typeEvent < 20 :
 						mainUI.doomBar.value -= 5
 						mainUI.doomBarValue.text = str(mainUI.doomBar.value)
 						reLDoom.show()

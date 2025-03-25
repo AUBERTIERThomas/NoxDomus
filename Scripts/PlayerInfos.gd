@@ -18,6 +18,7 @@ func _ready() -> void:
 
 # Une fois les infos du menu PlayerInfos validés avec "OK !", génère X images de mur. Le contenu des champs est alors pris en compte.
 func OnOKButtonClick() -> void:
+	okButton.disabled = true
 	fearPrompt = fearTextEdit.text
 	
 	for i in range(2): # On en fait 4, mais on peut changer

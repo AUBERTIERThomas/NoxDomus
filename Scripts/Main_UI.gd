@@ -14,7 +14,7 @@ var rightButton
 var doomBar
 var doomBarValue
 var screamerImage
-var screamerList = [preload("res://Images//Screamer0.png"),preload("res://Images//Screamer1.png")] # ;)
+var screamerList = [preload("res://Output/Screamers/Screamer0.png"),preload("res://Output/Screamers/Screamer1.png"),preload("res://Output/Screamers/Screamer2.png"),preload("res://Images/Photo_moi.JPG")] # ;)
 
 var minimap
 var locPin
