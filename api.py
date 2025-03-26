@@ -508,6 +508,10 @@ def delete_all_images():
     return ErrorJson("Deleted all images generated in the current session", Status.OK).to_json_c(200)
 
 
+@app.route('/test', methods = ['GET'])
+def test():
+    c = "éééé@ç`è%µ%µ$$$£$**Μ<>!§"
+    return jsonify(c)
 
 ################################################################################
 
