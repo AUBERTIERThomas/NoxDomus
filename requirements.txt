@@ -3,3 +3,4 @@ ollama
 pydantic
 websocket-client
 requests
+PILLOW
