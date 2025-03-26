@@ -3,8 +3,8 @@ extends Node3D
 # Gère le fonctionnement de la salle en cours, ainsi que son changement.
 #---------------------------------------------------------------------------------
 var wallTextList = ["_Wall0","blank","mansion1","mansion2","wallpaper","white_brick"] # Liste des textures possibles pour le mur.
-var groundTextList = [] # Liste des textures possibles pour le sol.
-var ceilingTextList = []  # Liste des textures possibles pour le plafond.
+var groundTextList = ["Ceiling"] # Liste des textures possibles pour le sol.
+var ceilingTextList = ["Ground"]  # Liste des textures possibles pour le plafond.
 
 # Liste des meshs
 var wall1
@@ -69,12 +69,14 @@ func _ready() -> void:
 	woodenTable = $WoodenTable
 	woodenChair = $WoodenChair
 	for i in range(wallTextList.size()):
-		for i in range(4):
+		for j in range(4):
 			wallTextList.append("res://Output/Walls/"+wallTextList[i]+"_"+str(j)+".png")
-	for i in range(1):
-		ceilingTextList.append("res://Output/Ceilings/Ceiling"+str(i)+".png")
-	for i in range(6):
-		groundTextList.append("res://Output/Grounds/Ground"+str(i)+".png")
+	for i in range(groundTextList.size()):
+		for j in range(6):
+			groundTextList.append("res://Output/Ceilings/"+groundTextList[i]+str(j)+".png")
+	for i in range(ceilingTextList.size()):
+		for j in range(4):
+			ceilingTextList.append("res://Output/Ceilings/"+ceilingTextList[i]+str(j)+".png")
 	room_init(0)
 	
 	
