@@ -42,9 +42,11 @@ func _on_riddle_request_completed(result, response_code, headers, body):
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		
 		if json and "question" in json and "correct_answer" in json and "incorrect_answers" in json:
-			current_question = json["question"]
-			correct_answer = json["correct_answer"]
+			current_question = json["question"].uri_decode()
+			correct_answer = json["correct_answer"].uri_decode()
 			incorrect_answers = json["incorrect_answers"]
+			for inc in incorrect_answers.size():
+				incorrect_answers[inc] = incorrect_answers[inc].uri_decode()
 			question_display.text = current_question
 			var ra
 			for i in range(4):
@@ -106,7 +108,7 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "response" in json:
 			var comment = json["response"]
-			commentary_text.text = comment
+			commentary_text.text = comment.uri_decode()
 			print("Commentaire :", comment)
 		else:
 			commentary_text.text = "Erreur lors de la récupération du commentaire."

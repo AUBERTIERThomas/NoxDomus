@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dq6hmfhh5r1oe"]
+[gd_scene load_steps=77 format=3 uid="uid://dq6hmfhh5r1oe"]
 
 [ext_resource type="Script" path="res://Scripts/GenerateRoom.gd" id="1_je4ns"]
 [ext_resource type="Script" path="res://Scripts/tourneletruc.gd" id="2_wyqdb"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/CeilingLamp.gd" id="4_e8pf1"]
 [ext_resource type="Script" path="res://Scripts/Main_UI.gd" id="4_r6018"]
 [ext_resource type="Script" path="res://Scripts/Minimap.gd" id="5_46gsp"]
+[ext_resource type="PackedScene" uid="uid://bo8scau6fdqa0" path="res://Objets/WoodenChair.glb" id="6_1o22u"]
+[ext_resource type="PackedScene" uid="uid://pcoi7xmot1w5" path="res://Objets/Chandelier.glb" id="6_d2npm"]
 [ext_resource type="Texture2D" uid="uid://bixfa38rpax2d" path="res://Images/Minimap_-1.png" id="6_dwbcj"]
 [ext_resource type="Texture2D" uid="uid://bc6n4urcv28fm" path="res://Images/Minimap_Link.png" id="7_dyk8s"]
 [ext_resource type="Texture2D" uid="uid://co0mxh4x3vjyu" path="res://Images/Minimap_LocPin.png" id="8_2u8ox"]
@@ -20,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b5cjoyxd30p4y" path="res://Images/DoomBar_Progress.png" id="16_e7q76"]
 [ext_resource type="Script" path="res://Scripts/Inventaire.gd" id="16_g20te"]
 [ext_resource type="Script" path="res://Scripts/QcmAPI.gd" id="17_bffh7"]
+[ext_resource type="PackedScene" uid="uid://qbtj2w4pw0q2" path="res://Objets/WoodenTable.glb" id="18_282c6"]
 [ext_resource type="Texture2D" uid="uid://cuyjaxnup3vxd" path="res://Images/AnswersGood.png" id="19_2y3f6"]
 [ext_resource type="Texture2D" uid="uid://cm0p6j7fbtdl5" path="res://Images/AnswersBad.png" id="20_35u7j"]
 [ext_resource type="Texture2D" uid="uid://3378amrluulw" path="res://Images/Minimap_1.png" id="21_81ysl"]
@@ -353,6 +356,15 @@ light_energy = 10.0
 omni_range = 30.0
 omni_attenuation = 1.5
 script = ExtResource("4_e8pf1")
+
+[node name="WoodenTable" parent="." instance=ExtResource("18_282c6")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -2, 0)
+
+[node name="WoodenChair" parent="." instance=ExtResource("6_1o22u")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -2, 0)
+
+[node name="Chandelier" parent="." instance=ExtResource("6_d2npm")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 13, 0)
 
 [node name="MainUI" type="Control" parent="."]
 layout_mode = 3

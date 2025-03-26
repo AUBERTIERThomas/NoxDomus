@@ -13,6 +13,9 @@ var wall3
 var wall4
 var ground
 var ceiling
+#var propPreload = preload("res://Classes/PropData.tscn") # C'est la "classe" salle qu'on va pouvoir instancier.
+var woodenTable
+var woodenChair
 
 var childList
 var textList
@@ -63,6 +66,8 @@ func _ready() -> void:
 	curseMenu = $CurseRoom_Menu
 	winMenu = $Win_Menu
 	loseMenu = $Lose_Menu
+	woodenTable = $WoodenTable
+	woodenChair = $WoodenChair
 	for i in range(4):
 		wallTextList.append("res://Output/Walls/_Wall0_"+str(i)+".png")
 	for i in range(1):
@@ -70,6 +75,15 @@ func _ready() -> void:
 	for i in range(6):
 		groundTextList.append("res://Output/Grounds/Ground"+str(i)+".png")
 	room_init(0)
+	
+	
+	#var newProp = propPreload.instantiate()
+	#newProp.setup(0, 0)
+	#add_child(newProp)
+	#var coordinates = Vector3(randf_range(-1.5,1.5),-2,randf_range(-1.5,1.5))
+	#print(coordinates)
+	#newProp.position = coordinates
+	#print(newProp.position)
 
 # Applique les textures aux surfaces, identifie la salle actuelle et active les menus de jeu.
 func room_init(id : int) -> void:
@@ -85,6 +99,11 @@ func room_init(id : int) -> void:
 	textList = [wall1, wall2, wall3, wall4, ceiling, ground]
 	for i in range(6):
 		apply_texture(i)
+	
+	woodenTable.position = Vector3(randf_range(-10,10),-2,randf_range(-10,10))
+	woodenTable.rotation = Vector3(0,randf_range(-90,90),0)
+	woodenChair.position = Vector3(randf_range(-10,10),-2,randf_range(-10,10))
+	woodenChair.rotation = Vector3(0,randf_range(-90,90),0)
 	mainUI.hide()
 	commentaryPanel.hide()
 	commentaryText.text = ""

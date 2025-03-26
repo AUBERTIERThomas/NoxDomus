@@ -42,8 +42,8 @@ func _on_riddle_request_completed(_result, response_code, _headers, body):
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		
 		if json and "question" in json and "answer" in json:
-			current_question = json["question"]
-			correct_answer = json["answer"]
+			current_question = json["question"].uri_decode()
+			correct_answer = json["answer"].uri_decode()
 			question_display.text = current_question
 			print("Bonne réponse attendue (énigme) : ", correct_answer)
 		else:
@@ -72,7 +72,7 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "is_right" in json:
-			var is_right = json["is_right"]
+			var is_right = json["is_right"].uri_decode()
 			
 			res = (is_right or user_answer == correct_answer)
 			# Bonne réponse
@@ -125,7 +125,7 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "response" in json:
-			var comment = json["response"]
+			var comment = json["response"].uri_decode()
 			commentary_text.text = comment
 			print("Commentaire :", comment)
 		else:

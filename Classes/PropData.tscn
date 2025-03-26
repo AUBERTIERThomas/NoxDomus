@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Classes/PropData.gd" id="1_keaoj"]
 
-[node name="PropData" type="Node"]
+[node name="Node3D" type="Node3D"]
 script = ExtResource("1_keaoj")
