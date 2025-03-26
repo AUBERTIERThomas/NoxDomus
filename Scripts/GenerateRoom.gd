@@ -2,7 +2,7 @@ extends Node3D
 #---------------------------------------------------------------------------------
 # Gère le fonctionnement de la salle en cours, ainsi que son changement.
 #---------------------------------------------------------------------------------
-var wallTextList = ["res://Output/Walls/_Wall0.png","res://Output/Walls/_Wall0_0.png","res://Output/Walls/_Wall0_1.png","res://Output/Walls/_Wall0_2.png","res://Output/Walls/_Wall0_3.png","res://Output/Walls/blank.png","res://Output/Walls/blank_0.png","res://Output/Walls/blank_1.png","res://Output/Walls/blank_2.png","res://Output/Walls/blank_3.png","res://Output/Walls/mansion1.png","res://Output/Walls/mansion1_0.png","res://Output/Walls/mansion1_1.png","res://Output/Walls/mansion1_2.png","res://Output/Walls/mansion1_3.png","res://Output/Walls/mansion2.png","res://Output/Walls/mansion2_0.png","res://Output/Walls/mansion2_1.png","res://Output/Walls/mansion2_2.png","res://Output/Walls/mansion2_3.png","res://Output/Walls/wallpaper.png","res://Output/Walls/wallpaper_0.png","res://Output/Walls/wallpaper_1.png","res://Output/Walls/wallpaper_2.png","res://Output/Walls/wallpaper_3.png","res://Output/Walls/white_brick.png","res://Output/Walls/white_brick_0.png","res://Output/Walls/white_brick_1.png","res://Output/Walls/white_brick_2.png","res://Output/Walls/white_brick_3.png"] # Liste des textures possibles pour le mur.
+var wallTextList = ["_Wall0","blank","mansion1","mansion2","wallpaper","white_brick"] # Liste des textures possibles pour le mur.
 var groundTextList = [] # Liste des textures possibles pour le sol.
 var ceilingTextList = []  # Liste des textures possibles pour le plafond.
 
@@ -68,8 +68,9 @@ func _ready() -> void:
 	loseMenu = $Lose_Menu
 	woodenTable = $WoodenTable
 	woodenChair = $WoodenChair
-	for i in range(4):
-		wallTextList.append("res://Output/Walls/_Wall0_"+str(i)+".png")
+	for i in range(wallTextList.size()):
+		for i in range(4):
+			wallTextList.append("res://Output/Walls/"+wallTextList[i]+"_"+str(j)+".png")
 	for i in range(1):
 		ceilingTextList.append("res://Output/Ceilings/Ceiling"+str(i)+".png")
 	for i in range(6):
