@@ -32,7 +32,6 @@ func _ready():
 func fetch_riddle():
 	var url = "http://127.0.0.1:5000/riddle/generate"
 	print(url)
-	http_request.request_completed.disconnect(_on_commentary_request_completed)
 	http_request.request_completed.connect(_on_riddle_request_completed)
 	http_request.request(url)
 
@@ -104,6 +103,7 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	answer_sprite.texture = answerSprites[0]
 	answer_input.text = ""
 	fetch_commentary(res)
+	fetch_riddle() # Demande à préparer la prochaine énigme.
 	self.hide()
 	
 func fetch_commentary(res: bool):
@@ -115,11 +115,12 @@ func fetch_commentary(res: bool):
 	url += "&is_user_right=" + str(res).to_lower()
 	url += "&model=phi3.5"
 
-	print("Requête commentaire :", url)
+	print("Requête commentaire : ", url)
 
 	http_request.request_completed.disconnect(_on_verify_request_completed)
 	http_request.request_completed.connect(_on_commentary_request_completed)
 	http_request.request(url)
+	print("ntmmmmmmmmm")
 
 func _on_commentary_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
@@ -132,9 +133,4 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 			commentary_text.text = "Erreur lors de la récupération du commentaire."
 	else:
 		commentary_text.text = "Erreur de requête (commentaire) : %d" % response_code
-	#await get_tree().create_timer(8.0).timeout
-	#get_node("/root/Node3D/MainUI").show()
-	#answer_sprite.texture = answerSprites[0]
-	#answer_input.text = ""
-	#fetch_riddle() # Demande à préparer la prochaine énigme.
-	#self.hide()
+	http_request.request_completed.disconnect(_on_commentary_request_completed)

@@ -209,7 +209,7 @@ def get_commentary():
 
     response = comment(is_user_right, question, correct_answer, user_answer, model)
 
-    return jsonify(response.model_dump())
+    return jsonify(response.model_dump()), 200
 
 
 ################################################################################
