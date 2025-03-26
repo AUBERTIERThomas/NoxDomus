@@ -6,6 +6,8 @@ extends Control
 @onready var http_request = $HTTPRequest
 
 var okButton
+
+var wallList = ["_Wall0.png","blank.png","mansion1.png","mansion2.png","wallpaper.png","white_brick.png"]
 var fearTextEdit
 var fearPrompt
 
@@ -19,20 +21,20 @@ func _ready() -> void:
 # Une fois les infos du menu PlayerInfos validés avec "OK !", génère X images de mur. Le contenu des champs est alors pris en compte.
 func OnOKButtonClick() -> void:
 	okButton.disabled = true
-	fearPrompt = fearTextEdit.text
-	
-	for i in range(2): # On en fait 4, mais on peut changer
-		var prefix = "http://127.0.0.1:5000/image/inpaint?"
-		var url = ""
-		url += "img_path=Images/_Wall0.png"
-		url += "&mask_path=AI/Images/masks/mask"+str(randi()%5 + 1)+".png"
-		url += "&positive_prompt="+fearPrompt.uri_encode()
-		url += "&filename=_Wall0_"+str(i)
-		url += "&output_folder=Images/"
-		url = prefix + url
-		print(url)
-		http_request.request(url)
-		await http_request.request_completed
+	fearPrompt = fearTextEdit.text.split(",")
+	for i in range(6):
+		for j in range(4): # On en fait 4, mais on peut changer
+			var prefix = "http://127.0.0.1:5000/image/inpaint?"
+			var url = ""
+			url += "img_path=Output/Walls/"+wallList[i]
+			url += "&mask_path=AI/Images/masks/mask"+str(randi()%5 + 1)+".png"
+			url += "&positive_prompt="+fearPrompt[randi()%fearPrompt.size()].uri_encode()
+			url += "&filename="+wallList[i]+"_"+str(j)
+			url += "&output_folder=Output/Walls/"
+			url = prefix + url
+			print(url)
+			http_request.request(url)
+			await http_request.request_completed
 	
 	# Chargement de la scène principale du jeu
 	get_tree().change_scene_to_file("res://Scenes/game_room.tscn")
