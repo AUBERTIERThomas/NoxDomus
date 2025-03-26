@@ -2,9 +2,12 @@ extends Node3D
 #---------------------------------------------------------------------------------
 # Gère le fonctionnement de la salle en cours, ainsi que son changement.
 #---------------------------------------------------------------------------------
-var wallTextList = ["_Wall0","blank","mansion1","mansion2","wallpaper","white_brick"] # Liste des textures possibles pour le mur.
-var groundTextList = ["Ceiling"] # Liste des textures possibles pour le sol.
-var ceilingTextList = ["Ground"]  # Liste des textures possibles pour le plafond.
+var wallList = ["mansion1","mansion2","wallpaper","white_brick"] # Liste des textures possibles pour le mur.
+var wallTextList = []
+var groundList = ["Ground"] # Liste des textures possibles pour le sol.
+var groundTextList = []
+var ceilingList = ["Ceiling"]  # Liste des textures possibles pour le plafond.
+var ceilingTextList = []
 
 # Liste des meshs
 var wall1
@@ -68,18 +71,19 @@ func _ready() -> void:
 	loseMenu = $Lose_Menu
 	woodenTable = $WoodenTable
 	woodenChair = $WoodenChair
-	for i in range(wallTextList.size()):
+	for i in range(wallList.size()):
+		wallTextList.append("res://Output/Walls/"+wallList[i]+".png")
 		for j in range(4):
-			wallTextList.append("res://Output/Walls/"+wallTextList[i]+"_"+str(j)+".png")
-	for i in range(groundTextList.size()):
+			wallTextList.append("res://Output/Walls/"+wallList[i]+"_"+str(j)+".png")
+	for i in range(groundList.size()):
 		for j in range(6):
-			groundTextList.append("res://Output/Ceilings/"+groundTextList[i]+str(j)+".png")
-	for i in range(ceilingTextList.size()):
+			groundTextList.append("res://Output/Grounds/"+groundList[i]+str(j)+".png")
+	for i in range(ceilingList.size()):
 		for j in range(4):
-			ceilingTextList.append("res://Output/Ceilings/"+ceilingTextList[i]+str(j)+".png")
+			ceilingTextList.append("res://Output/Ceilings/"+ceilingList[i]+str(j)+".png")
 	room_init(0)
 	
-	
+	print(wallTextList)
 	#var newProp = propPreload.instantiate()
 	#newProp.setup(0, 0)
 	#add_child(newProp)
@@ -92,11 +96,13 @@ func _ready() -> void:
 func room_init(id : int) -> void:
 	print("nouvelle salle")
 	currentRoom = roomList[id]
-	var s = wallTextList.size()
-	wall1 = wallTextList[randi() % s]
-	wall2 = wallTextList[randi() % s]
-	wall3 = wallTextList[randi() % s]
-	wall4 = wallTextList[randi() % s]
+	var t = randi() % wallTextList.size() / 5
+	print(t)
+	var s = 5
+	wall1 = wallTextList[5*t + randi() % s]
+	wall2 = wallTextList[5*t + randi() % s]
+	wall3 = wallTextList[5*t + randi() % s]
+	wall4 = wallTextList[5*t + randi() % s]
 	ceiling = ceilingTextList[randi() % ceilingTextList.size()]
 	ground = groundTextList[randi() % groundTextList.size()]
 	textList = [wall1, wall2, wall3, wall4, ceiling, ground]

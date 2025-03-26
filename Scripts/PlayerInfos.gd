@@ -7,7 +7,7 @@ extends Control
 
 var okButton
 
-var wallList = ["_Wall0.png","blank.png","mansion1.png","mansion2.png","wallpaper.png","white_brick.png"]
+var wallList = ["mansion1","mansion2","wallpaper","white_brick"]
 var fearTextEdit
 var fearPrompt
 

@@ -42,11 +42,11 @@ func _on_riddle_request_completed(result, response_code, headers, body):
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		
 		if json and "question" in json and "correct_answer" in json and "incorrect_answers" in json:
-			current_question = json["question"].uri_decode()
-			correct_answer = json["correct_answer"].uri_decode()
+			current_question = json["question"]
+			correct_answer = json["correct_answer"]
 			incorrect_answers = json["incorrect_answers"]
 			for inc in incorrect_answers.size():
-				incorrect_answers[inc] = incorrect_answers[inc].uri_decode()
+				incorrect_answers[inc] = incorrect_answers[inc]
 			question_display.text = current_question
 			var ra
 			for i in range(4):
@@ -76,7 +76,7 @@ func on_button_pressed(id: int):
 		inventory.objList[ggg].disabled = false
 	else:
 		answer_sprite.texture = answerSprites[1]  # Rouge si incorrect
-		mainUI.doomBar.value += 1
+		mainUI.doomBar.value += 3
 		mainUI.doomBarValue.text = str(mainUI.doomBar.value)
 
 	answer_button[correct_answer_id].disabled = true
@@ -91,9 +91,9 @@ func on_button_pressed(id: int):
 func fetch_commentary(res: bool, ans_id : int):
 	commentary_display.show()
 	var url = "http://127.0.0.1:5000/alexandre/astier"
-	url += "?question=" + current_question.uri_encode()
-	url += "&correct_answer=" + correct_answer.uri_encode()
-	url += "&user_answer=" + answer_button[ans_id].text.uri_encode()
+	url += "?question=" + current_question
+	url += "&correct_answer=" + correct_answer
+	url += "&user_answer=" + answer_button[ans_id].text
 	url += "&is_user_right=" + str(res).to_lower()
 	url += "&model=phi3.5"
 
@@ -108,7 +108,7 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "response" in json:
 			var comment = json["response"]
-			commentary_text.text = comment.uri_decode()
+			commentary_text.text = comment
 			print("Commentaire :", comment)
 		else:
 			commentary_text.text = "Erreur lors de la récupération du commentaire."

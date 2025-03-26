@@ -72,7 +72,7 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "is_right" in json:
-			var is_right = json["is_right"].uri_decode()
+			var is_right = json["is_right"]
 			
 			res = (is_right or user_answer == correct_answer)
 			# Bonne réponse
@@ -91,7 +91,7 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 			# Mauvaise réponse
 			else:
 				answer_sprite.texture = answerSprites[2]
-				mainUI.doomBar.value += 1
+				mainUI.doomBar.value += 3
 				mainUI.doomBarValue.text = str(mainUI.doomBar.value)
 				print("Réponse incorrecte")
 		else:
@@ -125,7 +125,7 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
 		if json and "response" in json:
-			var comment = json["response"].uri_decode()
+			var comment = json["response"]
 			commentary_text.text = comment
 			print("Commentaire :", comment)
 		else:

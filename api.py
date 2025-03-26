@@ -511,7 +511,7 @@ def delete_all_images():
 @app.route('/test', methods = ['GET'])
 def test():
     c = "éééé@ç`è%µ%µ$$$£$**Μ<>!§"
-    return jsonify(c.encode())
+    return jsonify(c)
 
 ################################################################################
 
