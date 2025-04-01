@@ -24,7 +24,7 @@ var answerSprites = [preload("res://Images//AnswersWait.png"),preload("res://Ima
 func _ready():
 	answer_sprite.texture = answerSprites[0]  # Point d'interrogation par défaut.
 	answer_input.text = ""
-	answer_input.text_submitted.connect(on_button_pressed) # Déclanche la fonction lorsqu'on appuie sur "Entree" dans le LineEdit.
+	answer_input.text_submitted.connect(on_button_pressed) # Déclenche la fonction lorsqu'on appuie sur "Entree" dans le LineEdit.
 	
 	fetch_riddle()
 
@@ -57,7 +57,7 @@ func on_button_pressed(user_answer1: String):
 	url2 += "?question=" + current_question.uri_encode() # Encodage pour les URL, surtout à cause des caractères spéciaux.
 	url2 += "&correct_answer=" + correct_answer.uri_encode()
 	url2 += "&user_answer=" + user_answer1.uri_encode()
-	url2 += "&model=phi3.5" # Tester mistral sur une machine avec + de GPU (càd beaucoup).
+	url2 += "&model=phi3.5" 
 	print("Réponse de l'utilisateur : ", user_answer1)
 	print(url2)
 	
@@ -120,7 +120,6 @@ func fetch_commentary(res: bool):
 	http_request.request_completed.disconnect(_on_verify_request_completed)
 	http_request.request_completed.connect(_on_commentary_request_completed)
 	http_request.request(url)
-	print("ntmmmmmmmmm")
 
 func _on_commentary_request_completed(_result, response_code, _headers, body):
 	if response_code == 200:

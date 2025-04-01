@@ -171,7 +171,7 @@ func _on_inventaire_obj_done() -> void:
 					await get_tree().create_timer(1.0).timeout
 					var typeQuestion = randi() % 100
 					# Énigme ouverte
-					if typeQuestion < 100 :
+					if typeQuestion < 25 :
 						qopen.show()
 					# QCM (préférable pour la majorité car plus simple)
 					else :
