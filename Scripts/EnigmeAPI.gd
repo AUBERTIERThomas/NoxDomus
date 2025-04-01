@@ -103,7 +103,7 @@ func _on_verify_request_completed(_result, response_code, _headers, body):
 	answer_sprite.texture = answerSprites[0]
 	answer_input.text = ""
 	fetch_commentary(res)
-	fetch_riddle() # Demande à préparer la prochaine énigme.
+	#fetch_riddle() # Demande à préparer la prochaine énigme.
 	self.hide()
 	
 func fetch_commentary(res: bool):
@@ -133,3 +133,5 @@ func _on_commentary_request_completed(_result, response_code, _headers, body):
 	else:
 		commentary_text.text = "Erreur de requête (commentaire) : %d" % response_code
 	http_request.request_completed.disconnect(_on_commentary_request_completed)
+	await get_tree().create_timer(3.0).timeout
+	fetch_riddle() # Nouvel énigme
