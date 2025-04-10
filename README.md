@@ -24,7 +24,7 @@
 
 - Stable Diffusion models: The models used in the game are not included in this repository and should be installed from ComfyUI Manager. The models used are:
     - [stable-diffusion-xl-base-1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0): To create images from text.
-    - [dreamshaper-8-inpainting](https://huggingface.co/Lykon/dreamshaper-8-inpainting): To inpaint images.
+    - [dreamshaper-8-inpainting](https://huggingface.co/frankjoshua/dreamshaper_8Inpainting/tree/main): To inpaint images.
 
 ### System requirements
 
